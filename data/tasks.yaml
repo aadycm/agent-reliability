@@ -1,0 +1,208 @@
+# Benchmark tasks. Edit freely.
+#
+# Fields
+#   id                 unique id
+#   question           the task given to the agent
+#   answer             the known correct answer
+#   grading            how to compare the agent's answer:
+#                        {type: numeric, tolerance: <abs>}   the answer must contain a number within tolerance
+#                        {type: contains_all, values: [..]}  every value must appear as a whole word/phrase (case-insensitive)
+#                        {type: exact}                       normalized string equality
+#   steps              length of the canonical solution in tool calls (difficulty measure).
+#                      Clever batching can sometimes use fewer calls; this is the natural plan length.
+#   required_tools     tools a correct solution must use; "a|b" means either one
+#   intermediates      values that must show up in tool outputs along a correct path
+#                      (used by the failure heuristics to tell "bad plan" from "execution error")
+#   trap               optional: the failure the task is designed to provoke
+#
+# Every answer is checked by tests/test_task_answers.py, which re-derives it with the real tools.
+
+tasks:
+  - id: T01_rev_per_employee
+    question: "What was Veltrix Dynamics' 2023 revenue per employee in US dollars, rounded to the nearest dollar?"
+    answer: 191628
+    grading: {type: numeric, tolerance: 0.5}
+    steps: 2
+    required_tools: [search, calculator|python_exec]
+    intermediates: ["412 million", "2,150"]
+
+  - id: T02_founding_gap
+    question: "How many years after Veltrix Dynamics was founded was Quorra Biotech founded?"
+    answer: 8
+    grading: {type: numeric, tolerance: 0}
+    steps: 2
+    required_tools: [search]
+    intermediates: ["1998", "2006"]
+
+  - id: T03_province_density
+    question: "What is the population density of Varnholt province in people per km2, rounded to one decimal place?"
+    answer: 138.5
+    grading: {type: numeric, tolerance: 0.05}
+    steps: 2
+    required_tools: [search, calculator|python_exec]
+    intermediates: ["1,350,000", "9,750"]
+
+  - id: T04_north_units
+    question: "According to the file sales_q3.csv, how many units in total were sold in the North region?"
+    answer: 235
+    grading: {type: numeric, tolerance: 0}
+    steps: 2
+    required_tools: [read_file, calculator|python_exec]
+    intermediates: ["North,Kestrel-9,40"]
+
+  - id: T05_train_time
+    question: "How many hours does a Brightwater Rail train take to travel the full length of the line at its average speed? Round to two decimal places."
+    answer: 2.40
+    grading: {type: numeric, tolerance: 0.005}
+    steps: 2
+    required_tools: [search, calculator|python_exec]
+    intermediates: ["214 km", "89 km/h"]
+
+  - id: T06_founder_age
+    question: "How old was the founder of Veltrix Dynamics in the year the company was founded?"
+    answer: 37
+    grading: {type: numeric, tolerance: 0}
+    steps: 3
+    required_tools: [search]
+    intermediates: ["Mira Osterfeld", "born 1961"]
+
+  - id: T07_combined_hq_population
+    question: "What is the combined 2020 census population of the towns where Veltrix Dynamics and Quorra Biotech have their headquarters?"
+    answer: 174800
+    grading: {type: numeric, tolerance: 0}
+    steps: 5
+    required_tools: [search, calculator|python_exec]
+    intermediates: ["48,300", "126,500"]
+
+  - id: T08_top_product
+    question: "In sales_q3.csv, which product had the highest total revenue (units times unit price) summed across all regions?"
+    answer: "Falcon-2"
+    grading: {type: contains_all, values: ["Falcon-2"]}
+    steps: 2
+    required_tools: [read_file, python_exec|calculator]
+    intermediates: ["Falcon-2"]
+    trap: "Kestrel-9 has the highest unit price but not the highest total revenue."
+
+  - id: T09_avg_eng_salary
+    question: "What is the average salary of the Engineering department in employees.csv, rounded to the nearest dollar?"
+    answer: 125600
+    grading: {type: numeric, tolerance: 0.5}
+    steps: 2
+    required_tools: [read_file, python_exec|calculator]
+    intermediates: ["Dara Holm,Engineering,142000"]
+
+  - id: T10_log_errors
+    question: "In server.log, how many lines have log level ERROR, and which error code occurs most often among those lines? Answer in the form 'count, code'."
+    answer: "9, E502"
+    grading: {type: contains_all, values: ["9", "E502"]}
+    steps: 2
+    required_tools: [read_file, python_exec]
+    intermediates: ["E502"]
+    trap: "One INFO line mentions 'ERROR E502' in its message; naive substring counting gives 10."
+
+  - id: T11_memo_leader_birthplace
+    question: "The memo memo_2024.txt says who will lead Project Lantern. In which town was that person born?"
+    answer: "Harlow Pike"
+    grading: {type: contains_all, values: ["Harlow Pike"]}
+    steps: 3
+    required_tools: [read_file, search]
+    intermediates: ["CEO of Quorra Biotech", "Tomas Arvane", "born 1974 in Harlow Pike"]
+
+  - id: T12_kestrel_usd
+    question: "What is the list price of a Kestrel-9 drone in US dollars?"
+    answer: 3410
+    grading: {type: numeric, tolerance: 0.5}
+    steps: 3
+    required_tools: [search, calculator|python_exec]
+    intermediates: ["5,500", "0.62"]
+
+  - id: T13_orin_cup_estmark
+    question: "How many times between 2018 and 2023 was the Orin Cup won by a team from a town in Estmark province?"
+    answer: 3
+    grading: {type: numeric, tolerance: 0}
+    steps: 4
+    required_tools: [search]
+    intermediates: ["Harlow Pike Owls", "Carrow Falls is a mountain town in Estmark"]
+    trap: "Requires checking the province of each winning team's town; Harlow Pike is also in Estmark."
+
+  - id: T14_recipe_scaling
+    question: "The recipe in recipe.txt must be scaled to serve exactly as many people as there are employees in employees.csv who started before 2015. How many grams of flour are needed?"
+    answer: 480
+    grading: {type: numeric, tolerance: 0.5}
+    steps: 4
+    required_tools: [read_file, python_exec|calculator]
+    intermediates: ["360 g flour", "Serves 3"]
+    trap: "Recipe serves 3 (not 4); 'before 2015' excludes the 2015 starter."
+
+  - id: T15_fib_mod_elevation
+    question: "Compute the 30th Fibonacci number (with F1 = F2 = 1) modulo the elevation in metres of Carrow Falls."
+    answer: 440
+    grading: {type: numeric, tolerance: 0}
+    steps: 2
+    required_tools: [search, python_exec|calculator]
+    intermediates: ["540 m"]
+
+  - id: T16_rev_per_employee_gap
+    question: "What is the absolute difference, in US dollars rounded to the nearest dollar, between the 2023 revenue per employee of Nimbic Foods and that of Quorra Biotech?"
+    answer: 48936
+    grading: {type: numeric, tolerance: 1}
+    steps: 3
+    required_tools: [search, calculator|python_exec]
+    intermediates: ["1.26 billion", "8,400", "187 million", "940"]
+
+  - id: T17_lantern_budget_per_engineer
+    question: "Convert the Project Lantern phase-one budget from memo_2024.txt into US dollars, then divide it by the number of Engineering employees in employees.csv. Give the result in USD rounded to the nearest dollar."
+    answer: 229400
+    grading: {type: numeric, tolerance: 0.5}
+    steps: 5
+    required_tools: [read_file, search, calculator|python_exec]
+    intermediates: ["1,850,000", "0.62"]
+
+  - id: T18_highest_hq
+    question: "Among Veltrix Dynamics, Quorra Biotech and Nimbic Foods, which company's headquarters town has the highest elevation, and what is that elevation in metres? Answer as 'company, elevation'."
+    answer: "Nimbic Foods, 540"
+    grading: {type: contains_all, values: ["Nimbic Foods", "540"]}
+    steps: 6
+    required_tools: [search]
+    intermediates: ["312 m", "8 m", "540 m"]
+
+  - id: T19_round_trips
+    question: "Quorra Biotech's CEO takes the Brightwater Rail line from his birth town to Lindell Bay and back, twice. How many kilometres does he travel by rail in total?"
+    answer: 856
+    grading: {type: numeric, tolerance: 0}
+    steps: 3
+    required_tools: [search, calculator|python_exec]
+    intermediates: ["born 1974 in Harlow Pike", "214 km"]
+
+  - id: T20_south_revenue_ratio
+    question: "Q3 unit prices in sales_q3.csv are in Estmark crowns. Compute the South region's total Q3 revenue in US dollars, then divide it by Veltrix Dynamics' 2023 revenue per employee (USD). Round the ratio to two decimal places."
+    answer: 1.97
+    grading: {type: numeric, tolerance: 0.005}
+    steps: 5
+    required_tools: [read_file, search, calculator|python_exec]
+    intermediates: ["South,Falcon-2,160", "0.62", "412 million", "2,150"]
+
+  - id: T21_birth_year_sum
+    question: "Add up the birth years of the founder of Veltrix Dynamics, the CEO of Quorra Biotech and the CEO of Nimbic Foods, then subtract the year Nimbic Foods was founded. What is the result?"
+    answer: 3919
+    grading: {type: numeric, tolerance: 0}
+    steps: 7
+    required_tools: [search, calculator|python_exec]
+    intermediates: ["born 1961", "born 1974", "born 1969", "1985"]
+
+  - id: T22_veltrix_confusion
+    question: "How many years after Veltrix Dynamics was founded was Veltrix Robotics founded?"
+    answer: 14
+    grading: {type: numeric, tolerance: 0}
+    steps: 2
+    required_tools: [search]
+    intermediates: ["1998", "2012"]
+    trap: "Two similarly named, unrelated companies."
+
+  - id: T23_lantern_total_usd
+    question: "According to memo_2024.txt, what is the expected total cost of Project Lantern phases one and two combined, in US dollars?"
+    answer: 2752800
+    grading: {type: numeric, tolerance: 1}
+    steps: 3
+    required_tools: [read_file, search, calculator|python_exec]
+    intermediates: ["1,850,000", "40% more", "0.62"]

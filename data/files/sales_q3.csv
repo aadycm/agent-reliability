@@ -1,0 +1,13 @@
+region,product,units,unit_price_ekr
+North,Kestrel-9,40,5500
+North,Falcon-2,120,1800
+North,SkyMapper Kit,75,950
+South,Kestrel-9,22,5500
+South,Falcon-2,160,1800
+South,SkyMapper Kit,210,950
+East,Kestrel-9,35,5500
+East,Falcon-2,90,1800
+East,SkyMapper Kit,130,950
+West,Kestrel-9,18,5500
+West,Falcon-2,140,1800
+West,SkyMapper Kit,95,950

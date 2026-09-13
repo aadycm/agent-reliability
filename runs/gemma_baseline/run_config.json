@@ -1,0 +1,45 @@
+{
+  "config": {
+    "model": "gemma-4-31b-it",
+    "temperature": 0.0,
+    "max_steps": 12,
+    "self_check": false,
+    "max_self_checks": 1,
+    "reflection": false,
+    "max_empty_response_nudges": 2,
+    "retry": {
+      "max_retries": 6,
+      "base_delay": 2.0,
+      "max_delay": 60.0,
+      "requests_per_minute": 10.0
+    },
+    "condition": "baseline"
+  },
+  "tasks": [
+    "T01_rev_per_employee",
+    "T02_founding_gap",
+    "T03_province_density",
+    "T04_north_units",
+    "T05_train_time",
+    "T06_founder_age",
+    "T07_combined_hq_population",
+    "T08_top_product",
+    "T09_avg_eng_salary",
+    "T10_log_errors",
+    "T11_memo_leader_birthplace",
+    "T12_kestrel_usd",
+    "T13_orin_cup_estmark",
+    "T14_recipe_scaling",
+    "T15_fib_mod_elevation",
+    "T16_rev_per_employee_gap",
+    "T17_lantern_budget_per_engineer",
+    "T18_highest_hq",
+    "T19_round_trips",
+    "T20_south_revenue_ratio",
+    "T21_birth_year_sum",
+    "T22_veltrix_confusion",
+    "T23_lantern_total_usd"
+  ],
+  "repeats": 1,
+  "updated_at": "2026-09-12T23:57:58+00:00"
+}

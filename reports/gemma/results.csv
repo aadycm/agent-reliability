@@ -1,0 +1,109 @@
+condition,run_dir,task_id,repeat,difficulty,steps_canonical,status,correct,final_answer,expected,grading_note,failure_category,heuristic_category,manual_category,finish_mode,model_calls,tool_calls,tool_errors,self_checks,self_checks_answered,empty_responses,retries,prompt_tokens,output_tokens,duration_s,model
+baseline,gemma_baseline,T01_rev_per_employee,0,easy (2 steps),2,answered,True,191628,191628,numbers=[191628.0] target=191628.0±0.5,,,,final_answer_tool,3,2,0,0,,,0,3666,145,54.846,gemma-4-31b-it
+baseline,gemma_baseline,T02_founding_gap,0,easy (2 steps),2,answered,True,8,8,numbers=[8.0] target=8.0±0.0,,,,final_answer_tool,4,3,0,0,,,0,5110,133,144.384,gemma-4-31b-it
+baseline,gemma_baseline,T03_province_density,0,easy (2 steps),2,answered,True,138.5,138.5,numbers=[138.5] target=138.5±0.05,,,,final_answer_tool,3,2,0,0,,,0,3307,110,101.656,gemma-4-31b-it
+baseline,gemma_baseline,T04_north_units,0,easy (2 steps),2,answered,True,235,235,numbers=[235.0] target=235.0±0.0,,,,final_answer_tool,4,3,0,0,,,0,4836,150,97.262,gemma-4-31b-it
+baseline,gemma_baseline,T05_train_time,0,easy (2 steps),2,answered,True,2.40,2.4,numbers=[2.4] target=2.4±0.005,,,,final_answer_tool,3,2,0,0,,,0,3516,134,87.475,gemma-4-31b-it
+baseline,gemma_baseline,T06_founder_age,0,medium (3-4 steps),3,answered,True,37,37,numbers=[37.0] target=37.0±0.0,,,,final_answer_tool,3,2,0,0,,,0,3486,96,66.536,gemma-4-31b-it
+baseline,gemma_baseline,T07_combined_hq_population,0,hard (5+ steps),5,answered,True,"174,800",174800,numbers=[174800.0] target=174800.0±0.0,,,,final_answer_tool,5,4,0,0,,,0,7688,163,52.631,gemma-4-31b-it
+baseline,gemma_baseline,T08_top_product,0,easy (2 steps),2,answered,True,Falcon-2,Falcon-2,all present,,,,final_answer_tool,5,4,0,0,,,0,7208,493,136.33,gemma-4-31b-it
+baseline,gemma_baseline,T09_avg_eng_salary,0,easy (2 steps),2,answered,True,125600,125600,numbers=[125600.0] target=125600.0±0.5,,,,final_answer_tool,5,4,0,0,,,1,7325,234,150.658,gemma-4-31b-it
+baseline,gemma_baseline,T10_log_errors,0,easy (2 steps),2,answered,True,"9, E502","9, E502",all present,,,,final_answer_tool,4,3,0,0,,,4,6166,194,146.208,gemma-4-31b-it
+baseline,gemma_baseline,T11_memo_leader_birthplace,0,medium (3-4 steps),3,answered,True,Harlow Pike,Harlow Pike,all present,,,,final_answer_tool,4,3,0,0,,,0,5017,147,134.98,gemma-4-31b-it
+baseline,gemma_baseline,T12_kestrel_usd,0,medium (3-4 steps),3,answered,True,"3,410 USD",3410,numbers=[3410.0] target=3410.0±0.5,,,,final_answer_tool,4,3,0,0,,,0,5201,215,112.996,gemma-4-31b-it
+baseline,gemma_baseline,T13_orin_cup_estmark,0,medium (3-4 steps),4,answered,True,3,3,numbers=[3.0] target=3.0±0.0,,,,final_answer_tool,3,2,0,0,,,0,4078,331,100.062,gemma-4-31b-it
+baseline,gemma_baseline,T14_recipe_scaling,0,medium (3-4 steps),4,answered,True,480,480,numbers=[480.0] target=480.0±0.5,,,,final_answer_tool,5,4,0,0,,,2,7945,245,135.751,gemma-4-31b-it
+baseline,gemma_baseline,T15_fib_mod_elevation,0,easy (2 steps),2,answered,True,440,440,numbers=[440.0] target=440.0±0.0,,,,final_answer_tool,4,3,0,0,,,0,5239,174,93.05,gemma-4-31b-it
+baseline,gemma_baseline,T16_rev_per_employee_gap,0,medium (3-4 steps),3,answered,True,"48,936",48936,numbers=[48936.0] target=48936.0±1.0,,,,final_answer_tool,6,5,0,0,,,0,10027,267,167.677,gemma-4-31b-it
+baseline,gemma_baseline,T17_lantern_budget_per_engineer,0,hard (5+ steps),5,answered,True,229400,229400,numbers=[229400.0] target=229400.0±0.5,,,,final_answer_tool,6,5,0,0,,,0,9867,153,185.641,gemma-4-31b-it
+baseline,gemma_baseline,T18_highest_hq,0,hard (5+ steps),6,answered,True,"The elevations are:
+- Harlow Pike (Veltrix Dynamics): 312 m
+- Lindell Bay (Quorra Biotech): 8 m
+- Carrow Falls (Nimbic Foods): 540 m
+
+Comparing these:
+540 m (Carrow Falls) > 312 m (Harlow Pike) > 8 m (Lindell Bay).
+
+The company with the highest elevation headquarters is Nimbic Foods at 540 m.
+The company with the highest headquarters elevation is Nimbic Foods, located in Carrow Falls at 540 metres.
+
+final_answer: Nimbic Foods, 540m","Nimbic Foods, 540",all present,,,,text_response,3,6,0,0,,,0,5287,189,86.108,gemma-4-31b-it
+baseline,gemma_baseline,T19_round_trips,0,medium (3-4 steps),3,answered,True,856,856,numbers=[856.0] target=856.0±0.0,,,,final_answer_tool,4,3,0,0,,,2,5743,194,110.763,gemma-4-31b-it
+baseline,gemma_baseline,T20_south_revenue_ratio,0,hard (5+ steps),5,answered,True,1.97,1.97,numbers=[1.97] target=1.97±0.005,,,,final_answer_tool,6,5,0,0,,,1,10866,540,166.404,gemma-4-31b-it
+baseline,gemma_baseline,T21_birth_year_sum,0,hard (5+ steps),7,answered,True,3919,3919,numbers=[3919.0] target=3919.0±0.0,,,,final_answer_tool,5,4,0,0,,,0,8453,193,175.477,gemma-4-31b-it
+baseline,gemma_baseline,T22_veltrix_confusion,0,easy (2 steps),2,answered,True,14,14,numbers=[14.0] target=14.0±0.0,,,,final_answer_tool,3,2,0,0,,,0,3380,105,90.773,gemma-4-31b-it
+baseline,gemma_baseline,T23_lantern_total_usd,0,medium (3-4 steps),3,answered,True,"2,752,800",2752800,numbers=[2752800.0] target=2752800.0±1.0,,,,final_answer_tool,5,4,0,0,,,1,7394,207,139.965,gemma-4-31b-it
+selfcheck,gemma_selfcheck,T01_rev_per_employee,0,easy (2 steps),2,answered,True,191628,191628,numbers=[191628.0] target=191628.0±0.5,,,,final_answer_tool,4,2,0,1,1,0,0,5563,249,165.876,gemma-4-31b-it
+selfcheck,gemma_selfcheck,T02_founding_gap,0,easy (2 steps),2,answered,True,8,8,numbers=[8.0] target=8.0±0.0,,,,final_answer_tool,5,3,0,1,1,0,0,7125,149,147.289,gemma-4-31b-it
+selfcheck,gemma_selfcheck,T03_province_density,0,easy (2 steps),2,answered,True,138.5,138.5,numbers=[138.5] target=138.5±0.05,,,,final_answer_tool,5,3,0,1,1,0,0,6557,167,106.463,gemma-4-31b-it
+selfcheck,gemma_selfcheck,T04_north_units,0,easy (2 steps),2,answered,True,235,235,numbers=[235.0] target=235.0±0.0,,,,final_answer_tool,5,3,0,1,1,0,0,6619,168,152.118,gemma-4-31b-it
+selfcheck,gemma_selfcheck,T05_train_time,0,easy (2 steps),2,answered,True,2.40,2.4,numbers=[2.4] target=2.4±0.005,,,,final_answer_tool,4,2,0,1,1,0,2,4837,204,99.619,gemma-4-31b-it
+selfcheck,gemma_selfcheck,T06_founder_age,0,medium (3-4 steps),3,answered,True,37,37,numbers=[37.0] target=37.0±0.0,,,,final_answer_tool,4,2,0,1,1,0,3,5144,113,129.708,gemma-4-31b-it
+selfcheck,gemma_selfcheck,T07_combined_hq_population,0,hard (5+ steps),5,answered,True,"174,800",174800,numbers=[174800.0] target=174800.0±0.0,,,,final_answer_tool,6,4,0,1,1,0,4,10003,185,197.411,gemma-4-31b-it
+selfcheck,gemma_selfcheck,T08_top_product,0,easy (2 steps),2,answered,True,Falcon-2,Falcon-2,all present,,,,final_answer_tool,6,4,0,1,1,0,1,9833,541,297.026,gemma-4-31b-it
+selfcheck,gemma_selfcheck,T09_avg_eng_salary,0,easy (2 steps),2,answered,True,125600,125600,numbers=[125600.0] target=125600.0±0.5,,,,final_answer_tool,6,4,0,1,1,0,3,9623,259,300.139,gemma-4-31b-it
+selfcheck,gemma_selfcheck,T10_log_errors,0,easy (2 steps),2,answered,True,"The count is 9 and the most common code is E502.
+The answer should be in the form 'count, code'.
+So, '9, E502'.
+The number of lines with log level ERROR in server.log is 9, and the error code that occurs most often among those lines is E502.
+
+final_answer: '9, E502'","9, E502",all present,,,,text_response,5,4,0,0,0,0,1,14222,1903,239.6,gemma-4-31b-it
+selfcheck,gemma_selfcheck,T11_memo_leader_birthplace,0,medium (3-4 steps),3,answered,True,Harlow Pike,Harlow Pike,all present,,,,final_answer_tool,5,3,0,1,1,0,0,7135,193,155.808,gemma-4-31b-it
+selfcheck,gemma_selfcheck,T12_kestrel_usd,0,medium (3-4 steps),3,answered,True,"3,410 USD",3410,numbers=[3410.0] target=3410.0±0.5,,,,final_answer_tool,5,3,0,1,1,0,18,7209,303,522.367,gemma-4-31b-it
+selfcheck,gemma_selfcheck,T13_orin_cup_estmark,0,medium (3-4 steps),4,answered,True,3,3,numbers=[3.0] target=3.0±0.0,,,,final_answer_tool,4,2,0,1,1,0,8,6669,347,215.879,gemma-4-31b-it
+selfcheck,gemma_selfcheck,T14_recipe_scaling,0,medium (3-4 steps),4,answered,True,480,480,numbers=[480.0] target=480.0±0.5,,,,final_answer_tool,6,4,0,1,1,0,1,10423,321,181.718,gemma-4-31b-it
+selfcheck,gemma_selfcheck,T15_fib_mod_elevation,0,easy (2 steps),2,answered,True,440,440,numbers=[440.0] target=440.0±0.0,,,,final_answer_tool,5,3,0,1,1,0,9,7065,192,247.817,gemma-4-31b-it
+selfcheck,gemma_selfcheck,T16_rev_per_employee_gap,0,medium (3-4 steps),3,answered,True,"48,936",48936,numbers=[48936.0] target=48936.0±1.0,,,,final_answer_tool,7,5,0,1,1,0,4,12430,288,132.775,gemma-4-31b-it
+selfcheck,gemma_selfcheck,T17_lantern_budget_per_engineer,0,hard (5+ steps),5,answered,True,229400,229400,numbers=[229400.0] target=229400.0±0.5,,,,final_answer_tool,7,5,0,1,1,0,3,12744,174,253.478,gemma-4-31b-it
+selfcheck,gemma_selfcheck,T18_highest_hq,0,hard (5+ steps),6,answered,True,"Nimbic Foods, 540","Nimbic Foods, 540",all present,,,,final_answer_tool,4,6,0,1,1,0,2,8083,223,119.155,gemma-4-31b-it
+selfcheck,gemma_selfcheck,T19_round_trips,0,medium (3-4 steps),3,answered,True,856,856,numbers=[856.0] target=856.0±0.0,,,,final_answer_tool,5,3,0,1,1,0,4,7937,212,155.474,gemma-4-31b-it
+selfcheck,gemma_selfcheck,T20_south_revenue_ratio,0,hard (5+ steps),5,answered,True,1.97,1.97,numbers=[1.97] target=1.97±0.005,,,,final_answer_tool,7,5,0,1,1,0,10,14352,599,400.985,gemma-4-31b-it
+selfcheck,gemma_selfcheck,T21_birth_year_sum,0,hard (5+ steps),7,answered,True,3919,3919,numbers=[3919.0] target=3919.0±0.0,,,,final_answer_tool,6,4,0,1,1,0,1,11426,212,136.246,gemma-4-31b-it
+selfcheck,gemma_selfcheck,T22_veltrix_confusion,0,easy (2 steps),2,answered,True,14,14,numbers=[14.0] target=14.0±0.0,,,,final_answer_tool,4,2,0,1,1,0,1,5063,122,104.524,gemma-4-31b-it
+selfcheck,gemma_selfcheck,T23_lantern_total_usd,0,medium (3-4 steps),3,answered,True,"2,752,800",2752800,numbers=[2752800.0] target=2752800.0±1.0,,,,final_answer_tool,6,4,0,1,1,0,2,9979,231,258.783,gemma-4-31b-it
+reflection,gemma_reflection,T01_rev_per_employee,0,easy (2 steps),2,answered,True,191628,191628,numbers=[191628.0] target=191628.0±0.5,,,,final_answer_tool,4,2,0,0,,,0,6744,482,129.813,gemma-4-31b-it
+reflection,gemma_reflection,T02_founding_gap,0,easy (2 steps),2,answered,True,8,8,numbers=[8.0] target=8.0±0.0,,,,final_answer_tool,5,3,0,0,,,0,8080,387,137.726,gemma-4-31b-it
+reflection,gemma_reflection,T03_province_density,0,easy (2 steps),2,answered,True,138.5,138.5,numbers=[138.5] target=138.5±0.05,,,,final_answer_tool,4,2,0,0,,,0,5379,389,96.603,gemma-4-31b-it
+reflection,gemma_reflection,T04_north_units,0,easy (2 steps),2,answered,True,235,235,numbers=[235.0] target=235.0±0.0,,,,final_answer_tool,8,6,2,0,,,0,18883,796,193.531,gemma-4-31b-it
+reflection,gemma_reflection,T05_train_time,0,easy (2 steps),2,answered,True,2.40,2.4,numbers=[2.4] target=2.4±0.005,,,,final_answer_tool,4,2,0,0,,,0,6311,499,102.823,gemma-4-31b-it
+reflection,gemma_reflection,T06_founder_age,0,medium (3-4 steps),3,answered,True,37,37,numbers=[37.0] target=37.0±0.0,,,,final_answer_tool,4,2,0,0,,,0,5931,457,103.817,gemma-4-31b-it
+reflection,gemma_reflection,T07_combined_hq_population,0,hard (5+ steps),5,answered,True,"174,800",174800,numbers=[174800.0] target=174800.0±0.0,,,,final_answer_tool,7,5,0,0,,,0,14555,579,185.914,gemma-4-31b-it
+reflection,gemma_reflection,T08_top_product,0,easy (2 steps),2,answered,True,Falcon-2,Falcon-2,all present,,,,final_answer_tool,7,5,1,0,,,0,15649,971,175.166,gemma-4-31b-it
+reflection,gemma_reflection,T09_avg_eng_salary,0,easy (2 steps),2,answered,True,125600,125600,numbers=[125600.0] target=125600.0±0.5,,,,final_answer_tool,6,4,1,0,,,1,11959,662,198.97,gemma-4-31b-it
+reflection,gemma_reflection,T10_log_errors,0,easy (2 steps),2,answered,True,"9, E502","9, E502",all present,,,,final_answer_tool,8,6,1,0,,,0,26739,2474,328.645,gemma-4-31b-it
+reflection,gemma_reflection,T11_memo_leader_birthplace,0,medium (3-4 steps),3,answered,True,Harlow Pike,Harlow Pike,all present,,,,final_answer_tool,4,2,0,0,,,0,5512,347,126.897,gemma-4-31b-it
+reflection,gemma_reflection,T12_kestrel_usd,0,medium (3-4 steps),3,answered,True,"3,410 USD",3410,numbers=[3410.0] target=3410.0±0.5,,,,final_answer_tool,5,3,0,0,,,2,8569,457,103.411,gemma-4-31b-it
+reflection,gemma_reflection,T13_orin_cup_estmark,0,medium (3-4 steps),4,answered,True,3,3,numbers=[3.0] target=3.0±0.0,,,,final_answer_tool,6,6,0,0,,,0,16394,955,143.97,gemma-4-31b-it
+reflection,gemma_reflection,T14_recipe_scaling,0,medium (3-4 steps),4,answered,True,480,480,numbers=[480.0] target=480.0±0.5,,,,final_answer_tool,6,4,0,0,,,0,15963,972,190.229,gemma-4-31b-it
+reflection,gemma_reflection,T15_fib_mod_elevation,0,easy (2 steps),2,answered,True,440,440,numbers=[440.0] target=440.0±0.0,,,,final_answer_tool,4,2,0,0,,,0,5917,531,165.977,gemma-4-31b-it
+reflection,gemma_reflection,T16_rev_per_employee_gap,0,medium (3-4 steps),3,answered,True,48936,48936,numbers=[48936.0] target=48936.0±1.0,,,,final_answer_tool,6,4,0,0,,,3,12293,633,214.047,gemma-4-31b-it
+reflection,gemma_reflection,T17_lantern_budget_per_engineer,0,hard (5+ steps),5,answered,True,229400,229400,numbers=[229400.0] target=229400.0±0.5,,,,final_answer_tool,7,5,0,0,,,0,17979,1126,338.235,gemma-4-31b-it
+reflection,gemma_reflection,T18_highest_hq,0,hard (5+ steps),6,answered,True,"Nimbic Foods, 540","Nimbic Foods, 540",all present,,,,final_answer_tool,8,6,0,0,,,2,20961,700,397.423,gemma-4-31b-it
+reflection,gemma_reflection,T19_round_trips,0,medium (3-4 steps),3,answered,True,856,856,numbers=[856.0] target=856.0±0.0,,,,final_answer_tool,5,3,0,0,,,0,8495,381,222.682,gemma-4-31b-it
+reflection,gemma_reflection,T20_south_revenue_ratio,0,hard (5+ steps),5,answered,True,1.97,1.97,numbers=[1.97] target=1.97±0.005,,,,final_answer_tool,12,10,1,0,,,8,42170,1759,543.705,gemma-4-31b-it
+reflection,gemma_reflection,T21_birth_year_sum,0,hard (5+ steps),7,answered,True,3919,3919,numbers=[3919.0] target=3919.0±0.0,,,,final_answer_tool,7,5,0,0,,,5,15436,732,270.996,gemma-4-31b-it
+reflection,gemma_reflection,T22_veltrix_confusion,0,easy (2 steps),2,answered,True,14,14,numbers=[14.0] target=14.0±0.0,,,,final_answer_tool,4,2,0,0,,,2,5756,359,213.109,gemma-4-31b-it
+reflection,gemma_reflection,T23_lantern_total_usd,0,medium (3-4 steps),3,answered,True,"2,752,800",2752800,numbers=[2752800.0] target=2752800.0±1.0,,,,final_answer_tool,6,4,0,0,,,5,11209,547,283.182,gemma-4-31b-it
+reflection+selfcheck,gemma_reflection+selfcheck,T01_rev_per_employee,0,easy (2 steps),2,answered,True,191628,191628,numbers=[191628.0] target=191628.0±0.5,,,,final_answer_tool,5,2,0,1,1,0,3,9589,585,249.261,gemma-4-31b-it
+reflection+selfcheck,gemma_reflection+selfcheck,T02_founding_gap,0,easy (2 steps),2,answered,True,8,8,numbers=[8.0] target=8.0±0.0,,,,final_answer_tool,6,3,0,1,1,0,8,10423,403,269.9,gemma-4-31b-it
+reflection+selfcheck,gemma_reflection+selfcheck,T03_province_density,0,easy (2 steps),2,answered,True,138.5,138.5,numbers=[138.5] target=138.5±0.05,,,,final_answer_tool,5,2,0,1,1,0,6,7596,481,280.381,gemma-4-31b-it
+reflection+selfcheck,gemma_reflection+selfcheck,T04_north_units,0,easy (2 steps),2,answered,True,235,235,numbers=[235.0] target=235.0±0.0,,,,final_answer_tool,8,5,1,1,1,0,9,19714,660,365.925,gemma-4-31b-it
+reflection+selfcheck,gemma_reflection+selfcheck,T05_train_time,0,easy (2 steps),2,answered,True,2.40,2.4,numbers=[2.4] target=2.4±0.005,,,,final_answer_tool,5,2,0,1,1,0,4,9093,579,289.271,gemma-4-31b-it
+reflection+selfcheck,gemma_reflection+selfcheck,T06_founder_age,0,medium (3-4 steps),3,answered,True,37,37,numbers=[37.0] target=37.0±0.0,,,,final_answer_tool,5,2,0,1,1,0,0,8449,474,183.706,gemma-4-31b-it
+reflection+selfcheck,gemma_reflection+selfcheck,T07_combined_hq_population,0,hard (5+ steps),5,answered,True,"174,800",174800,numbers=[174800.0] target=174800.0±0.0,,,,final_answer_tool,8,5,0,1,1,0,1,17801,599,289.586,gemma-4-31b-it
+reflection+selfcheck,gemma_reflection+selfcheck,T08_top_product,0,easy (2 steps),2,answered,True,Falcon-2,Falcon-2,all present,,,,final_answer_tool,8,5,1,1,1,0,4,20174,1014,282.679,gemma-4-31b-it
+reflection+selfcheck,gemma_reflection+selfcheck,T09_avg_eng_salary,0,easy (2 steps),2,answered,True,125600,125600,numbers=[125600.0] target=125600.0±0.5,,,,final_answer_tool,7,4,1,1,1,0,5,15282,683,349.265,gemma-4-31b-it
+reflection+selfcheck,gemma_reflection+selfcheck,T10_log_errors,0,easy (2 steps),2,answered,True,"9, E502","9, E502",all present,,,,final_answer_tool,9,6,1,1,1,0,2,34514,2495,289.84,gemma-4-31b-it
+reflection+selfcheck,gemma_reflection+selfcheck,T11_memo_leader_birthplace,0,medium (3-4 steps),3,answered,True,Harlow Pike,Harlow Pike,all present,,,,final_answer_tool,5,2,0,1,1,0,1,7812,409,162.265,gemma-4-31b-it
+reflection+selfcheck,gemma_reflection+selfcheck,T12_kestrel_usd,0,medium (3-4 steps),3,answered,True,"3,410 USD",3410,numbers=[3410.0] target=3410.0±0.5,,,,final_answer_tool,6,3,0,1,1,0,1,11291,526,198.913,gemma-4-31b-it
+reflection+selfcheck,gemma_reflection+selfcheck,T13_orin_cup_estmark,0,medium (3-4 steps),4,answered,True,3,3,numbers=[3.0] target=3.0±0.0,,,,final_answer_tool,9,6,0,1,1,0,4,28821,1133,309.374,gemma-4-31b-it
+reflection+selfcheck,gemma_reflection+selfcheck,T14_recipe_scaling,0,medium (3-4 steps),4,answered,True,480,480,numbers=[480.0] target=480.0±0.5,,,,final_answer_tool,7,4,0,1,1,0,3,20044,990,246.975,gemma-4-31b-it
+reflection+selfcheck,gemma_reflection+selfcheck,T15_fib_mod_elevation,0,easy (2 steps),2,answered,True,440,440,numbers=[440.0] target=440.0±0.0,,,,final_answer_tool,5,2,0,1,1,0,2,8389,604,251.251,gemma-4-31b-it
+reflection+selfcheck,gemma_reflection+selfcheck,T16_rev_per_employee_gap,0,medium (3-4 steps),3,answered,True,48936,48936,numbers=[48936.0] target=48936.0±1.0,,,,final_answer_tool,7,4,0,1,1,0,2,15432,697,273.73,gemma-4-31b-it
+reflection+selfcheck,gemma_reflection+selfcheck,T17_lantern_budget_per_engineer,0,hard (5+ steps),5,answered,True,229400,229400,numbers=[229400.0] target=229400.0±0.5,,,,final_answer_tool,8,5,0,1,1,0,5,22382,1147,271.22,gemma-4-31b-it
+reflection+selfcheck,gemma_reflection+selfcheck,T18_highest_hq,0,hard (5+ steps),6,answered,True,"Nimbic Foods, 540","Nimbic Foods, 540",all present,,,,final_answer_tool,10,7,0,1,1,0,4,30207,738,297.172,gemma-4-31b-it
+reflection+selfcheck,gemma_reflection+selfcheck,T19_round_trips,0,medium (3-4 steps),3,answered,True,856,856,numbers=[856.0] target=856.0±0.0,,,,final_answer_tool,6,3,0,1,1,0,1,11139,399,102.803,gemma-4-31b-it
+reflection+selfcheck,gemma_reflection+selfcheck,T20_south_revenue_ratio,0,hard (5+ steps),5,answered,True,1.97,1.97,numbers=[1.97] target=1.97±0.005,,,,final_answer_tool,13,10,1,1,1,0,10,47985,1777,467.45,gemma-4-31b-it
+reflection+selfcheck,gemma_reflection+selfcheck,T21_birth_year_sum,0,hard (5+ steps),7,answered,True,3919,3919,numbers=[3919.0] target=3919.0±0.0,,,,final_answer_tool,8,5,0,1,1,0,4,19627,699,371.331,gemma-4-31b-it
+reflection+selfcheck,gemma_reflection+selfcheck,T22_veltrix_confusion,0,easy (2 steps),2,answered,True,14,14,numbers=[14.0] target=14.0±0.0,,,,final_answer_tool,5,2,0,1,1,0,6,7855,376,237.34,gemma-4-31b-it
+reflection+selfcheck,gemma_reflection+selfcheck,T23_lantern_total_usd,0,medium (3-4 steps),3,answered,True,"2,752,800",2752800,numbers=[2752800.0] target=2752800.0±1.0,,,,final_answer_tool,7,4,0,1,1,0,6,14398,598,221.509,gemma-4-31b-it

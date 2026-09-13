@@ -1,0 +1,28 @@
+# Secrets
+.env
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+*.egg-info/
+
+# Run outputs: ignored by default. The first study's results are committed on purpose,
+# so the README's Results section can be checked against the raw traces.
+runs/*
+!runs/gemma_baseline/
+!runs/gemma_selfcheck/
+!runs/gemma_reflection/
+!runs/gemma_reflection+selfcheck/
+!runs/_superseded/
+runs/_superseded/*
+!runs/_superseded/gemma_selfcheck_v1_empty_selfcheck/
+!runs/_superseded/gemma_reflection+selfcheck_v1_empty_selfcheck/
+runs/**/*.log
+reports/*
+!reports/gemma/
+
+# OS
+.DS_Store

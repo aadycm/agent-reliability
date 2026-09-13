@@ -1,0 +1,22 @@
+2024-05-02 08:00:01 INFO  service started version=4.2.1
+2024-05-02 08:03:17 INFO  GET /api/items 200
+2024-05-02 08:05:42 ERROR E502 upstream timeout on /api/orders
+2024-05-02 08:05:44 WARN  retrying /api/orders attempt=1
+2024-05-02 08:05:49 INFO  retry succeeded after ERROR E502
+2024-05-02 08:11:03 INFO  GET /api/items 200
+2024-05-02 08:14:26 ERROR E404 missing resource /api/items/9913
+2024-05-02 08:20:10 ERROR E500 unhandled exception in billing worker
+2024-05-02 08:20:11 WARN  billing worker restarted
+2024-05-02 08:31:55 INFO  POST /api/orders 201
+2024-05-02 08:40:02 ERROR E502 upstream timeout on /api/orders
+2024-05-02 08:47:19 INFO  GET /api/health 200
+2024-05-02 08:52:37 ERROR E500 unhandled exception in billing worker
+2024-05-02 09:01:12 INFO  cache refreshed entries=5120
+2024-05-02 09:06:48 ERROR E502 upstream timeout on /api/inventory
+2024-05-02 09:15:30 WARN  slow query 2.8s on inventory table
+2024-05-02 09:22:04 ERROR E404 missing resource /api/users/77
+2024-05-02 09:30:59 INFO  GET /api/items 200
+2024-05-02 09:38:21 ERROR E500 database connection reset
+2024-05-02 09:44:43 INFO  POST /api/orders 201
+2024-05-02 09:51:16 ERROR E502 upstream timeout on /api/orders
+2024-05-02 09:58:00 INFO  service heartbeat ok
