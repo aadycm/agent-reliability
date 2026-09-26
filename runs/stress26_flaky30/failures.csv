@@ -1,0 +1,3 @@
+task_id,repeat,heuristic_category,manual_category,final_category,label_source,evidence,manual_notes
+T13_orin_cup_estmark,0,execution_error,,execution_error,heuristic,step limit reached with all required information already gathered (6 tool error(s) along the way),
+T17_lantern_budget_per_engineer,0,execution_error,,execution_error,heuristic,step limit reached with all required information already gathered (4 tool error(s) along the way),

@@ -24,6 +24,10 @@ from typing import Any, Protocol
 
 from .config import RetryConfig, get_api_key
 
+# Long conversations (many tool results in history) are slow to generate. 120s was too
+# tight under the degraded-search stress condition and cost tasks to DeadlineExceeded.
+REQUEST_TIMEOUT_S = 300
+
 
 @dataclass
 class FunctionCall:
@@ -186,7 +190,7 @@ class GeminiConversation:
         model = self._model_tools if use_tools else self._model_plain
         t0 = time.perf_counter()
         raw, retries = call_with_retries(
-            lambda: model.generate_content(self.history, request_options={"timeout": 120}),
+            lambda: model.generate_content(self.history, request_options={"timeout": REQUEST_TIMEOUT_S}),
             self.backend.retry, self.backend.limiter,
         )
         resp = LLMResponse(retries=retries, latency_s=round(time.perf_counter() - t0, 3))

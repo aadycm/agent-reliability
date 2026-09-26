@@ -312,6 +312,63 @@ per condition), so it is **not** a meaningful efficiency comparison. Use model c
 
 ---
 
+## Results (second study: stress conditions, Gemma 4 26B)
+
+Study 1 hit a ceiling: `gemma-4-31b-it` solved every task, and so did the smaller `gemma-4-26b-a4b-it`
+(23/23 baseline, though with 1.5x the tokens and 8 recovered tool errors). Rather than rewrite the
+tasks after seeing which ones were easy - an obvious author bias - study 2 keeps the tasks fixed and
+degrades the **environment** (`stress.py`), which is objective and reproducible.
+
+**Setup:** `gemma-4-26b-a4b-it`, temperature 0, 23 tasks per condition, one run each. Reproduce with
+`benchmark --model gemma-4-26b-a4b-it` plus the flag named below; report in `reports/stress26/`.
+
+| condition | flag | success | 95% CI | vs baseline (McNemar p) | dominant failure |
+|---|---|---|---|---|---|
+| baseline | - | 23/23 (100%) | 85.7-100% | - | - |
+| flaky tools | `--tool-failure-rate 0.3` | 21/23 (91.3%) | 73.2-97.6% | -8.7 pp (p=0.50) | execution_error (2) |
+| tight budget | `--max-steps 5` | 17/23 (73.9%) | 53.5-87.5% | -26.1 pp (p=0.031) | execution_error (6) |
+| degraded search | `--degrade-search` | 8/21 (38.1%) | 20.8-59.1% | -61.9 pp (p<0.001) | infinite_loop (13) |
+
+Degraded search excludes 2 runs that ended in `api_error` (repeated HTTP 504s on very long
+conversations), so it is scored over 21 runs.
+
+**Finding 1: information quality breaks the agent far more than tool failures do.** Flaky tools cost
+only 2 tasks, despite injecting 42 failures (1.8 per run) that the agent retried through - error
+recovery is a real strength. Truncating search results to one first-sentence hit cost 13 tasks. The
+gradient by difficulty is stark: 6/10 easy, 2/7 medium, **0/4 hard**. Every task that needed no search
+still passed.
+
+**Finding 2: the dominant failure is a reworded-query loop.** When the needed fact was in the
+truncated-away sentence, the agent rephrased the same question 8-9 times ("Brightwater Rail",
+"... average speed", "... km", "... miles"), received the identical snippet 5-7 times, then searched
+unrelated files before running out of steps. It averaged 9.0 tool calls and 2.3x baseline tokens.
+It never said "I could not find this": there were **zero** `gave_up_early` labels. Not recognising a
+dead end is the single most expensive behaviour observed in this project.
+
+**Finding 3: under a tight budget, wasted first moves decide the outcome.** With 5 steps the agent
+lost tasks it solves comfortably at 12 - including 2-step ones. Steps went to a redundant `list_files`
+(the task names the file), reading a file twice, and `python_exec` code calling `open()`/`import csv`,
+which the sandbox blocks. Two runs (T17, T20) computed the correct value on their final step and were
+cut off before submitting it.
+
+**Finding 4: two heuristics were wrong, and the traces proved it.** Both were fixed, with tests:
+- *"Step limit reached" was labelled `bad_plan`.* All 8 budget-bound failures had already gathered
+  every required fact; some had computed the answer. The rule now checks whether the needed
+  information was actually missing before blaming the plan; otherwise it is an `execution_error`.
+- *The loop detector only caught identical repeated calls.* The reworded-query loops slipped through.
+  It now also flags re-fetching the same result 4+ times, which caught 13 of 15 degraded-search
+  failures and fires on nothing else.
+
+Both refinements were made **after** reading these traces, so heuristic-vs-manual agreement here would
+not be an independent validation, and none is claimed. The labels were checked by hand against the
+traces; an independent pass with `label` would still be worth doing.
+
+**What this does not show:** one model, one run per task, and stress levels (0.3, 5 steps, 1 truncated
+result) chosen by hand rather than swept. The interventions were not yet tested under stress - that is
+the open experiment, and the one setting where they might finally show an effect.
+
+---
+
 ## Limitations
 
 Read these before drawing conclusions from any report.

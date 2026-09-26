@@ -154,3 +154,44 @@ def test_end_to_end_report(tmp_path):
     assert "(cached)" not in str(rd1b)  # path only; behaviour checked below
     from agent_reliability.benchmark.runner import load_results
     assert any(r["correct"] for r in load_results(rd1b))
+
+
+def test_step_limit_with_all_info_is_execution_error_not_bad_plan():
+    """Refined after the stress study: a tight budget can cut off a correct run one step short.
+    Gathering everything needed and then running out is an execution failure, not a bad plan."""
+    cat, lab = label_of("T01_rev_per_employee", [
+        LLMResponse(function_calls=[S("list_files")]),                      # wasted step
+        LLMResponse(function_calls=[S("search", query="Veltrix Dynamics")]),
+        LLMResponse(function_calls=[S("calculator", expression="412000000/2150")]),
+    ], max_steps=3)
+    assert cat == "execution_error" and "all required information already gathered" in lab.evidence[0]
+
+
+def test_step_limit_without_the_needed_information_is_still_bad_plan():
+    cat, lab = label_of("T01_rev_per_employee", [
+        LLMResponse(function_calls=[S("list_files")]),
+        LLMResponse(function_calls=[S("read_file", path="employees.csv")]),
+        LLMResponse(function_calls=[S("list_files")]),
+    ], max_steps=3)
+    assert cat == "bad_plan"
+
+
+def test_reworded_queries_returning_one_document_count_as_a_loop():
+    """Degraded-search finding: near-duplicate queries that keep returning the same document are a
+    loop, even though no two calls are identical."""
+    queries = ["Brightwater Rail", "Brightwater Rail length", "Brightwater Rail km",
+               "Brightwater Rail miles", "Brightwater", "Brightwater Rail speed"]
+    cat, lab = label_of("T05_train_time",
+                        [LLMResponse(function_calls=[S("search", query=q, top_k=1)]) for q in queries],
+                        max_steps=6)
+    assert cat == "infinite_loop" and lab.signals["max_same_result_refetches"] >= 4
+
+
+def test_distinct_lookups_are_not_a_loop():
+    cat, _ = label_of("T13_orin_cup_estmark", [
+        LLMResponse(function_calls=[S("search", query="Orin Cup", top_k=1)]),
+        LLMResponse(function_calls=[S("search", query="Harlow Pike province", top_k=1)]),
+        LLMResponse(function_calls=[S("search", query="Lindell Bay province", top_k=1)]),
+        LLMResponse(function_calls=[S("search", query="Carrow Falls province", top_k=1)]),
+    ], max_steps=4)
+    assert cat != "infinite_loop"

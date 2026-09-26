@@ -1,0 +1,7 @@
+task_id,repeat,heuristic_category,manual_category,final_category,label_source,evidence,manual_notes
+T08_top_product,0,execution_error,,execution_error,heuristic,step limit reached with all required information already gathered (2 tool error(s) along the way),
+T09_avg_eng_salary,0,execution_error,,execution_error,heuristic,step limit reached with all required information already gathered (2 tool error(s) along the way),
+T10_log_errors,0,execution_error,,execution_error,heuristic,step limit reached with all required information already gathered (1 tool error(s) along the way),
+T14_recipe_scaling,0,execution_error,,execution_error,heuristic,step limit reached with all required information already gathered (2 tool error(s) along the way),
+T17_lantern_budget_per_engineer,0,execution_error,,execution_error,heuristic,step limit reached with all required information already gathered (0 tool error(s) along the way),
+T20_south_revenue_ratio,0,execution_error,,execution_error,heuristic,step limit reached with all required information already gathered (0 tool error(s) along the way),

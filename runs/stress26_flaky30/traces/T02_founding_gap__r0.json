@@ -1,0 +1,212 @@
+{
+  "task_id": "T02_founding_gap",
+  "task": "How many years after Veltrix Dynamics was founded was Quorra Biotech founded?",
+  "condition": "baseline[flaky0.3]",
+  "config": {
+    "model": "gemma-4-26b-a4b-it",
+    "temperature": 0.0,
+    "max_steps": 12,
+    "self_check": false,
+    "max_self_checks": 1,
+    "reflection": false,
+    "tool_failure_rate": 0.3,
+    "degrade_search": false,
+    "stress_seed": 0,
+    "max_empty_response_nudges": 2,
+    "retry": {
+      "max_retries": 6,
+      "base_delay": 2.0,
+      "max_delay": 60.0,
+      "requests_per_minute": 10.0
+    },
+    "condition": "baseline[flaky0.3]"
+  },
+  "model": "gemma-4-26b-a4b-it",
+  "started_at": "2026-09-25T03:12:51+00:00",
+  "ended_at": "2026-09-25T03:13:35+00:00",
+  "duration_s": 43.944,
+  "status": "answered",
+  "final_answer": "8",
+  "finish_mode": "final_answer_tool",
+  "error": null,
+  "reflection_plan": null,
+  "steps": [
+    {
+      "index": 0,
+      "kind": "model",
+      "reasoning": "The user wants to know the number of years between the founding of Veltrix Dynamics and Quorra Biotech.\nI need to find the founding year for both companies.\nI will start by searching for \"Veltrix Dynamics founded\" and \"Quorra Biotech founded\".\nI will search for the founding year of Veltrix Dynamics.",
+      "tool_calls": [
+        {
+          "name": "search",
+          "args": {
+            "query": "Veltrix Dynamics founded"
+          },
+          "output": null,
+          "error": "temporary tool failure (service unavailable). The call was not executed; try again.",
+          "duration_s": 0.0
+        }
+      ],
+      "proposed_answer": null,
+      "nudged": false,
+      "note": null,
+      "usage": {
+        "prompt_tokens": 816,
+        "output_tokens": 32
+      },
+      "retries": 0,
+      "latency_s": 2.437
+    },
+    {
+      "index": 1,
+      "kind": "model",
+      "reasoning": "The search tool failed. I will try again.\nI will try searching for the founding year of Veltrix Dynamics again.",
+      "tool_calls": [
+        {
+          "name": "search",
+          "args": {
+            "query": "Veltrix Dynamics founded"
+          },
+          "output": [
+            {
+              "title": "Veltrix Dynamics",
+              "snippet": "Veltrix Dynamics is an industrial drone manufacturer founded in 1998 by Mira Osterfeld. Headquarters: Harlow Pike. 2023 revenue: 412 million USD. Employees (2023): 2,150. Best-known product: the Kestrel-9 survey drone."
+            },
+            {
+              "title": "Veltrix Robotics",
+              "snippet": "Veltrix Robotics is a warehouse-automation startup, not affiliated with Veltrix Dynamics. Founded in 2012 in Lindell Bay by Joren Vasquez. Employees (2023): 85."
+            },
+            {
+              "title": "Mira Osterfeld",
+              "snippet": "Mira Osterfeld (born 1961 in Carrow Falls) is an engineer and the founder of Veltrix Dynamics."
+            }
+          ],
+          "error": null,
+          "duration_s": 0.0002
+        }
+      ],
+      "proposed_answer": null,
+      "nudged": false,
+      "note": null,
+      "usage": {
+        "prompt_tokens": 985,
+        "output_tokens": 34
+      },
+      "retries": 0,
+      "latency_s": 7.511
+    },
+    {
+      "index": 2,
+      "kind": "model",
+      "reasoning": "Veltrix Dynamics was founded in 1998.\nNow I need to find when Quorra Biotech was founded.\nI will search for the founding year of Quorra Biotech.",
+      "tool_calls": [
+        {
+          "name": "search",
+          "args": {
+            "query": "Quorra Biotech founded"
+          },
+          "output": [
+            {
+              "title": "Quorra Biotech",
+              "snippet": "Quorra Biotech is a biotechnology company founded in 2006. Headquarters: Lindell Bay. CEO: Tomas Arvane (since 2015). 2023 revenue: 187 million USD. Employees (2023): 940."
+            },
+            {
+              "title": "Tomas Arvane",
+              "snippet": "Tomas Arvane (born 1974 in Harlow Pike) is a biochemist who has been CEO of Quorra Biotech since 2015."
+            },
+            {
+              "title": "Veltrix Dynamics",
+              "snippet": "Veltrix Dynamics is an industrial drone manufacturer founded in 1998 by Mira Osterfeld. Headquarters: Harlow Pike. 2023 revenue: 412 million USD. Employees (2023): 2,150. Best-known product: the Kestrel-9 survey drone."
+            }
+          ],
+          "error": null,
+          "duration_s": 0.0002
+        }
+      ],
+      "proposed_answer": null,
+      "nudged": false,
+      "note": null,
+      "usage": {
+        "prompt_tokens": 1230,
+        "output_tokens": 30
+      },
+      "retries": 0,
+      "latency_s": 19.141
+    },
+    {
+      "index": 3,
+      "kind": "model",
+      "reasoning": "Veltrix Dynamics was founded in 1998.\nQuorra Biotech was founded in 2006.\nThe question asks how many years after Veltrix Dynamics was founded was Quorra Biotech founded.\nCalculation: 2006 - 1998.\nI will calculate the difference between the founding years of Quorra Biotech and Veltrix Dynamics.",
+      "tool_calls": [
+        {
+          "name": "calculator",
+          "args": {
+            "expression": "2006 - 1998"
+          },
+          "output": null,
+          "error": "temporary tool failure (service unavailable). The call was not executed; try again.",
+          "duration_s": 0.0
+        }
+      ],
+      "proposed_answer": null,
+      "nudged": false,
+      "note": null,
+      "usage": {
+        "prompt_tokens": 1524,
+        "output_tokens": 43
+      },
+      "retries": 0,
+      "latency_s": 4.081
+    },
+    {
+      "index": 4,
+      "kind": "model",
+      "reasoning": "The calculator failed. I will try again.\nI will try calculating the difference between the founding years of Quorra Biotech and Veltrix Dynamics again.",
+      "tool_calls": [
+        {
+          "name": "calculator",
+          "args": {
+            "expression": "2006 - 1998"
+          },
+          "output": 8,
+          "error": null,
+          "duration_s": 0.0
+        }
+      ],
+      "proposed_answer": null,
+      "nudged": false,
+      "note": null,
+      "usage": {
+        "prompt_tokens": 1716,
+        "output_tokens": 45
+      },
+      "retries": 0,
+      "latency_s": 3.564
+    },
+    {
+      "index": 5,
+      "kind": "model",
+      "reasoning": "The difference is 8 years.\nVeltrix Dynamics: 1998\nQuorra Biotech: 2006\n2006 - 1998 = 8.\nThe question asks \"How many years after Veltrix Dynamics was founded was Quorra Biotech founded?\".\nThe answer is 8.\nI will provide the final answer.",
+      "tool_calls": [],
+      "proposed_answer": "8",
+      "nudged": false,
+      "note": null,
+      "usage": {
+        "prompt_tokens": 1789,
+        "output_tokens": 24
+      },
+      "retries": 0,
+      "latency_s": 7.207
+    }
+  ],
+  "stats": {
+    "model_calls": 6,
+    "empty_responses": 0,
+    "self_checks_answered": 0,
+    "tool_calls": 5,
+    "tool_errors": 2,
+    "retries": 0,
+    "self_checks": 0,
+    "prompt_tokens": 8060,
+    "output_tokens": 208
+  }
+}

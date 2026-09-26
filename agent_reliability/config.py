@@ -37,9 +37,24 @@ class AgentConfig:
     self_check: bool = False      # verify the answer before finalizing
     max_self_checks: int = 1      # how many times self-check may intercept a final answer
     reflection: bool = False      # critique the plan before executing
+    # --- stress conditions (degrade the environment, not the tasks; see stress.py) ---
+    tool_failure_rate: float = 0.0   # chance each tool call returns a transient error
+    degrade_search: bool = False     # search returns 1 truncated result instead of several
+    stress_seed: int = 0             # makes the injected failures reproducible
     # --- robustness ---
     max_empty_response_nudges: int = 2
     retry: RetryConfig = field(default_factory=RetryConfig)
+
+    @property
+    def stress_name(self) -> str:
+        parts = []
+        if self.max_steps != AgentConfig.max_steps:
+            parts.append(f"steps{self.max_steps}")
+        if self.tool_failure_rate:
+            parts.append(f"flaky{self.tool_failure_rate:g}")
+        if self.degrade_search:
+            parts.append("search1")
+        return ",".join(parts)
 
     @property
     def condition_name(self) -> str:
@@ -48,7 +63,10 @@ class AgentConfig:
             parts.append("reflection")
         if self.self_check:
             parts.append("selfcheck")
-        return "+".join(parts) or "baseline"
+        name = "+".join(parts) or "baseline"
+        # Stress belongs in the condition name: otherwise a report could put a stressed run and a
+        # normal run in the same column.
+        return f"{name}[{self.stress_name}]" if self.stress_name else name
 
     def to_dict(self) -> dict:
         d = asdict(self)

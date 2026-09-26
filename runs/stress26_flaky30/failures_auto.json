@@ -1,0 +1,53 @@
+[
+  {
+    "task_id": "T13_orin_cup_estmark",
+    "repeat": 0,
+    "category": "execution_error",
+    "evidence": [
+      "step limit reached with all required information already gathered (6 tool error(s) along the way)"
+    ],
+    "signals": {
+      "status": "step_limit",
+      "tool_calls": 12,
+      "tools_used": [
+        "list_files",
+        "read_file",
+        "search"
+      ],
+      "tool_errors": 6,
+      "max_identical_call_repeats": 2,
+      "missing_required_tools": [],
+      "missing_intermediates": [],
+      "fabricated_numbers": [],
+      "max_same_result_refetches": 1,
+      "finish_mode": null
+    },
+    "source": "heuristic"
+  },
+  {
+    "task_id": "T17_lantern_budget_per_engineer",
+    "repeat": 0,
+    "category": "execution_error",
+    "evidence": [
+      "step limit reached with all required information already gathered (4 tool error(s) along the way)"
+    ],
+    "signals": {
+      "status": "step_limit",
+      "tool_calls": 11,
+      "tools_used": [
+        "calculator",
+        "list_files",
+        "read_file",
+        "search"
+      ],
+      "tool_errors": 4,
+      "max_identical_call_repeats": 2,
+      "missing_required_tools": [],
+      "missing_intermediates": [],
+      "fabricated_numbers": [],
+      "max_same_result_refetches": 1,
+      "finish_mode": null
+    },
+    "source": "heuristic"
+  }
+]

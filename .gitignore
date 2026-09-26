@@ -16,6 +16,12 @@ runs/*
 !runs/gemma_selfcheck/
 !runs/gemma_reflection/
 !runs/gemma_reflection+selfcheck/
+!runs/gemma26_baseline/
+!runs/stress26_steps5/
+!runs/stress26_flaky30/
+!runs/stress26_search1/
+!runs/stress26_search1_reflection/
+!runs/stress26_search1_selfcheck/
 !runs/_superseded/
 runs/_superseded/*
 !runs/_superseded/gemma_selfcheck_v1_empty_selfcheck/
@@ -23,6 +29,7 @@ runs/_superseded/*
 runs/**/*.log
 reports/*
 !reports/gemma/
+!reports/stress26/
 
 # OS
 .DS_Store

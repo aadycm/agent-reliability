@@ -1,0 +1,161 @@
+[
+  {
+    "task_id": "T08_top_product",
+    "repeat": 0,
+    "category": "execution_error",
+    "evidence": [
+      "step limit reached with all required information already gathered (2 tool error(s) along the way)"
+    ],
+    "signals": {
+      "status": "step_limit",
+      "tool_calls": 5,
+      "tools_used": [
+        "list_files",
+        "python_exec",
+        "read_file"
+      ],
+      "tool_errors": 2,
+      "max_identical_call_repeats": 2,
+      "missing_required_tools": [],
+      "missing_intermediates": [],
+      "fabricated_numbers": [],
+      "max_same_result_refetches": 2,
+      "finish_mode": null
+    },
+    "source": "heuristic"
+  },
+  {
+    "task_id": "T09_avg_eng_salary",
+    "repeat": 0,
+    "category": "execution_error",
+    "evidence": [
+      "step limit reached with all required information already gathered (2 tool error(s) along the way)"
+    ],
+    "signals": {
+      "status": "step_limit",
+      "tool_calls": 5,
+      "tools_used": [
+        "list_files",
+        "python_exec",
+        "read_file"
+      ],
+      "tool_errors": 2,
+      "max_identical_call_repeats": 1,
+      "missing_required_tools": [],
+      "missing_intermediates": [],
+      "fabricated_numbers": [],
+      "max_same_result_refetches": 1,
+      "finish_mode": null
+    },
+    "source": "heuristic"
+  },
+  {
+    "task_id": "T10_log_errors",
+    "repeat": 0,
+    "category": "execution_error",
+    "evidence": [
+      "step limit reached with all required information already gathered (1 tool error(s) along the way)"
+    ],
+    "signals": {
+      "status": "step_limit",
+      "tool_calls": 5,
+      "tools_used": [
+        "list_files",
+        "python_exec",
+        "read_file"
+      ],
+      "tool_errors": 1,
+      "max_identical_call_repeats": 1,
+      "missing_required_tools": [],
+      "missing_intermediates": [],
+      "fabricated_numbers": [],
+      "max_same_result_refetches": 1,
+      "finish_mode": null
+    },
+    "source": "heuristic"
+  },
+  {
+    "task_id": "T14_recipe_scaling",
+    "repeat": 0,
+    "category": "execution_error",
+    "evidence": [
+      "step limit reached with all required information already gathered (2 tool error(s) along the way)"
+    ],
+    "signals": {
+      "status": "step_limit",
+      "tool_calls": 5,
+      "tools_used": [
+        "list_files",
+        "python_exec",
+        "read_file"
+      ],
+      "tool_errors": 2,
+      "max_identical_call_repeats": 1,
+      "missing_required_tools": [],
+      "missing_intermediates": [],
+      "fabricated_numbers": [],
+      "max_same_result_refetches": 1,
+      "finish_mode": null
+    },
+    "source": "heuristic"
+  },
+  {
+    "task_id": "T17_lantern_budget_per_engineer",
+    "repeat": 0,
+    "category": "execution_error",
+    "evidence": [
+      "step limit reached with all required information already gathered (0 tool error(s) along the way)"
+    ],
+    "signals": {
+      "status": "step_limit",
+      "tool_calls": 5,
+      "tools_used": [
+        "calculator",
+        "list_files",
+        "read_file",
+        "search"
+      ],
+      "tool_errors": 0,
+      "max_identical_call_repeats": 1,
+      "missing_required_tools": [],
+      "missing_intermediates": [],
+      "fabricated_numbers": [],
+      "max_same_result_refetches": 1,
+      "finish_mode": null
+    },
+    "source": "heuristic"
+  },
+  {
+    "task_id": "T20_south_revenue_ratio",
+    "repeat": 0,
+    "category": "execution_error",
+    "evidence": [
+      "step limit reached with all required information already gathered (0 tool error(s) along the way)"
+    ],
+    "signals": {
+      "status": "step_limit",
+      "tool_calls": 5,
+      "tools_used": [
+        "calculator",
+        "list_files",
+        "python_exec",
+        "read_file",
+        "search"
+      ],
+      "tool_errors": 0,
+      "max_identical_call_repeats": 1,
+      "missing_required_tools": [],
+      "missing_intermediates": [],
+      "fabricated_numbers": [
+        5500.0,
+        160.0,
+        1800.0,
+        210.0,
+        950.0
+      ],
+      "max_same_result_refetches": 1,
+      "finish_mode": null
+    },
+    "source": "heuristic"
+  }
+]

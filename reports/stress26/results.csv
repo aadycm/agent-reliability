@@ -1,0 +1,104 @@
+condition,run_dir,task_id,repeat,difficulty,steps_canonical,status,correct,final_answer,expected,grading_note,failure_category,heuristic_category,manual_category,finish_mode,model_calls,tool_calls,tool_errors,self_checks,self_checks_answered,empty_responses,retries,prompt_tokens,output_tokens,duration_s,model
+baseline,gemma26_baseline,T01_rev_per_employee,0,easy (2 steps),2,answered,True,191628,191628,numbers=[191628.0] target=191628.0±0.5,,,,final_answer_tool,4,3,0,0,0,0,0,5286,190,19.441,gemma-4-26b-a4b-it
+baseline,gemma26_baseline,T02_founding_gap,0,easy (2 steps),2,answered,True,8,8,numbers=[8.0] target=8.0±0.0,,,,final_answer_tool,4,3,0,0,0,0,0,5030,129,23.886,gemma-4-26b-a4b-it
+baseline,gemma26_baseline,T03_province_density,0,easy (2 steps),2,answered,True,138.5,138.5,numbers=[138.5] target=138.5±0.05,,,,final_answer_tool,3,2,0,0,0,0,0,3497,112,24.838,gemma-4-26b-a4b-it
+baseline,gemma26_baseline,T04_north_units,0,easy (2 steps),2,answered,True,235,235,numbers=[235.0] target=235.0±0.0,,,,final_answer_tool,4,3,0,0,0,0,0,5006,144,19.358,gemma-4-26b-a4b-it
+baseline,gemma26_baseline,T05_train_time,0,easy (2 steps),2,answered,True,2.40,2.4,numbers=[2.4] target=2.4±0.005,,,,final_answer_tool,3,2,0,0,0,0,0,3275,121,20.648,gemma-4-26b-a4b-it
+baseline,gemma26_baseline,T06_founder_age,0,medium (3-4 steps),3,answered,True,37,37,numbers=[37.0] target=37.0±0.0,,,,final_answer_tool,3,2,0,0,0,0,0,3560,170,17.333,gemma-4-26b-a4b-it
+baseline,gemma26_baseline,T07_combined_hq_population,0,hard (5+ steps),5,answered,True,"174,800",174800,numbers=[174800.0] target=174800.0±0.0,,,,final_answer_tool,5,4,0,0,0,0,0,7366,179,29.379,gemma-4-26b-a4b-it
+baseline,gemma26_baseline,T08_top_product,0,easy (2 steps),2,answered,True,Falcon-2,Falcon-2,all present,,,,final_answer_tool,7,6,2,0,0,0,0,12025,939,54.076,gemma-4-26b-a4b-it
+baseline,gemma26_baseline,T09_avg_eng_salary,0,easy (2 steps),2,answered,True,125600,125600,numbers=[125600.0] target=125600.0±0.5,,,,final_answer_tool,7,6,2,0,0,0,0,13032,932,54.562,gemma-4-26b-a4b-it
+baseline,gemma26_baseline,T10_log_errors,0,easy (2 steps),2,answered,True,"9, E502","9, E502",all present,,,,final_answer_tool,6,5,1,0,0,0,0,17090,1322,96.946,gemma-4-26b-a4b-it
+baseline,gemma26_baseline,T11_memo_leader_birthplace,0,medium (3-4 steps),3,answered,True,Harlow Pike,Harlow Pike,all present,,,,final_answer_tool,4,3,0,0,0,0,0,4683,151,21.9,gemma-4-26b-a4b-it
+baseline,gemma26_baseline,T12_kestrel_usd,0,medium (3-4 steps),3,answered,True,"3,410 USD",3410,numbers=[3410.0] target=3410.0±0.5,,,,final_answer_tool,4,3,0,0,0,0,0,5307,173,22.056,gemma-4-26b-a4b-it
+baseline,gemma26_baseline,T13_orin_cup_estmark,0,medium (3-4 steps),4,answered,True,3,3,numbers=[3.0] target=3.0±0.0,,,,final_answer_tool,5,4,0,0,0,0,0,8773,362,41.297,gemma-4-26b-a4b-it
+baseline,gemma26_baseline,T14_recipe_scaling,0,medium (3-4 steps),4,answered,True,480,480,numbers=[480.0] target=480.0±0.5,,,,final_answer_tool,7,6,2,0,0,0,0,14891,430,58.084,gemma-4-26b-a4b-it
+baseline,gemma26_baseline,T15_fib_mod_elevation,0,easy (2 steps),2,answered,True,440.0,440,numbers=[440.0] target=440.0±0.0,,,,final_answer_tool,3,2,0,0,0,0,1,3750,265,31.516,gemma-4-26b-a4b-it
+baseline,gemma26_baseline,T16_rev_per_employee_gap,0,medium (3-4 steps),3,answered,True,48936,48936,numbers=[48936.0] target=48936.0±1.0,,,,final_answer_tool,4,3,0,0,0,0,0,5796,209,19.339,gemma-4-26b-a4b-it
+baseline,gemma26_baseline,T17_lantern_budget_per_engineer,0,hard (5+ steps),5,answered,True,229400,229400,numbers=[229400.0] target=229400.0±0.5,,,,final_answer_tool,6,5,0,0,0,0,0,12189,272,54.4,gemma-4-26b-a4b-it
+baseline,gemma26_baseline,T18_highest_hq,0,hard (5+ steps),6,answered,True,"Nimbic Foods, 540","Nimbic Foods, 540",all present,,,,final_answer_tool,5,4,0,0,0,0,0,8021,183,34.282,gemma-4-26b-a4b-it
+baseline,gemma26_baseline,T19_round_trips,0,medium (3-4 steps),3,answered,True,"The total distance is 856 km.
+I have found that the CEO of Quorra Biotech is Tomas Arvane, who was born in Harlow Pike. The Brightwater Rail line connects Harlow Pike and Lindell Bay with a distance of 214 km. Since he travels from his birth town to Lindell Bay and back twice, the total distance is 214 km * 2 (for the round trip) * 2 (for doing it twice), which equals 856 km.
+
+final_answer: 856",856,numbers=[856.0] target=856.0±0.0,,,,text_response,4,3,0,0,0,0,0,7309,209,26.03,gemma-4-26b-a4b-it
+baseline,gemma26_baseline,T20_south_revenue_ratio,0,hard (5+ steps),5,answered,True,1.97,1.97,numbers=[1.97] target=1.97±0.005,,,,final_answer_tool,12,11,1,0,0,0,2,39335,640,249.289,gemma-4-26b-a4b-it
+baseline,gemma26_baseline,T21_birth_year_sum,0,hard (5+ steps),7,answered,True,3919,3919,numbers=[3919.0] target=3919.0±0.0,,,,final_answer_tool,5,4,0,0,0,0,0,8560,165,31.083,gemma-4-26b-a4b-it
+baseline,gemma26_baseline,T22_veltrix_confusion,0,easy (2 steps),2,answered,True,14,14,numbers=[14.0] target=14.0±0.0,,,,final_answer_tool,3,2,0,0,0,0,0,3314,106,26.289,gemma-4-26b-a4b-it
+baseline,gemma26_baseline,T23_lantern_total_usd,0,medium (3-4 steps),3,answered,True,"2,752,800",2752800,numbers=[2752800.0] target=2752800.0±1.0,,,,final_answer_tool,5,4,0,0,0,0,0,6865,244,43.26,gemma-4-26b-a4b-it
+baseline[steps5],stress26_steps5,T01_rev_per_employee,0,easy (2 steps),2,answered,True,191628,191628,numbers=[191628.0] target=191628.0±0.5,,,,final_answer_tool,4,3,0,0,0,0,0,5286,190,19.418,gemma-4-26b-a4b-it
+baseline[steps5],stress26_steps5,T02_founding_gap,0,easy (2 steps),2,answered,True,8,8,numbers=[8.0] target=8.0±0.0,,,,final_answer_tool,4,3,0,0,0,0,0,5030,129,40.783,gemma-4-26b-a4b-it
+baseline[steps5],stress26_steps5,T03_province_density,0,easy (2 steps),2,answered,True,138.5,138.5,numbers=[138.5] target=138.5±0.05,,,,final_answer_tool,3,2,0,0,0,0,0,3497,112,43.714,gemma-4-26b-a4b-it
+baseline[steps5],stress26_steps5,T04_north_units,0,easy (2 steps),2,answered,True,235,235,numbers=[235.0] target=235.0±0.0,,,,final_answer_tool,4,3,0,0,0,0,0,5006,144,33.855,gemma-4-26b-a4b-it
+baseline[steps5],stress26_steps5,T05_train_time,0,easy (2 steps),2,answered,True,2.40,2.4,numbers=[2.4] target=2.4±0.005,,,,final_answer_tool,3,2,0,0,0,0,0,3275,121,34.206,gemma-4-26b-a4b-it
+baseline[steps5],stress26_steps5,T06_founder_age,0,medium (3-4 steps),3,answered,True,37,37,numbers=[37.0] target=37.0±0.0,,,,final_answer_tool,3,2,0,0,0,0,0,3560,170,36.82,gemma-4-26b-a4b-it
+baseline[steps5],stress26_steps5,T07_combined_hq_population,0,hard (5+ steps),5,answered,True,"174,800",174800,numbers=[174800.0] target=174800.0±0.0,,,,final_answer_tool,5,4,0,0,0,0,1,7366,179,61.73,gemma-4-26b-a4b-it
+baseline[steps5],stress26_steps5,T08_top_product,0,easy (2 steps),2,step_limit,False,,Falcon-2,step_limit,execution_error,execution_error,,,5,5,2,0,0,0,0,6900,505,47.733,gemma-4-26b-a4b-it
+baseline[steps5],stress26_steps5,T09_avg_eng_salary,0,easy (2 steps),2,step_limit,False,,125600,step_limit,execution_error,execution_error,,,5,5,2,0,0,0,1,7156,469,84.037,gemma-4-26b-a4b-it
+baseline[steps5],stress26_steps5,T10_log_errors,0,easy (2 steps),2,step_limit,False,,"9, E502",step_limit,execution_error,execution_error,,,5,5,1,0,0,0,0,11690,1264,80.332,gemma-4-26b-a4b-it
+baseline[steps5],stress26_steps5,T11_memo_leader_birthplace,0,medium (3-4 steps),3,answered,True,Harlow Pike,Harlow Pike,all present,,,,final_answer_tool,4,3,0,0,0,0,1,4683,151,63.28,gemma-4-26b-a4b-it
+baseline[steps5],stress26_steps5,T12_kestrel_usd,0,medium (3-4 steps),3,answered,True,"3,410 USD",3410,numbers=[3410.0] target=3410.0±0.5,,,,final_answer_tool,4,3,0,0,0,0,0,5307,173,57.515,gemma-4-26b-a4b-it
+baseline[steps5],stress26_steps5,T13_orin_cup_estmark,0,medium (3-4 steps),4,answered,True,3,3,numbers=[3.0] target=3.0±0.0,,,,final_answer_tool,5,4,0,0,0,0,0,8773,362,84.197,gemma-4-26b-a4b-it
+baseline[steps5],stress26_steps5,T14_recipe_scaling,0,medium (3-4 steps),4,step_limit,False,,480,step_limit,execution_error,execution_error,,,5,5,2,0,0,0,0,7952,337,88.181,gemma-4-26b-a4b-it
+baseline[steps5],stress26_steps5,T15_fib_mod_elevation,0,easy (2 steps),2,answered,True,440.0,440,numbers=[440.0] target=440.0±0.0,,,,final_answer_tool,3,2,0,0,0,0,0,3750,265,58.104,gemma-4-26b-a4b-it
+baseline[steps5],stress26_steps5,T16_rev_per_employee_gap,0,medium (3-4 steps),3,answered,True,48936,48936,numbers=[48936.0] target=48936.0±1.0,,,,final_answer_tool,4,3,0,0,0,0,0,5796,209,104.733,gemma-4-26b-a4b-it
+baseline[steps5],stress26_steps5,T17_lantern_budget_per_engineer,0,hard (5+ steps),5,step_limit,False,,229400,step_limit,execution_error,execution_error,,,5,5,0,0,0,0,0,8988,217,61.142,gemma-4-26b-a4b-it
+baseline[steps5],stress26_steps5,T18_highest_hq,0,hard (5+ steps),6,answered,True,"Nimbic Foods, 540","Nimbic Foods, 540",all present,,,,final_answer_tool,5,4,0,0,0,0,0,8021,183,91.529,gemma-4-26b-a4b-it
+baseline[steps5],stress26_steps5,T19_round_trips,0,medium (3-4 steps),3,answered,True,"The total distance is 856 km.
+I have found that the CEO of Quorra Biotech is Tomas Arvane, who was born in Harlow Pike. The Brightwater Rail line connects Harlow Pike and Lindell Bay with a distance of 214 km. Since he travels from his birth town to Lindell Bay and back twice, the total distance is 214 km * 2 (for the round trip) * 2 (for doing it twice), which equals 856 km.
+
+final_answer: 856",856,numbers=[856.0] target=856.0±0.0,,,,text_response,4,3,0,0,0,0,0,7309,209,25.888,gemma-4-26b-a4b-it
+baseline[steps5],stress26_steps5,T20_south_revenue_ratio,0,hard (5+ steps),5,step_limit,False,,1.97,step_limit,execution_error,execution_error,,,5,5,0,0,0,0,0,9114,244,119.77,gemma-4-26b-a4b-it
+baseline[steps5],stress26_steps5,T21_birth_year_sum,0,hard (5+ steps),7,answered,True,3919,3919,numbers=[3919.0] target=3919.0±0.0,,,,final_answer_tool,5,4,0,0,0,0,0,8560,165,46.152,gemma-4-26b-a4b-it
+baseline[steps5],stress26_steps5,T22_veltrix_confusion,0,easy (2 steps),2,answered,True,14,14,numbers=[14.0] target=14.0±0.0,,,,final_answer_tool,3,2,0,0,0,0,0,3314,106,45.739,gemma-4-26b-a4b-it
+baseline[steps5],stress26_steps5,T23_lantern_total_usd,0,medium (3-4 steps),3,answered,True,"2,752,800",2752800,numbers=[2752800.0] target=2752800.0±1.0,,,,final_answer_tool,5,4,0,0,0,0,0,6865,244,122.363,gemma-4-26b-a4b-it
+baseline[flaky0.3],stress26_flaky30,T01_rev_per_employee,0,easy (2 steps),2,answered,True,191628,191628,numbers=[191628.0] target=191628.0±0.5,,,,final_answer_tool,6,5,3,0,0,0,1,8914,365,89.254,gemma-4-26b-a4b-it
+baseline[flaky0.3],stress26_flaky30,T02_founding_gap,0,easy (2 steps),2,answered,True,8,8,numbers=[8.0] target=8.0±0.0,,,,final_answer_tool,6,5,2,0,0,0,0,8060,208,43.944,gemma-4-26b-a4b-it
+baseline[flaky0.3],stress26_flaky30,T03_province_density,0,easy (2 steps),2,answered,True,138.5,138.5,numbers=[138.5] target=138.5±0.05,,,,final_answer_tool,4,3,1,0,0,0,0,4739,155,34.722,gemma-4-26b-a4b-it
+baseline[flaky0.3],stress26_flaky30,T04_north_units,0,easy (2 steps),2,answered,True,235,235,numbers=[235.0] target=235.0±0.0,,,,final_answer_tool,5,4,1,0,0,0,1,6806,175,31.358,gemma-4-26b-a4b-it
+baseline[flaky0.3],stress26_flaky30,T05_train_time,0,easy (2 steps),2,answered,True,2.40,2.4,numbers=[2.4] target=2.4±0.005,,,,final_answer_tool,3,2,0,0,0,0,1,3275,121,35.101,gemma-4-26b-a4b-it
+baseline[flaky0.3],stress26_flaky30,T06_founder_age,0,medium (3-4 steps),3,answered,True,37,37,numbers=[37.0] target=37.0±0.0,,,,final_answer_tool,7,6,4,0,0,0,2,9860,324,57.928,gemma-4-26b-a4b-it
+baseline[flaky0.3],stress26_flaky30,T07_combined_hq_population,0,hard (5+ steps),5,answered,True,"174,800",174800,numbers=[174800.0] target=174800.0±0.0,,,,final_answer_tool,6,5,1,0,0,0,0,8885,208,42.868,gemma-4-26b-a4b-it
+baseline[flaky0.3],stress26_flaky30,T08_top_product,0,easy (2 steps),2,answered,True,Falcon-2,Falcon-2,all present,,,,final_answer_tool,9,8,3,0,0,0,0,20026,737,70.87,gemma-4-26b-a4b-it
+baseline[flaky0.3],stress26_flaky30,T09_avg_eng_salary,0,easy (2 steps),2,answered,True,125600,125600,numbers=[125600.0] target=125600.0±0.5,,,,final_answer_tool,10,9,5,0,0,0,2,18538,529,135.962,gemma-4-26b-a4b-it
+baseline[flaky0.3],stress26_flaky30,T10_log_errors,0,easy (2 steps),2,answered,True,"9, E502","9, E502",all present,,,,final_answer_tool,8,7,4,0,0,0,0,26526,1804,117.363,gemma-4-26b-a4b-it
+baseline[flaky0.3],stress26_flaky30,T11_memo_leader_birthplace,0,medium (3-4 steps),3,answered,True,Harlow Pike,Harlow Pike,all present,,,,final_answer_tool,4,3,0,0,0,0,0,4683,151,21.974,gemma-4-26b-a4b-it
+baseline[flaky0.3],stress26_flaky30,T12_kestrel_usd,0,medium (3-4 steps),3,answered,True,"3,410 USD",3410,numbers=[3410.0] target=3410.0±0.5,,,,final_answer_tool,5,4,1,0,0,0,0,6558,222,28.23,gemma-4-26b-a4b-it
+baseline[flaky0.3],stress26_flaky30,T13_orin_cup_estmark,0,medium (3-4 steps),4,step_limit,False,,3,step_limit,execution_error,execution_error,,,12,12,6,0,0,0,1,24678,442,81.964,gemma-4-26b-a4b-it
+baseline[flaky0.3],stress26_flaky30,T14_recipe_scaling,0,medium (3-4 steps),4,answered,True,480,480,numbers=[480.0] target=480.0±0.5,,,,final_answer_tool,7,6,2,0,0,0,0,14492,415,82.707,gemma-4-26b-a4b-it
+baseline[flaky0.3],stress26_flaky30,T15_fib_mod_elevation,0,easy (2 steps),2,answered,True,440,440,numbers=[440.0] target=440.0±0.0,,,,final_answer_tool,4,3,1,0,0,0,0,5614,406,39.583,gemma-4-26b-a4b-it
+baseline[flaky0.3],stress26_flaky30,T16_rev_per_employee_gap,0,medium (3-4 steps),3,answered,True,48936,48936,numbers=[48936.0] target=48936.0±1.0,,,,final_answer_tool,4,3,1,0,0,0,0,5217,277,31.146,gemma-4-26b-a4b-it
+baseline[flaky0.3],stress26_flaky30,T17_lantern_budget_per_engineer,0,hard (5+ steps),5,step_limit,False,,229400,step_limit,execution_error,execution_error,,,12,11,4,0,0,1,0,29571,489,100.651,gemma-4-26b-a4b-it
+baseline[flaky0.3],stress26_flaky30,T18_highest_hq,0,hard (5+ steps),6,answered,True,"Nimbic Foods, 540","Nimbic Foods, 540",all present,,,,final_answer_tool,5,4,0,0,0,0,1,8021,183,102.47,gemma-4-26b-a4b-it
+baseline[flaky0.3],stress26_flaky30,T19_round_trips,0,medium (3-4 steps),3,answered,True,"The total distance is 856 km.
+I will provide the final answer.
+
+The CEO of Quorra Biotech is Tomas Arvane, who was born in Harlow Pike. The Brightwater Rail line connects Harlow Pike and Lindell Bay and has a length of 214 km. A single round trip (from Harlow Pike to Lindell Bay and back) is 428 km. Since he makes this trip twice, the total distance traveled is 856 km.
+
+final_answer: 856",856,numbers=[856.0] target=856.0±0.0,,,,text_response,6,5,2,0,0,0,0,11459,318,73.937,gemma-4-26b-a4b-it
+baseline[flaky0.3],stress26_flaky30,T20_south_revenue_ratio,0,hard (5+ steps),5,answered,True,1.97,1.97,numbers=[1.97] target=1.97±0.005,,,,final_answer_tool,9,8,1,0,0,0,0,21993,557,69.686,gemma-4-26b-a4b-it
+baseline[flaky0.3],stress26_flaky30,T21_birth_year_sum,0,hard (5+ steps),7,answered,True,3919,3919,numbers=[3919.0] target=3919.0±0.0,,,,final_answer_tool,6,5,1,0,0,0,1,10251,542,98.645,gemma-4-26b-a4b-it
+baseline[flaky0.3],stress26_flaky30,T22_veltrix_confusion,0,easy (2 steps),2,answered,True,14,14,numbers=[14.0] target=14.0±0.0,,,,final_answer_tool,5,4,2,0,0,0,0,6286,211,35.448,gemma-4-26b-a4b-it
+baseline[flaky0.3],stress26_flaky30,T23_lantern_total_usd,0,medium (3-4 steps),3,answered,True,"2,752,800",2752800,numbers=[2752800.0] target=2752800.0±1.0,,,,final_answer_tool,5,4,0,0,0,0,0,6865,244,65.604,gemma-4-26b-a4b-it
+baseline[search1],stress26_search1,T01_rev_per_employee,0,easy (2 steps),2,step_limit,False,,191628,step_limit,infinite_loop,infinite_loop,,,12,12,0,0,0,0,1,32300,604,177.421,gemma-4-26b-a4b-it
+baseline[search1],stress26_search1,T02_founding_gap,0,easy (2 steps),2,answered,True,8,8,numbers=[8.0] target=8.0±0.0,,,,final_answer_tool,4,3,0,0,0,0,0,4329,129,31.826,gemma-4-26b-a4b-it
+baseline[search1],stress26_search1,T03_province_density,0,easy (2 steps),2,answered,True,138.5,138.5,numbers=[138.5] target=138.5±0.05,,,,final_answer_tool,3,2,0,0,0,0,1,3307,108,32.381,gemma-4-26b-a4b-it
+baseline[search1],stress26_search1,T04_north_units,0,easy (2 steps),2,answered,True,235,235,numbers=[235.0] target=235.0±0.0,,,,final_answer_tool,4,3,0,0,0,0,0,5006,144,29.229,gemma-4-26b-a4b-it
+baseline[search1],stress26_search1,T05_train_time,0,easy (2 steps),2,step_limit,False,,2.4,step_limit,infinite_loop,infinite_loop,,,12,12,0,0,0,0,1,25300,486,139.758,gemma-4-26b-a4b-it
+baseline[search1],stress26_search1,T06_founder_age,0,medium (3-4 steps),3,answered,True,37,37,numbers=[37.0] target=37.0±0.0,,,,final_answer_tool,4,3,0,0,0,0,0,4754,136,24.299,gemma-4-26b-a4b-it
+baseline[search1],stress26_search1,T07_combined_hq_population,0,hard (5+ steps),5,step_limit,False,,174800,step_limit,infinite_loop,infinite_loop,,,12,12,0,0,0,0,0,24639,458,72.989,gemma-4-26b-a4b-it
+baseline[search1],stress26_search1,T08_top_product,0,easy (2 steps),2,answered,True,Falcon-2,Falcon-2,all present,,,,final_answer_tool,7,6,2,0,0,0,1,12025,939,116.003,gemma-4-26b-a4b-it
+baseline[search1],stress26_search1,T09_avg_eng_salary,0,easy (2 steps),2,answered,True,125600,125600,numbers=[125600.0] target=125600.0±0.5,,,,final_answer_tool,7,6,2,0,0,0,0,13032,932,63.806,gemma-4-26b-a4b-it
+baseline[search1],stress26_search1,T10_log_errors,0,easy (2 steps),2,answered,True,"9, E502","9, E502",all present,,,,final_answer_tool,6,5,1,0,0,0,0,17090,1322,97.244,gemma-4-26b-a4b-it
+baseline[search1],stress26_search1,T11_memo_leader_birthplace,0,medium (3-4 steps),3,api_error,False,,Harlow Pike,api_error,api_error,api_error,,,9,9,0,0,0,0,0,15539,341,1009.011,gemma-4-26b-a4b-it
+baseline[search1],stress26_search1,T12_kestrel_usd,0,medium (3-4 steps),3,step_limit,False,,3410,step_limit,infinite_loop,infinite_loop,,,12,12,0,0,0,0,1,24150,460,120.215,gemma-4-26b-a4b-it
+baseline[search1],stress26_search1,T13_orin_cup_estmark,0,medium (3-4 steps),4,step_limit,False,,3,step_limit,infinite_loop,infinite_loop,,,12,12,0,0,0,0,1,26654,557,124.352,gemma-4-26b-a4b-it
+baseline[search1],stress26_search1,T14_recipe_scaling,0,medium (3-4 steps),4,answered,True,480,480,numbers=[480.0] target=480.0±0.5,,,,final_answer_tool,7,6,2,0,0,0,0,14891,430,60.97,gemma-4-26b-a4b-it
+baseline[search1],stress26_search1,T15_fib_mod_elevation,0,easy (2 steps),2,step_limit,False,,440,step_limit,infinite_loop,infinite_loop,,,12,12,0,0,0,0,1,26320,460,119.976,gemma-4-26b-a4b-it
+baseline[search1],stress26_search1,T16_rev_per_employee_gap,0,medium (3-4 steps),3,step_limit,False,,48936,step_limit,infinite_loop,infinite_loop,,,12,12,0,0,0,0,1,28520,541,126.095,gemma-4-26b-a4b-it
+baseline[search1],stress26_search1,T17_lantern_budget_per_engineer,0,hard (5+ steps),5,step_limit,False,,229400,step_limit,infinite_loop,infinite_loop,,,12,12,0,0,0,0,1,31743,477,131.079,gemma-4-26b-a4b-it
+baseline[search1],stress26_search1,T18_highest_hq,0,hard (5+ steps),6,step_limit,False,,"Nimbic Foods, 540",step_limit,infinite_loop,infinite_loop,,,12,12,0,0,0,0,1,23729,386,97.189,gemma-4-26b-a4b-it
+baseline[search1],stress26_search1,T19_round_trips,0,medium (3-4 steps),3,step_limit,False,,856,step_limit,infinite_loop,infinite_loop,,,12,12,0,0,0,0,1,30796,428,120.54,gemma-4-26b-a4b-it
+baseline[search1],stress26_search1,T20_south_revenue_ratio,0,hard (5+ steps),5,step_limit,False,,1.97,step_limit,infinite_loop,infinite_loop,,,12,12,0,0,0,0,1,32795,491,120.179,gemma-4-26b-a4b-it
+baseline[search1],stress26_search1,T21_birth_year_sum,0,hard (5+ steps),7,api_error,False,,3919,api_error,api_error,api_error,,,7,7,0,0,0,0,0,11000,215,986.563,gemma-4-26b-a4b-it
+baseline[search1],stress26_search1,T22_veltrix_confusion,0,easy (2 steps),2,step_limit,False,,14,step_limit,infinite_loop,infinite_loop,,,12,12,0,0,0,0,1,23312,468,93.632,gemma-4-26b-a4b-it
+baseline[search1],stress26_search1,T23_lantern_total_usd,0,medium (3-4 steps),3,step_limit,False,,2752800,step_limit,infinite_loop,infinite_loop,,,12,12,0,0,0,0,1,24628,448,112.557,gemma-4-26b-a4b-it

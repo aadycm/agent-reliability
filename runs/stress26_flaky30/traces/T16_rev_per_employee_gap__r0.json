@@ -1,0 +1,149 @@
+{
+  "task_id": "T16_rev_per_employee_gap",
+  "task": "What is the absolute difference, in US dollars rounded to the nearest dollar, between the 2023 revenue per employee of Nimbic Foods and that of Quorra Biotech?",
+  "condition": "baseline[flaky0.3]",
+  "config": {
+    "model": "gemma-4-26b-a4b-it",
+    "temperature": 0.0,
+    "max_steps": 12,
+    "self_check": false,
+    "max_self_checks": 1,
+    "reflection": false,
+    "tool_failure_rate": 0.3,
+    "degrade_search": false,
+    "stress_seed": 0,
+    "max_empty_response_nudges": 2,
+    "retry": {
+      "max_retries": 6,
+      "base_delay": 2.0,
+      "max_delay": 60.0,
+      "requests_per_minute": 10.0
+    },
+    "condition": "baseline[flaky0.3]"
+  },
+  "model": "gemma-4-26b-a4b-it",
+  "started_at": "2026-09-25T03:26:36+00:00",
+  "ended_at": "2026-09-25T03:27:07+00:00",
+  "duration_s": 31.146,
+  "status": "answered",
+  "final_answer": "48936",
+  "finish_mode": "final_answer_tool",
+  "error": null,
+  "reflection_plan": null,
+  "steps": [
+    {
+      "index": 0,
+      "kind": "model",
+      "reasoning": "The user wants to find the absolute difference in 2023 revenue per employee between Nimbic Foods and Quorra Biotech.\n\nFirst, I need to find the 2023 revenue and the number of employees for both Nimbic Foods and Quorra Biotech.\n\nI'll start by searching for \"Nimbic Foods\" and \"Quorra Biotech\" to find their 2023 revenue and employee counts.\nI will search for information about Nimbic Foods and Quorra Biotech to find their 2023 revenue and number of employees.",
+      "tool_calls": [
+        {
+          "name": "search",
+          "args": {
+            "query": "Nimbic Foods 2023 revenue and number of employees"
+          },
+          "output": null,
+          "error": "temporary tool failure (service unavailable). The call was not executed; try again.",
+          "duration_s": 0.0
+        }
+      ],
+      "proposed_answer": null,
+      "nudged": false,
+      "note": null,
+      "usage": {
+        "prompt_tokens": 837,
+        "output_tokens": 56
+      },
+      "retries": 0,
+      "latency_s": 4.533
+    },
+    {
+      "index": 1,
+      "kind": "model",
+      "reasoning": "The search failed. I'll try searching for them separately.\nI will search for Nimbic Foods' 2023 revenue and number of employees.",
+      "tool_calls": [
+        {
+          "name": "search",
+          "args": {
+            "query": "Nimbic Foods 2023 revenue and number of employees"
+          },
+          "output": [
+            {
+              "title": "Nimbic Foods",
+              "snippet": "Nimbic Foods is a packaged-food producer founded in 1985. Headquarters: Carrow Falls. CEO: Priya Lanford (since 2011). 2023 revenue: 1.26 billion USD. Employees (2023): 8,400."
+            },
+            {
+              "title": "Veltrix Dynamics",
+              "snippet": "Veltrix Dynamics is an industrial drone manufacturer founded in 1998 by Mira Osterfeld. Headquarters: Harlow Pike. 2023 revenue: 412 million USD. Employees (2023): 2,150. Best-known product: the Kestrel-9 survey drone."
+            },
+            {
+              "title": "Quorra Biotech",
+              "snippet": "Quorra Biotech is a biotechnology company founded in 2006. Headquarters: Lindell Bay. CEO: Tomas Arvane (since 2015). 2023 revenue: 187 million USD. Employees (2023): 940."
+            }
+          ],
+          "error": null,
+          "duration_s": 0.0002
+        }
+      ],
+      "proposed_answer": null,
+      "nudged": false,
+      "note": null,
+      "usage": {
+        "prompt_tokens": 1100,
+        "output_tokens": 49
+      },
+      "retries": 0,
+      "latency_s": 3.218
+    },
+    {
+      "index": 2,
+      "kind": "model",
+      "reasoning": "I have the following information:\n\n**Nimbic Foods:**\n- 2023 revenue: 1.26 billion USD\n- Employees (2023): 8,400\n\n**Quorra Biotech:**\n- 2023 revenue: 187 million USD\n- Employees (2023): 940\n\nNow I need to calculate the revenue per employee for each.\n\n**Nimbic Foods revenue per employee:**\n$1,260,000,000 / 8,400$\n\n**Quorra Biotech revenue per employee:**\n$187,000,000 / 940$\n\nThen I'll find the absolute difference and round it to the nearest dollar.\nI will calculate the revenue per employee for Nimbic Foods and Quorra Biotech, and then find the absolute difference between them, rounded to the nearest dollar.",
+      "tool_calls": [
+        {
+          "name": "calculator",
+          "args": {
+            "expression": "abs((1260000000 / 8400) - (187000000 / 940))"
+          },
+          "output": 48936.170212766,
+          "error": null,
+          "duration_s": 0.0001
+        }
+      ],
+      "proposed_answer": null,
+      "nudged": false,
+      "note": null,
+      "usage": {
+        "prompt_tokens": 1418,
+        "output_tokens": 83
+      },
+      "retries": 0,
+      "latency_s": 10.063
+    },
+    {
+      "index": 3,
+      "kind": "model",
+      "reasoning": "The result is 48936.170212766.\nRounding to the nearest dollar gives 48936.\n\nLet me double check the math.\nNimbic: 1,260,000,000 / 8,400 = 150,000\nQuorra: 187,000,000 / 940 = 198,936.17021276596\n\nDifference: |150,000 - 198,936.17021276596| = 48,936.17021276596\n\nRounding to the nearest dollar: 48,936.\n\nWait, let me re-read the prompt. \"absolute difference, in US dollars rounded to the nearest dollar\".\n\nNimbic revenue: 1.26 billion = 1,260,000,000\nNimbic employees: 8,400\n1,260,000,000 / 8,400 = 150,000\n\nQuorra revenue: 187 million = 187,000,000\nQuorra employees: 940\n187,000,000 / 940 = 198,936.17021276596\n\nDifference = 198,936.17021276596 - 150,000 = 48,936.17021276596\n\nRounded to the nearest dollar: 48,936.\n\nI'll just do a quick check on the numbers from the search results.\nNimbic Foods: 2023 revenue: 1.26 billion USD. Employees (2023): 8,400.\nQuorra Biotech: 2023 revenue: 187 million USD. Employees (2023): 940.\n\nEverything seems correct.\nI have calculated the revenue per employee for both companies and found the absolute difference. The revenue per employee for Nimbic Foods is $150,000 and for Quorra Biotech is approximately $198,936. The absolute difference is $48,936 when rounded to the nearest dollar.",
+      "tool_calls": [],
+      "proposed_answer": "48936",
+      "nudged": false,
+      "note": null,
+      "usage": {
+        "prompt_tokens": 1862,
+        "output_tokens": 89
+      },
+      "retries": 0,
+      "latency_s": 13.329
+    }
+  ],
+  "stats": {
+    "model_calls": 4,
+    "empty_responses": 0,
+    "self_checks_answered": 0,
+    "tool_calls": 3,
+    "tool_errors": 1,
+    "retries": 0,
+    "self_checks": 0,
+    "prompt_tokens": 5217,
+    "output_tokens": 277
+  }
+}

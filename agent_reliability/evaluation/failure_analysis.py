@@ -105,6 +105,28 @@ def fabricated_numbers(trace: dict) -> list[float]:
     return suspicious
 
 
+
+def repeated_documents(calls: list[dict]) -> tuple[str, int]:
+    """Largest number of times one search result was re-fetched.
+
+    Added after the degraded-search stress study: when a needed fact was missing from the
+    snippet, the agent rephrased its query again and again ("Brightwater Rail", "... km",
+    "... miles") and received the identical document each time. Those calls are not identical,
+    so the exact-repeat rule missed them, but re-reading one document many times is a loop.
+    """
+    seen = Counter()
+    for c in calls:
+        if c.get("error"):
+            continue
+        out = c.get("output")
+        if isinstance(out, list):
+            for item in out[:1]:            # the top hit is what the model actually reads
+                if isinstance(item, dict) and item.get("title"):
+                    seen[f"{c['name']}:{item['title']}"] += 1
+        elif c["name"] == "read_file":
+            seen[f"read_file:{json.dumps(c.get('args', {}), sort_keys=True)}"] += 1
+    return seen.most_common(1)[0] if seen else ("", 0)
+
 def _required_groups(task: Task) -> list[set[str]]:
     return [set(g.split("|")) for g in task.required_tools]
 
@@ -134,6 +156,7 @@ def categorize(task: Task, trace: dict, result: dict) -> FailureLabel | None:
         "tool_errors": len(errors), "max_identical_call_repeats": max_repeat,
         "missing_required_tools": ["|".join(sorted(g)) for g in missing_groups],
         "missing_intermediates": missing_inter, "fabricated_numbers": fabricated[:10],
+        "max_same_result_refetches": repeated_documents(calls)[1],
         "finish_mode": trace.get("finish_mode"),
     }
 
@@ -148,10 +171,25 @@ def categorize(task: Task, trace: dict, result: dict) -> FailureLabel | None:
     if status == "step_limit":
         if max_repeat >= 3:
             return done("infinite_loop", f"step limit reached; one identical call repeated {max_repeat}x")
+        doc, doc_n = repeated_documents(calls)
+        if doc_n >= 4:
+            return done("infinite_loop",
+                        f"step limit reached; re-fetched the same result {doc_n}x ({doc}) with "
+                        "reworded queries instead of changing approach")
         tail = [c["name"] for c in calls[-6:]]
         if len(tail) >= 6 and len(set(tail)) == 1 and all(c.get("error") for c in calls[-6:]):
             return done("infinite_loop", f"step limit reached; last 6 calls all failing {tail[0]} calls")
-        return done("bad_plan", "step limit reached without exact repetition (flailing or over-long plan)")
+        # Refined after the stress study (2026-09): with a deliberately tight step budget, running
+        # out is not evidence of a bad plan. Traces showed runs that had gathered every required
+        # fact - some had even computed the answer - and were cut off a step short, or lost steps to
+        # tool errors. Those are execution failures, not planning failures.
+        if not missing_groups and not missing_inter:
+            why = (f"step limit reached with all required information already gathered "
+                   f"({len(errors)} tool error(s) along the way)")
+            return done("execution_error", why)
+        return done("bad_plan", "step limit reached without the needed information "
+                                f"(missing tools {lab.signals['missing_required_tools']}, "
+                                f"missing values {missing_inter[:4]})")
 
     if status == "no_answer":
         return done("gave_up_early", "run ended with empty/malformed responses and no answer")

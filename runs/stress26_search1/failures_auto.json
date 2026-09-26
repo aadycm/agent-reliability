@@ -1,0 +1,422 @@
+[
+  {
+    "task_id": "T01_rev_per_employee",
+    "repeat": 0,
+    "category": "bad_plan",
+    "evidence": [
+      "step limit reached without the needed information (missing tools ['calculator|python_exec'], missing values ['412 million', '2,150'])"
+    ],
+    "signals": {
+      "status": "step_limit",
+      "tool_calls": 12,
+      "tools_used": [
+        "list_files",
+        "read_file",
+        "search"
+      ],
+      "tool_errors": 0,
+      "max_identical_call_repeats": 1,
+      "missing_required_tools": [
+        "calculator|python_exec"
+      ],
+      "missing_intermediates": [
+        "412 million",
+        "2,150"
+      ],
+      "fabricated_numbers": [],
+      "finish_mode": null
+    },
+    "source": "heuristic"
+  },
+  {
+    "task_id": "T05_train_time",
+    "repeat": 0,
+    "category": "bad_plan",
+    "evidence": [
+      "step limit reached without the needed information (missing tools ['calculator|python_exec'], missing values ['214 km', '89 km/h'])"
+    ],
+    "signals": {
+      "status": "step_limit",
+      "tool_calls": 12,
+      "tools_used": [
+        "list_files",
+        "read_file",
+        "search"
+      ],
+      "tool_errors": 0,
+      "max_identical_call_repeats": 1,
+      "missing_required_tools": [
+        "calculator|python_exec"
+      ],
+      "missing_intermediates": [
+        "214 km",
+        "89 km/h"
+      ],
+      "fabricated_numbers": [],
+      "finish_mode": null
+    },
+    "source": "heuristic"
+  },
+  {
+    "task_id": "T07_combined_hq_population",
+    "repeat": 0,
+    "category": "bad_plan",
+    "evidence": [
+      "step limit reached without the needed information (missing tools ['calculator|python_exec'], missing values ['48,300', '126,500'])"
+    ],
+    "signals": {
+      "status": "step_limit",
+      "tool_calls": 12,
+      "tools_used": [
+        "list_files",
+        "read_file",
+        "search"
+      ],
+      "tool_errors": 0,
+      "max_identical_call_repeats": 1,
+      "missing_required_tools": [
+        "calculator|python_exec"
+      ],
+      "missing_intermediates": [
+        "48,300",
+        "126,500"
+      ],
+      "fabricated_numbers": [],
+      "finish_mode": null
+    },
+    "source": "heuristic"
+  },
+  {
+    "task_id": "T11_memo_leader_birthplace",
+    "repeat": 0,
+    "category": "api_error",
+    "evidence": [
+      "API failure: DeadlineExceeded: 504 Deadline Exceeded"
+    ],
+    "signals": {
+      "status": "api_error",
+      "tool_calls": 9,
+      "tools_used": [
+        "list_files",
+        "read_file",
+        "search"
+      ],
+      "tool_errors": 0,
+      "max_identical_call_repeats": 1,
+      "missing_required_tools": [],
+      "missing_intermediates": [
+        "Tomas Arvane",
+        "born 1974 in Harlow Pike"
+      ],
+      "fabricated_numbers": [],
+      "finish_mode": null
+    },
+    "source": "heuristic"
+  },
+  {
+    "task_id": "T12_kestrel_usd",
+    "repeat": 0,
+    "category": "bad_plan",
+    "evidence": [
+      "step limit reached without the needed information (missing tools ['calculator|python_exec'], missing values ['0.62'])"
+    ],
+    "signals": {
+      "status": "step_limit",
+      "tool_calls": 12,
+      "tools_used": [
+        "list_files",
+        "read_file",
+        "search"
+      ],
+      "tool_errors": 0,
+      "max_identical_call_repeats": 1,
+      "missing_required_tools": [
+        "calculator|python_exec"
+      ],
+      "missing_intermediates": [
+        "0.62"
+      ],
+      "fabricated_numbers": [],
+      "finish_mode": null
+    },
+    "source": "heuristic"
+  },
+  {
+    "task_id": "T13_orin_cup_estmark",
+    "repeat": 0,
+    "category": "bad_plan",
+    "evidence": [
+      "step limit reached without the needed information (missing tools [], missing values ['Harlow Pike Owls', 'Carrow Falls is a mountain town in Estmark'])"
+    ],
+    "signals": {
+      "status": "step_limit",
+      "tool_calls": 12,
+      "tools_used": [
+        "list_files",
+        "search"
+      ],
+      "tool_errors": 0,
+      "max_identical_call_repeats": 1,
+      "missing_required_tools": [],
+      "missing_intermediates": [
+        "Harlow Pike Owls",
+        "Carrow Falls is a mountain town in Estmark"
+      ],
+      "fabricated_numbers": [],
+      "finish_mode": null
+    },
+    "source": "heuristic"
+  },
+  {
+    "task_id": "T15_fib_mod_elevation",
+    "repeat": 0,
+    "category": "bad_plan",
+    "evidence": [
+      "step limit reached without the needed information (missing tools ['calculator|python_exec'], missing values ['540 m'])"
+    ],
+    "signals": {
+      "status": "step_limit",
+      "tool_calls": 12,
+      "tools_used": [
+        "list_files",
+        "read_file",
+        "search"
+      ],
+      "tool_errors": 0,
+      "max_identical_call_repeats": 1,
+      "missing_required_tools": [
+        "calculator|python_exec"
+      ],
+      "missing_intermediates": [
+        "540 m"
+      ],
+      "fabricated_numbers": [],
+      "finish_mode": null
+    },
+    "source": "heuristic"
+  },
+  {
+    "task_id": "T16_rev_per_employee_gap",
+    "repeat": 0,
+    "category": "bad_plan",
+    "evidence": [
+      "step limit reached without the needed information (missing tools ['calculator|python_exec'], missing values ['1.26 billion', '8,400', '187 million'])"
+    ],
+    "signals": {
+      "status": "step_limit",
+      "tool_calls": 12,
+      "tools_used": [
+        "list_files",
+        "read_file",
+        "search"
+      ],
+      "tool_errors": 0,
+      "max_identical_call_repeats": 1,
+      "missing_required_tools": [
+        "calculator|python_exec"
+      ],
+      "missing_intermediates": [
+        "1.26 billion",
+        "8,400",
+        "187 million"
+      ],
+      "fabricated_numbers": [],
+      "finish_mode": null
+    },
+    "source": "heuristic"
+  },
+  {
+    "task_id": "T17_lantern_budget_per_engineer",
+    "repeat": 0,
+    "category": "bad_plan",
+    "evidence": [
+      "step limit reached without the needed information (missing tools ['calculator|python_exec'], missing values ['0.62'])"
+    ],
+    "signals": {
+      "status": "step_limit",
+      "tool_calls": 12,
+      "tools_used": [
+        "list_files",
+        "read_file",
+        "search"
+      ],
+      "tool_errors": 0,
+      "max_identical_call_repeats": 1,
+      "missing_required_tools": [
+        "calculator|python_exec"
+      ],
+      "missing_intermediates": [
+        "0.62"
+      ],
+      "fabricated_numbers": [],
+      "finish_mode": null
+    },
+    "source": "heuristic"
+  },
+  {
+    "task_id": "T18_highest_hq",
+    "repeat": 0,
+    "category": "bad_plan",
+    "evidence": [
+      "step limit reached without the needed information (missing tools [], missing values ['312 m', '8 m', '540 m'])"
+    ],
+    "signals": {
+      "status": "step_limit",
+      "tool_calls": 12,
+      "tools_used": [
+        "list_files",
+        "search"
+      ],
+      "tool_errors": 0,
+      "max_identical_call_repeats": 1,
+      "missing_required_tools": [],
+      "missing_intermediates": [
+        "312 m",
+        "8 m",
+        "540 m"
+      ],
+      "fabricated_numbers": [],
+      "finish_mode": null
+    },
+    "source": "heuristic"
+  },
+  {
+    "task_id": "T19_round_trips",
+    "repeat": 0,
+    "category": "bad_plan",
+    "evidence": [
+      "step limit reached without the needed information (missing tools ['calculator|python_exec'], missing values ['born 1974 in Harlow Pike', '214 km'])"
+    ],
+    "signals": {
+      "status": "step_limit",
+      "tool_calls": 12,
+      "tools_used": [
+        "list_files",
+        "read_file",
+        "search"
+      ],
+      "tool_errors": 0,
+      "max_identical_call_repeats": 1,
+      "missing_required_tools": [
+        "calculator|python_exec"
+      ],
+      "missing_intermediates": [
+        "born 1974 in Harlow Pike",
+        "214 km"
+      ],
+      "fabricated_numbers": [],
+      "finish_mode": null
+    },
+    "source": "heuristic"
+  },
+  {
+    "task_id": "T20_south_revenue_ratio",
+    "repeat": 0,
+    "category": "bad_plan",
+    "evidence": [
+      "step limit reached without the needed information (missing tools ['calculator|python_exec'], missing values ['0.62', '412 million', '2,150'])"
+    ],
+    "signals": {
+      "status": "step_limit",
+      "tool_calls": 12,
+      "tools_used": [
+        "list_files",
+        "read_file",
+        "search"
+      ],
+      "tool_errors": 0,
+      "max_identical_call_repeats": 2,
+      "missing_required_tools": [
+        "calculator|python_exec"
+      ],
+      "missing_intermediates": [
+        "0.62",
+        "412 million",
+        "2,150"
+      ],
+      "fabricated_numbers": [],
+      "finish_mode": null
+    },
+    "source": "heuristic"
+  },
+  {
+    "task_id": "T21_birth_year_sum",
+    "repeat": 0,
+    "category": "api_error",
+    "evidence": [
+      "API failure: DeadlineExceeded: 504 Deadline Exceeded"
+    ],
+    "signals": {
+      "status": "api_error",
+      "tool_calls": 7,
+      "tools_used": [
+        "search"
+      ],
+      "tool_errors": 0,
+      "max_identical_call_repeats": 1,
+      "missing_required_tools": [
+        "calculator|python_exec"
+      ],
+      "missing_intermediates": [
+        "born 1974",
+        "born 1969",
+        "1985"
+      ],
+      "fabricated_numbers": [],
+      "finish_mode": null
+    },
+    "source": "heuristic"
+  },
+  {
+    "task_id": "T22_veltrix_confusion",
+    "repeat": 0,
+    "category": "execution_error",
+    "evidence": [
+      "step limit reached with all required information already gathered (0 tool error(s) along the way)"
+    ],
+    "signals": {
+      "status": "step_limit",
+      "tool_calls": 12,
+      "tools_used": [
+        "list_files",
+        "read_file",
+        "search"
+      ],
+      "tool_errors": 0,
+      "max_identical_call_repeats": 1,
+      "missing_required_tools": [],
+      "missing_intermediates": [],
+      "fabricated_numbers": [],
+      "finish_mode": null
+    },
+    "source": "heuristic"
+  },
+  {
+    "task_id": "T23_lantern_total_usd",
+    "repeat": 0,
+    "category": "bad_plan",
+    "evidence": [
+      "step limit reached without the needed information (missing tools ['calculator|python_exec'], missing values ['0.62'])"
+    ],
+    "signals": {
+      "status": "step_limit",
+      "tool_calls": 12,
+      "tools_used": [
+        "list_files",
+        "read_file",
+        "search"
+      ],
+      "tool_errors": 0,
+      "max_identical_call_repeats": 1,
+      "missing_required_tools": [
+        "calculator|python_exec"
+      ],
+      "missing_intermediates": [
+        "0.62"
+      ],
+      "fabricated_numbers": [],
+      "finish_mode": null
+    },
+    "source": "heuristic"
+  }
+]

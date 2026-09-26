@@ -56,6 +56,10 @@ class Agent:
                  backend: LLMBackend | None = None, verbose: bool = False, printer: Printer = print):
         self.config = config or AgentConfig()
         self.tools = tools or DEFAULT_REGISTRY
+        if self.config.tool_failure_rate or self.config.degrade_search:
+            from .stress import StressRegistry
+            self.tools = StressRegistry(self.tools, self.config.tool_failure_rate,
+                                        self.config.degrade_search, self.config.stress_seed)
         self.backend = backend or GeminiBackend(self.config.model, self.config.temperature, self.config.retry)
         self.verbose = verbose
         self._print = printer
@@ -67,6 +71,8 @@ class Agent:
     # ------------------------------------------------------------------
     def run(self, task: str, task_id: str = "adhoc") -> Trace:
         cfg = self.config
+        if hasattr(self.tools, "begin_run"):
+            self.tools.begin_run(task_id)  # reproducible stress failures for this task
         trace = Trace(task_id=task_id, task=task, condition=cfg.condition_name,
                       config=cfg.to_dict(), model=getattr(self.backend, "model_name", cfg.model))
         declarations = self.tools.declarations() + [prompts.FINAL_ANSWER_DECLARATION]

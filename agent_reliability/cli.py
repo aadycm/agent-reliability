@@ -41,6 +41,12 @@ def _config(args, **overrides) -> AgentConfig:
         cfg.max_steps = args.max_steps
     if getattr(args, "rpm", None):
         cfg.retry.requests_per_minute = args.rpm
+    if getattr(args, "tool_failure_rate", None):
+        cfg.tool_failure_rate = args.tool_failure_rate
+    if getattr(args, "degrade_search", False):
+        cfg.degrade_search = True
+    if getattr(args, "stress_seed", None) is not None:
+        cfg.stress_seed = args.stress_seed
     cfg.reflection = overrides.get("reflection", getattr(args, "reflection", False))
     cfg.self_check = overrides.get("self_check", getattr(args, "self_check", False))
     return cfg
@@ -146,6 +152,11 @@ def main(argv=None):
         sp.add_argument("--model", help="Gemini model name (default: $GEMINI_MODEL or gemini-3.6-flash)")
         sp.add_argument("--max-steps", type=int)
         sp.add_argument("--rpm", type=float, help="client-side requests-per-minute limit")
+        sp.add_argument("--tool-failure-rate", type=float, metavar="P",
+                        help="stress: probability each tool call returns a transient error (e.g. 0.3)")
+        sp.add_argument("--degrade-search", action="store_true",
+                        help="stress: search returns 1 truncated result instead of several")
+        sp.add_argument("--stress-seed", type=int, help="seed for injected tool failures (default 0)")
         if toggles:
             sp.add_argument("--reflection", action="store_true", help="critique the plan before executing")
             sp.add_argument("--self-check", action="store_true", help="verify the answer before finalizing")
