@@ -176,3 +176,35 @@ def test_non_retryable_error_raises_immediately():
         assert "InvalidArgument" in str(e)
     else:
         raise AssertionError("expected LLMAPIError")
+
+
+def test_timeouts_fail_fast_instead_of_burning_the_retry_ladder():
+    """A server-side 504 on a long conversation does not clear up on retry; under degraded search
+    one task spent ~20 minutes on 6 retries before failing anyway."""
+    calls = {"n": 0}
+    sleeps = []
+
+    def always_timeout():
+        calls["n"] += 1
+        raise gexc.DeadlineExceeded("504 Deadline Exceeded")
+
+    try:
+        call_with_retries(always_timeout, RetryConfig(max_retries=6, base_delay=0.01), sleep=sleeps.append)
+    except LLMAPIError as e:
+        assert "repeated request timeouts" in str(e)
+        assert calls["n"] == 3        # initial attempt + 2 retries, not 7
+    else:
+        raise AssertionError("expected LLMAPIError")
+
+
+def test_rate_limits_still_use_the_full_retry_ladder():
+    calls = {"n": 0}
+
+    def flaky():
+        calls["n"] += 1
+        if calls["n"] < 5:
+            raise gexc.TooManyRequests("429")
+        return "ok"
+
+    result, retries = call_with_retries(flaky, RetryConfig(max_retries=6, base_delay=0.001), sleep=lambda s: None)
+    assert result == "ok" and retries == 4

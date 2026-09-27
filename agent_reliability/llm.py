@@ -89,6 +89,14 @@ class RateLimiter:
             self._next = max(now, self._next) + self.interval
 
 
+def _is_timeout(exc: Exception) -> bool:
+    try:
+        from google.api_core import exceptions as gexc
+        return isinstance(exc, (gexc.DeadlineExceeded, gexc.GatewayTimeout))
+    except ImportError:
+        return isinstance(exc, TimeoutError)
+
+
 def _is_retryable(exc: Exception) -> bool:
     try:
         from google.api_core import exceptions as gexc
@@ -110,6 +118,11 @@ def _server_retry_delay(exc: Exception) -> float | None:
 def call_with_retries(fn, retry: RetryConfig, limiter: RateLimiter | None = None, sleep=time.sleep):
     """Run fn() with exponential backoff + jitter. Returns (result, n_retries)."""
     attempt = 0
+    timeouts = 0
+    # A server-side 504 on a long conversation does not clear up by asking again: under the
+    # degraded-search condition one task burned the whole retry ladder (~20 min) before failing.
+    # Give timeouts a couple of tries, then fail fast so the benchmark moves on to the next task.
+    max_timeout_attempts = 2
     while True:
         if limiter:
             limiter.wait()
@@ -123,6 +136,10 @@ def call_with_retries(fn, retry: RetryConfig, limiter: RateLimiter | None = None
                 raise DailyQuotaExhausted(
                     f"daily quota exhausted ({daily[0]}, limit {limit.group(1) if limit else '?'} requests/day). "
                     "It resets daily; use another model or a paid tier to continue now.") from exc
+            if _is_timeout(exc):
+                timeouts += 1
+                if timeouts > max_timeout_attempts:
+                    raise LLMAPIError(f"repeated request timeouts ({timeouts}): {exc}"[:500]) from exc
             if not _is_retryable(exc) or attempt >= retry.max_retries:
                 raise LLMAPIError(f"{type(exc).__name__}: {exc}"[:1000]) from exc
             delay = min(retry.max_delay, retry.base_delay * 2 ** attempt)
