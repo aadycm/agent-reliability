@@ -1,11 +1,22 @@
-# Secrets
+# Secrets - never commit these. .env.example is the committed template.
 .env
+.env.*
+!.env.example
+*.key
+*.pem
+credentials.json
+service-account*.json
+secrets.*
 
 # Python
 __pycache__/
 *.pyc
+*.pyo
 .venv/
+.venv*/
 venv/
+env/
+.ipynb_checkpoints/
 .pytest_cache/
 *.egg-info/
 
@@ -31,5 +42,15 @@ reports/*
 !reports/gemma/
 !reports/stress26/
 
+# Editors / IDEs
+.vscode/
+.idea/
+*.swp
+
+# Local agent/session settings
+.claude/
+
 # OS
 .DS_Store
+Thumbs.db
+desktop.ini
