@@ -1,6 +1,6 @@
 # HANDOFF - current project state
 
-Generated 2026-10-01 17:29 by `scripts/handoff.py`. Do not edit by hand except
+Generated 2026-10-24 22:29 by `scripts/handoff.py`. Do not edit by hand except
 the Baton section; everything else is regenerated.
 
 ## Baton
@@ -53,20 +53,21 @@ success rates and retried automatically when the same benchmark command is rerun
 
 ## Repo state
 
-- Branch: `## main...origin/main`
+- Branch: `## main...origin/main [ahead 1]`
 - Last commits:
 ```
+0f381f7 Add handoff tooling for switching between assistants
 f124bce reflections done few failures yet to be updated
 8c2d71c Harden .gitignore before making the repo public
 4647c1e Fail fast on repeated request timeouts
 4e1a292 no room for reflection and self check
-cad3f0b Stress study: degrade the environment to find real failures
 ```
 - Uncommitted:
-- `HANDOFF.md`
-- `docs/handoff-prompt.md`
-- `scripts/`
-- Tests: `71 passed in 12.88s`
+- `ANDOFF.md`
+- `runs/stress26_search1/failures.csv`
+- `runs/stress26_search1/failures_auto.json`
+- `scripts/verify_claims.py`
+- Tests: `71 passed in 15.05s`
 
 ## Environment
 
