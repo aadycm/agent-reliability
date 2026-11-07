@@ -66,3 +66,60 @@ def test_agent_wraps_registry_and_records_injected_errors():
     t = agent.run("6*7?", "T_x")
     assert t.steps[0].tool_calls[0].error == TRANSIENT_ERROR
     assert t.config["tool_failure_rate"] == 1.0 and t.condition == "baseline[flaky1]"
+
+
+# --- search degradation dose ladder ------------------------------------------
+
+def _search(level, top_k=3):
+    s = StressRegistry(REG, degrade_search=True, search_level=level)
+    return s.execute("search", {"query": "Veltrix Dynamics", "top_k": top_k}).output
+
+
+def test_severe_is_unchanged_from_the_original_setting():
+    """Earlier runs used this behaviour; it must stay identical or they stop being comparable."""
+    out = _search("severe")
+    assert len(out) == 1
+    assert out[0]["title"] == "Veltrix Dynamics"
+    assert out[0]["snippet"].endswith("Mira Osterfeld.")   # first sentence only
+    assert "2,150" not in out[0]["snippet"]                # later facts withheld
+
+
+def test_moderate_keeps_one_full_snippet():
+    out = _search("moderate")
+    assert len(out) == 1
+    assert "2,150" in out[0]["snippet"]                    # the whole snippet survives
+    assert "top match only" in out[0]["note"]
+
+
+def test_mild_keeps_two_full_snippets():
+    out = _search("mild")
+    assert len(out) == 2
+    assert all("..." not in d["snippet"] for d in out)
+    assert "2,150" in out[0]["snippet"]
+
+
+def test_ladder_is_monotonic_in_information():
+    """Each step up the ladder withholds at least as much as the one below it."""
+    sizes = [sum(len(d["snippet"]) for d in _search(lvl)) for lvl in ("mild", "moderate", "severe")]
+    assert sizes[0] > sizes[1] > sizes[2]
+
+
+def test_level_ignored_when_degradation_is_off():
+    s = StressRegistry(REG, degrade_search=False, search_level="severe")
+    assert s.search_level == "off"
+    assert s.execute("search", {"query": "Veltrix Dynamics", "top_k": 3}).output == \
+        REG.execute("search", {"query": "Veltrix Dynamics", "top_k": 3}).output
+
+
+def test_unknown_level_is_rejected():
+    import pytest
+    from agent_reliability.stress import _truncate_search
+    with pytest.raises(ValueError):
+        _truncate_search([{"title": "x", "snippet": "y."}], "catastrophic")
+
+
+def test_condition_names_distinguish_the_levels():
+    assert AgentConfig(degrade_search=True, search_level="severe").condition_name == "baseline[search1]"
+    assert AgentConfig(degrade_search=True, search_level="mild").condition_name == "baseline[search-mild]"
+    assert AgentConfig(degrade_search=True, search_level="moderate", reflection=True).condition_name == \
+        "reflection[search-moderate]"

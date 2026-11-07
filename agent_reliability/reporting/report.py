@@ -297,15 +297,29 @@ def build_report(run_dirs: list[Path], out_dir: Path) -> Path:
            "from success rates and counted separately.", ""]
 
     body = []
+    any_api = False
     for c in conds:
         allr = [r for r in rows if r["condition"] == c]
         rs = _scored(allr)
         k, n = sum(r["correct"] for r in rs), len(rs)
         lo, hi = wilson(k, n)
+        n_api = len(allr) - n
+        any_api = any_api or n_api > 0
+        # Sensitivity: api_error runs are excluded above, but that missingness is not random -
+        # long conversations time out more often, so the hardest runs drop out. This column shows
+        # the worst case, counting every excluded run as a failure.
+        worst = k / len(allr) if allr else 0
         body.append([c, n, k, _fmt_pct(k / n) if n else "n/a", f"{_fmt_pct(lo)} – {_fmt_pct(hi)}",
-                     len(allr) - n])
-    md += ["## Overall success", "", _md_table(["condition", "scored runs", "correct", "success", "95% CI", "api_error (excluded)"], body),
-           "", "![](success_by_condition.png)", ""]
+                     n_api, _fmt_pct(worst) if n_api else "–"])
+    md += ["## Overall success", "",
+           _md_table(["condition", "scored runs", "correct", "success", "95% CI",
+                      "api_error (excluded)", "worst case*"], body), ""]
+    if any_api:
+        md += [r"\* *Sensitivity check: success rate if every `api_error` run were counted as a failure. "
+               "These runs are excluded from the headline figure because they are infrastructure failures, "
+               "but the exclusion is not random - the longest conversations time out most - so the true "
+               "value lies between the two columns.*", ""]
+    md += ["![](success_by_condition.png)", ""]
 
     body = []
     for d in DIFFICULTY_ORDER:

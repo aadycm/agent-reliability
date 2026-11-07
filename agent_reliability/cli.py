@@ -45,6 +45,8 @@ def _config(args, **overrides) -> AgentConfig:
         cfg.tool_failure_rate = args.tool_failure_rate
     if getattr(args, "degrade_search", False):
         cfg.degrade_search = True
+    if getattr(args, "search_level", None):
+        cfg.search_level = args.search_level
     if getattr(args, "stress_seed", None) is not None:
         cfg.stress_seed = args.stress_seed
     cfg.reflection = overrides.get("reflection", getattr(args, "reflection", False))
@@ -155,7 +157,9 @@ def main(argv=None):
         sp.add_argument("--tool-failure-rate", type=float, metavar="P",
                         help="stress: probability each tool call returns a transient error (e.g. 0.3)")
         sp.add_argument("--degrade-search", action="store_true",
-                        help="stress: search returns 1 truncated result instead of several")
+                        help="stress: withhold part of each search result (see --search-level)")
+        sp.add_argument("--search-level", choices=["mild", "moderate", "severe"],
+                        help="stress: how much to withhold (default severe); needs --degrade-search")
         sp.add_argument("--stress-seed", type=int, help="seed for injected tool failures (default 0)")
         if toggles:
             sp.add_argument("--reflection", action="store_true", help="critique the plan before executing")

@@ -89,7 +89,7 @@ baseline[search1],stress26_search1,T07_combined_hq_population,0,hard (5+ steps),
 baseline[search1],stress26_search1,T08_top_product,0,easy (2 steps),2,answered,True,Falcon-2,Falcon-2,all present,,,,final_answer_tool,7,6,2,0,0,0,1,12025,939,116.003,gemma-4-26b-a4b-it
 baseline[search1],stress26_search1,T09_avg_eng_salary,0,easy (2 steps),2,answered,True,125600,125600,numbers=[125600.0] target=125600.0±0.5,,,,final_answer_tool,7,6,2,0,0,0,0,13032,932,63.806,gemma-4-26b-a4b-it
 baseline[search1],stress26_search1,T10_log_errors,0,easy (2 steps),2,answered,True,"9, E502","9, E502",all present,,,,final_answer_tool,6,5,1,0,0,0,0,17090,1322,97.244,gemma-4-26b-a4b-it
-baseline[search1],stress26_search1,T11_memo_leader_birthplace,0,medium (3-4 steps),3,api_error,False,,Harlow Pike,api_error,api_error,api_error,,,9,9,0,0,0,0,0,15539,341,1009.011,gemma-4-26b-a4b-it
+baseline[search1],stress26_search1,T11_memo_leader_birthplace,0,medium (3-4 steps),3,api_error,False,,Harlow Pike,api_error,api_error,api_error,,,9,9,0,0,0,0,0,15539,341,2264.18,gemma-4-26b-a4b-it
 baseline[search1],stress26_search1,T12_kestrel_usd,0,medium (3-4 steps),3,step_limit,False,,3410,step_limit,infinite_loop,infinite_loop,,,12,12,0,0,0,0,1,24150,460,120.215,gemma-4-26b-a4b-it
 baseline[search1],stress26_search1,T13_orin_cup_estmark,0,medium (3-4 steps),4,step_limit,False,,3,step_limit,infinite_loop,infinite_loop,,,12,12,0,0,0,0,1,26654,557,124.352,gemma-4-26b-a4b-it
 baseline[search1],stress26_search1,T14_recipe_scaling,0,medium (3-4 steps),4,answered,True,480,480,numbers=[480.0] target=480.0±0.5,,,,final_answer_tool,7,6,2,0,0,0,0,14891,430,60.97,gemma-4-26b-a4b-it
@@ -99,6 +99,6 @@ baseline[search1],stress26_search1,T17_lantern_budget_per_engineer,0,hard (5+ st
 baseline[search1],stress26_search1,T18_highest_hq,0,hard (5+ steps),6,step_limit,False,,"Nimbic Foods, 540",step_limit,infinite_loop,infinite_loop,,,12,12,0,0,0,0,1,23729,386,97.189,gemma-4-26b-a4b-it
 baseline[search1],stress26_search1,T19_round_trips,0,medium (3-4 steps),3,step_limit,False,,856,step_limit,infinite_loop,infinite_loop,,,12,12,0,0,0,0,1,30796,428,120.54,gemma-4-26b-a4b-it
 baseline[search1],stress26_search1,T20_south_revenue_ratio,0,hard (5+ steps),5,step_limit,False,,1.97,step_limit,infinite_loop,infinite_loop,,,12,12,0,0,0,0,1,32795,491,120.179,gemma-4-26b-a4b-it
-baseline[search1],stress26_search1,T21_birth_year_sum,0,hard (5+ steps),7,api_error,False,,3919,api_error,api_error,api_error,,,7,7,0,0,0,0,0,11000,215,986.563,gemma-4-26b-a4b-it
+baseline[search1],stress26_search1,T21_birth_year_sum,0,hard (5+ steps),7,api_error,False,,3919,api_error,api_error,api_error,,,7,7,0,0,0,0,0,11000,215,2276.018,gemma-4-26b-a4b-it
 baseline[search1],stress26_search1,T22_veltrix_confusion,0,easy (2 steps),2,step_limit,False,,14,step_limit,infinite_loop,infinite_loop,,,12,12,0,0,0,0,1,23312,468,93.632,gemma-4-26b-a4b-it
 baseline[search1],stress26_search1,T23_lantern_total_usd,0,medium (3-4 steps),3,step_limit,False,,2752800,step_limit,infinite_loop,infinite_loop,,,12,12,0,0,0,0,1,24628,448,112.557,gemma-4-26b-a4b-it

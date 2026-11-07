@@ -7,12 +7,14 @@
 
 ## Overall success
 
-| condition | scored runs | correct | success | 95% CI | api_error (excluded) |
-|---|---|---|---|---|---|
-| baseline | 23 | 23 | 100.0% | 85.7% – 100.0% | 0 |
-| baseline[flaky0.3] | 23 | 21 | 91.3% | 73.2% – 97.6% | 0 |
-| baseline[search1] | 21 | 8 | 38.1% | 20.8% – 59.1% | 2 |
-| baseline[steps5] | 23 | 17 | 73.9% | 53.5% – 87.5% | 0 |
+| condition | scored runs | correct | success | 95% CI | api_error (excluded) | worst case* |
+|---|---|---|---|---|---|---|
+| baseline | 23 | 23 | 100.0% | 85.7% – 100.0% | 0 | – |
+| baseline[flaky0.3] | 23 | 21 | 91.3% | 73.2% – 97.6% | 0 | – |
+| baseline[search1] | 21 | 8 | 38.1% | 20.8% – 59.1% | 2 | 34.8% |
+| baseline[steps5] | 23 | 17 | 73.9% | 53.5% – 87.5% | 0 | – |
+
+\* *Sensitivity check: success rate if every `api_error` run were counted as a failure. These runs are excluded from the headline figure because they are infrastructure failures, but the exclusion is not random - the longest conversations time out most - so the true value lies between the two columns.*
 
 ![](success_by_condition.png)
 

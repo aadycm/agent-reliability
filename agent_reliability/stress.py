@@ -8,8 +8,12 @@ reproducible, and independent of any particular task:
   tool_failure_rate   each tool call fails with a transient error with this probability, and the
                       agent must notice and retry. Seeded per task, so a rerun reproduces exactly
                       the same failures.
-  degrade_search      `search` returns one truncated result instead of several full ones, so facts
-                      must be gathered over more, better-targeted queries.
+  search_level        how much of the `search` result is withheld. A dose ladder, so the effect can
+                      be measured as a curve rather than a single point:
+                        off      - untouched (up to top_k full results)
+                        mild     - top 2 results, full snippets
+                        moderate - top 1 result, full snippet
+                        severe   - top 1 result, first sentence only (the original setting)
   (tight step limit)  set with the existing --max-steps; no wrapper needed.
 
 Each knob targets a different suspected weak point: error recovery, information gathering, and
@@ -30,10 +34,11 @@ class StressRegistry(ToolRegistry):
     """Wraps a registry and degrades it. Declarations are unchanged, so the model is not told."""
 
     def __init__(self, inner: ToolRegistry, tool_failure_rate: float = 0.0, degrade_search: bool = False,
-                 seed: int = 0):
+                 seed: int = 0, search_level: str = "severe"):
         self._inner = inner
         self.tool_failure_rate = tool_failure_rate
         self.degrade_search = degrade_search
+        self.search_level = search_level if degrade_search else "off"
         self.seed = seed
         self._rng = random.Random(seed)
 
@@ -62,17 +67,25 @@ class StressRegistry(ToolRegistry):
             return ToolResult(error=TRANSIENT_ERROR)
         result = self._inner.execute(name, args)
         if self.degrade_search and name == "search" and result.error is None:
-            result.output = _truncate_search(result.output)
+            result.output = _truncate_search(result.output, self.search_level)
         return result
 
 
-def _truncate_search(output):
-    """Keep only the top hit, and only its first sentence."""
-    if not isinstance(output, list) or not output:
+KEEP_RESULTS = {"mild": 2, "moderate": 1, "severe": 1}
+
+
+def _truncate_search(output, level: str = "severe"):
+    """Withhold part of the search result, by dose level (see module docstring)."""
+    if level == "off" or not isinstance(output, list) or not output:
         return output
-    top = dict(output[0])
-    snippet = str(top.get("snippet", ""))
-    first = re.split(r"(?<=[.!?])\s", snippet.strip(), maxsplit=1)[0]
-    top["snippet"] = first
-    top["note"] = "results truncated: 1 of possibly several matches, first sentence only"
-    return [top]
+    if level not in KEEP_RESULTS:
+        raise ValueError(f"unknown search level {level!r}; expected one of {sorted(KEEP_RESULTS) + ['off']}")
+    kept = [dict(d) for d in output[: KEEP_RESULTS[level]]]
+    if level == "severe":
+        snippet = str(kept[0].get("snippet", ""))
+        kept[0]["snippet"] = re.split(r"(?<=[.!?])\s", snippet.strip(), maxsplit=1)[0]
+    note = {"mild": "results truncated: top 2 matches only",
+            "moderate": "results truncated: top match only",
+            "severe": "results truncated: top match only, first sentence only"}[level]
+    kept[0]["note"] = note
+    return kept

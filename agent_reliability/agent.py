@@ -59,7 +59,8 @@ class Agent:
         if self.config.tool_failure_rate or self.config.degrade_search:
             from .stress import StressRegistry
             self.tools = StressRegistry(self.tools, self.config.tool_failure_rate,
-                                        self.config.degrade_search, self.config.stress_seed)
+                                        self.config.degrade_search, self.config.stress_seed,
+                                        self.config.search_level)
         self.backend = backend or GeminiBackend(self.config.model, self.config.temperature, self.config.retry)
         self.verbose = verbose
         self._print = printer

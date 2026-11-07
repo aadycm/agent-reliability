@@ -39,7 +39,8 @@ class AgentConfig:
     reflection: bool = False      # critique the plan before executing
     # --- stress conditions (degrade the environment, not the tasks; see stress.py) ---
     tool_failure_rate: float = 0.0   # chance each tool call returns a transient error
-    degrade_search: bool = False     # search returns 1 truncated result instead of several
+    degrade_search: bool = False     # withhold part of each search result (see search_level)
+    search_level: str = "severe"     # off | mild | moderate | severe - the dose ladder in stress.py
     stress_seed: int = 0             # makes the injected failures reproducible
     # --- robustness ---
     max_empty_response_nudges: int = 2
@@ -53,7 +54,8 @@ class AgentConfig:
         if self.tool_failure_rate:
             parts.append(f"flaky{self.tool_failure_rate:g}")
         if self.degrade_search:
-            parts.append("search1")
+            # "search1" is kept for the original severe setting so earlier runs stay comparable.
+            parts.append("search1" if self.search_level == "severe" else f"search-{self.search_level}")
         return ",".join(parts)
 
     @property
