@@ -1,6 +1,6 @@
 # HANDOFF - current project state
 
-Generated 2026-10-27 23:25 by `scripts/handoff.py`. Do not edit by hand except
+Generated 2026-11-07 01:21 by `scripts/handoff.py`. Do not edit by hand except
 the Baton section; everything else is regenerated.
 
 ## Baton
@@ -29,10 +29,13 @@ self-check). Full design, results and limitations are in `README.md` - **read it
 
 ## Next steps
 
-1. Finish `stress26_search1_reflection`: 3 tasks left. `python -m agent_reliability benchmark --name stress26_search1_reflection --model gemma-4-26b-a4b-it --rpm 8 --degrade-search --reflection` (resumes; skips cached).
-2. Rebuild the report with that condition included: `python -m agent_reliability report runs/gemma26_baseline runs/stress26_steps5 runs/stress26_flaky30 runs/stress26_search1 runs/stress26_search1_reflection --out reports/stress26`.
-3. Add a 'reflection under stress' paragraph to the README study-2 section, using only numbers from the regenerated report.
-4. DECIDED, do not redo: self-check under degraded search was skipped on purpose - self-check only fires when the agent submits an answer, and 13 of 21 degraded-search runs never do. Run it under flaky tools instead if a self-check-under-stress number is wanted.
+1. DAY 1a: finish `stress26_search1_reflection` (3 tasks left). `python -m agent_reliability benchmark --name stress26_search1_reflection --model gemma-4-26b-a4b-it --rpm 8 --degrade-search --reflection` (resumes; skips cached).
+2. DAY 1b: dose level MODERATE. `python -m agent_reliability benchmark --name stress26_search_moderate --model gemma-4-26b-a4b-it --rpm 8 --degrade-search --search-level moderate`.
+3. DAY 2a: dose level MILD. `python -m agent_reliability benchmark --name stress26_search_mild --model gemma-4-26b-a4b-it --rpm 8 --degrade-search --search-level mild`.
+4. DAY 2b: baseline repeats. `python -m agent_reliability benchmark --name gemma26_baseline_rep --model gemma-4-26b-a4b-it --rpm 8 --repeats 3`.
+5. DAY 3: severe repeats. `python -m agent_reliability benchmark --name stress26_search1_rep --model gemma-4-26b-a4b-it --rpm 8 --degrade-search --repeats 3`.
+6. DAY 4: rebuild the report over every run: `python -m agent_reliability report runs/gemma26_baseline runs/stress26_search_mild runs/stress26_search_moderate runs/stress26_search1 runs/stress26_steps5 runs/stress26_flaky30 --out reports/stress26`.
+7. DAY 5 (NEEDS THE USER - do not attempt unattended): write the study-3 section of the README from the regenerated report, check each prediction in docs/preregistration.md against what happened, and add the new figures to scripts/verify_claims.py.
 
 ## Benchmark runs on disk
 
@@ -53,18 +56,20 @@ success rates and retried automatically when the same benchmark command is rerun
 
 ## Repo state
 
-- Branch: `## main...origin/main`
+- Branch: `## main...origin/main [ahead 1]`
 - Last commits:
 ```
+4e5ad5b Add search-degradation dose ladder and api_error sensitivity column
 c5ae8bc Add claim verifier; refresh degraded-search failure labels
 0f381f7 Add handoff tooling for switching between assistants
 f124bce reflections done few failures yet to be updated
 8c2d71c Harden .gitignore before making the repo public
-4647c1e Fail fast on repeated request timeouts
 ```
 - Uncommitted:
-- `ANDOFF.md`
-- Tests: `71 passed in 13.17s`
+- `uns/stress26_search1_reflection/traces/T07_combined_hq_population__r0.json`
+- `scripts/handoff.py`
+- `docs/preregistration.md`
+- Tests: `78 passed in 13.34s`
 
 ## Environment
 
