@@ -56,18 +56,18 @@ success rates and retried automatically when the same benchmark command is rerun
 
 ## Repo state
 
-- Branch: `## main...origin/main [ahead 4]`
+- Branch: `## main...origin/main [ahead 5]`
 - Last commits:
 ```
+810f699 Mark the dose ladder done in the handoff plan
 eea4069 Add the mild and moderate dose-level run data
 64c97b4 Run reflection-under-stress and the moderate dose level
 085dc0a Pre-register study 3 and queue the 5-day plan
 4e5ad5b Add search-degradation dose ladder and api_error sensitivity column
-c5ae8bc Add claim verifier; refresh degraded-search failure labels
 ```
 - Uncommitted:
-- `cripts/handoff.py`
-- Tests: `(unknown)`
+- (clean)
+- Tests: `78 passed in 14.30s`
 
 ## Environment
 

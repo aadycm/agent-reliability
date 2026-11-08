@@ -145,7 +145,25 @@ def cmd_show_trace(args):
     print(format_trace(load_trace(Path(args.path)), max_out=args.max_out))
 
 
+def _force_utf8_output() -> None:
+    """Make stdout/stderr survive non-ASCII on Windows.
+
+    Progress lines carry marks and arrows. When output goes to a console the
+    default encoding is fine, but when it is piped or redirected Python picks
+    the legacy ANSI codepage (cp1252 here) and the first tick mark raises
+    UnicodeEncodeError - which killed a three-repeat benchmark after one task,
+    with the real work lost. Unattended runs are exactly the redirected case,
+    so force UTF-8 and never let an unprintable character end a run.
+    """
+    for stream in (sys.stdout, sys.stderr):
+        try:
+            stream.reconfigure(encoding="utf-8", errors="replace")
+        except (AttributeError, ValueError, OSError):
+            pass  # not a reconfigurable text stream; printing stays best-effort
+
+
 def main(argv=None):
+    _force_utf8_output()
     p = argparse.ArgumentParser(prog="agent_reliability", description=__doc__,
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = p.add_subparsers(dest="cmd", required=True)
