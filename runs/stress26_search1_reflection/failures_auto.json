@@ -203,13 +203,13 @@
   {
     "task_id": "T16_rev_per_employee_gap",
     "repeat": 0,
-    "category": "api_error",
+    "category": "infinite_loop",
     "evidence": [
-      "API failure: repeated request timeouts (3): 504 Deadline Exceeded"
+      "step limit reached; re-fetched the same result 6x (search:Nimbic Foods) with reworded queries instead of changing approach"
     ],
     "signals": {
-      "status": "api_error",
-      "tool_calls": 9,
+      "status": "step_limit",
+      "tool_calls": 12,
       "tools_used": [
         "list_files",
         "read_file",
@@ -226,7 +226,7 @@
         "187 million"
       ],
       "fabricated_numbers": [],
-      "max_same_result_refetches": 5,
+      "max_same_result_refetches": 6,
       "finish_mode": null
     },
     "source": "heuristic"
@@ -359,7 +359,7 @@
     "repeat": 0,
     "category": "api_error",
     "evidence": [
-      "API failure: repeated request timeouts (3): 504 Deadline Exceeded"
+      "API failure: repeated request timeouts (3): 504 Deadline expired before operation could complete."
     ],
     "signals": {
       "status": "api_error",

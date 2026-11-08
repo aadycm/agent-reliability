@@ -1,6 +1,6 @@
 # HANDOFF - current project state
 
-Generated 2026-11-07 19:38 by `scripts/handoff.py`. Do not edit by hand except
+Generated 2026-11-07 21:01 by `scripts/handoff.py`. Do not edit by hand except
 the Baton section; everything else is regenerated.
 
 ## Baton
@@ -48,7 +48,8 @@ self-check). Full design, results and limitations are in `README.md` - **read it
 | `gemma_selfcheck` | 23 | 23 | 0 | complete |
 | `stress26_flaky30` | 23 | 21 | 0 | complete |
 | `stress26_search1` | 23 | 8 | 2 | complete |
-| `stress26_search1_reflection` | 23 | 8 | 4 | complete |
+| `stress26_search1_reflection` | 23 | 8 | 3 | complete |
+| `stress26_search_mild` | 23 | 23 | 0 | complete |
 | `stress26_search_moderate` | 23 | 23 | 0 | complete |
 | `stress26_steps5` | 23 | 17 | 0 | complete |
 
@@ -57,30 +58,32 @@ success rates and retried automatically when the same benchmark command is rerun
 
 ## Repo state
 
-- Branch: `## main...origin/main [ahead 2]`
+- Branch: `## main...origin/main [ahead 3]`
 - Last commits:
 ```
+64c97b4 Run reflection-under-stress and the moderate dose level
 085dc0a Pre-register study 3 and queue the 5-day plan
 4e5ad5b Add search-degradation dose ladder and api_error sensitivity column
 c5ae8bc Add claim verifier; refresh degraded-search failure labels
 0f381f7 Add handoff tooling for switching between assistants
-f124bce reflections done few failures yet to be updated
 ```
 - Uncommitted:
-- `ANDOFF.md`
-- `runs/stress26_search1_reflection/run_config.json`
-- `runs/stress26_search1_reflection/traces/T07_combined_hq_population__r0.json`
-- `runs/stress26_search1_reflection/traces/T11_memo_leader_birthplace__r0.json`
-- `runs/stress26_search1_reflection/traces/T13_orin_cup_estmark__r0.json`
-- `runs/stress26_search1_reflection/traces/T16_rev_per_employee_gap__r0.json`
-- `runs/stress26_search1_reflection/traces/T19_round_trips__r0.json`
+- `.gitignore`
+- `HANDOFF.md`
 - `runs/stress26_search1_reflection/failures.csv`
 - `runs/stress26_search1_reflection/failures_auto.json`
 - `runs/stress26_search1_reflection/results.jsonl`
+- `runs/stress26_search1_reflection/run_config.json`
+- `runs/stress26_search1_reflection/traces/T11_memo_leader_birthplace__r0.json`
+- `runs/stress26_search1_reflection/traces/T16_rev_per_employee_gap__r0.json`
 - `runs/stress26_search1_reflection/traces/T21_birth_year_sum__r0.json`
 - `runs/stress26_search1_reflection/traces/T22_veltrix_confusion__r0.json`
-- `runs/stress26_search1_reflection/traces/T23_lantern_total_usd__r0.json`
-- Tests: `78 passed in 12.98s`
+- `runs/stress26_search_mild/failures.csv`
+- `runs/stress26_search_mild/failures_auto.json`
+- `runs/stress26_search_mild/results.jsonl`
+- `runs/stress26_search_mild/run_config.json`
+- `runs/stress26_search_mild/traces/T01_rev_per_employee__r0.json`
+- Tests: `(unknown)`
 
 ## Environment
 

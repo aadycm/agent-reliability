@@ -1,0 +1,149 @@
+{
+  "task_id": "T12_kestrel_usd",
+  "task": "What is the list price of a Kestrel-9 drone in US dollars?",
+  "condition": "baseline[search-moderate]",
+  "config": {
+    "model": "gemma-4-26b-a4b-it",
+    "temperature": 0.0,
+    "max_steps": 12,
+    "self_check": false,
+    "max_self_checks": 1,
+    "reflection": false,
+    "tool_failure_rate": 0.0,
+    "degrade_search": true,
+    "search_level": "moderate",
+    "stress_seed": 0,
+    "max_empty_response_nudges": 2,
+    "retry": {
+      "max_retries": 6,
+      "base_delay": 2.0,
+      "max_delay": 60.0,
+      "requests_per_minute": 6.0
+    },
+    "condition": "baseline[search-moderate]"
+  },
+  "model": "gemma-4-26b-a4b-it",
+  "started_at": "2026-11-08T00:23:57+00:00",
+  "ended_at": "2026-11-08T00:25:24+00:00",
+  "duration_s": 87.162,
+  "status": "answered",
+  "final_answer": "3410",
+  "finish_mode": "final_answer_tool",
+  "error": null,
+  "reflection_plan": null,
+  "steps": [
+    {
+      "index": 0,
+      "kind": "model",
+      "reasoning": "The user is asking for the list price of a \"Kestrel-9 drone\" in US dollars. I need to find information about this drone and its price. I'll start by searching for \"Kestrel-9 drone\" to see if I can find any information about it.\nI will search for \"Kestrel-9 drone\" to find information about its price.",
+      "tool_calls": [
+        {
+          "name": "search",
+          "args": {
+            "query": "Kestrel-9 drone"
+          },
+          "output": [
+            {
+              "title": "Kestrel-9 drone",
+              "snippet": "The Kestrel-9 is a survey drone made by Veltrix Dynamics, launched in 2017. List price: 5,500 Estmark crowns (EKR).",
+              "note": "results truncated: top match only"
+            }
+          ],
+          "error": null,
+          "duration_s": 0.0009
+        }
+      ],
+      "proposed_answer": null,
+      "nudged": false,
+      "note": null,
+      "usage": {
+        "prompt_tokens": 816,
+        "output_tokens": 37
+      },
+      "retries": 4,
+      "latency_s": 57.616
+    },
+    {
+      "index": 1,
+      "kind": "model",
+      "reasoning": "The search result says the Kestrel-9 is a survey drone made by Veltrix Dynamics and its list price is 5,500 Estmark crowns (EKR). I need to find the conversion rate from Estmark crowns (EKR) to US dollars (USD) to answer the user's question. I'll search for \"Estmark crown to USD\" or \"EKR to USD exchange rate\".\nI will search for the exchange rate from Estmark crowns (EKR) to US dollars (USD).",
+      "tool_calls": [
+        {
+          "name": "search",
+          "args": {
+            "query": "Estmark crown to USD exchange rate"
+          },
+          "output": [
+            {
+              "title": "Estmark crown (EKR) exchange rate",
+              "snippet": "The Estmark crown (EKR) is the currency of Estmark province. Fixed exchange rate: 1 EKR = 0.62 USD.",
+              "note": "results truncated: top match only"
+            }
+          ],
+          "error": null,
+          "duration_s": 0.0009
+        }
+      ],
+      "proposed_answer": null,
+      "nudged": false,
+      "note": null,
+      "usage": {
+        "prompt_tokens": 1044,
+        "output_tokens": 42
+      },
+      "retries": 0,
+      "latency_s": 10.69
+    },
+    {
+      "index": 2,
+      "kind": "model",
+      "reasoning": "The exchange rate is 1 EKR = 0.62 USD. The price of the Kestrel-9 drone is 5,500 EKR. I need to calculate the price in USD.\nI will calculate the price of the Kestrel-9 drone in US dollars by multiplying 5,500 EKR by the exchange rate of 0.62 USD/EKR.",
+      "tool_calls": [
+        {
+          "name": "calculator",
+          "args": {
+            "expression": "5500 * 0.62"
+          },
+          "output": 3410,
+          "error": null,
+          "duration_s": 0.0001
+        }
+      ],
+      "proposed_answer": null,
+      "nudged": false,
+      "note": null,
+      "usage": {
+        "prompt_tokens": 1331,
+        "output_tokens": 64
+      },
+      "retries": 0,
+      "latency_s": 9.591
+    },
+    {
+      "index": 3,
+      "kind": "model",
+      "reasoning": "The calculation result is 3410. So the list price of a Kestrel-9 drone is 3,410 US dollars.\nI have found that the list price of a Kestrel-9 drone is 3,410 US dollars.",
+      "tool_calls": [],
+      "proposed_answer": "3410",
+      "nudged": false,
+      "note": null,
+      "usage": {
+        "prompt_tokens": 1496,
+        "output_tokens": 44
+      },
+      "retries": 0,
+      "latency_s": 9.258
+    }
+  ],
+  "stats": {
+    "model_calls": 4,
+    "empty_responses": 0,
+    "self_checks_answered": 0,
+    "tool_calls": 3,
+    "tool_errors": 0,
+    "retries": 4,
+    "self_checks": 0,
+    "prompt_tokens": 4687,
+    "output_tokens": 187
+  }
+}

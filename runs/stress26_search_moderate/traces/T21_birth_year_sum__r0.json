@@ -1,0 +1,273 @@
+{
+  "task_id": "T21_birth_year_sum",
+  "task": "Add up the birth years of the founder of Veltrix Dynamics, the CEO of Quorra Biotech and the CEO of Nimbic Foods, then subtract the year Nimbic Foods was founded. What is the result?",
+  "condition": "baseline[search-moderate]",
+  "config": {
+    "model": "gemma-4-26b-a4b-it",
+    "temperature": 0.0,
+    "max_steps": 12,
+    "self_check": false,
+    "max_self_checks": 1,
+    "reflection": false,
+    "tool_failure_rate": 0.0,
+    "degrade_search": true,
+    "search_level": "moderate",
+    "stress_seed": 0,
+    "max_empty_response_nudges": 2,
+    "retry": {
+      "max_retries": 6,
+      "base_delay": 2.0,
+      "max_delay": 60.0,
+      "requests_per_minute": 6.0
+    },
+    "condition": "baseline[search-moderate]"
+  },
+  "model": "gemma-4-26b-a4b-it",
+  "started_at": "2026-11-08T00:34:37+00:00",
+  "ended_at": "2026-11-08T00:35:59+00:00",
+  "duration_s": 81.541,
+  "status": "answered",
+  "final_answer": "3919.0",
+  "finish_mode": "final_answer_tool",
+  "error": null,
+  "reflection_plan": null,
+  "steps": [
+    {
+      "index": 0,
+      "kind": "model",
+      "reasoning": "The user wants to calculate a specific value based on several pieces of information:\n1. Birth year of the founder of Veltrix Dynamics.\n2. Birth year of the CEO of Quorra Biotech.\n3. Birth year of the CEO of Nimbic Foods.\n4. Year Nimbic Foods was founded.\n\nThe formula is: (Birth year of Veltrix Dynamics founder) + (Birth year of Quorra Biotech CEO) + (Birth year of Nimbic Foods CEO) - (Year Nimbic Foods was founded).\n\nI need to find:\n- Founder of Veltrix Dynamics and their birth year.\n- CEO of Quorra Biotech and their birth year.\n- CEO of Nimbic Foods and their birth year.\n- Founding year of Nimbic Foods.\n\nI will start by searching for \"Veltrix Dynamics founder\".\nI will search for the founder of Veltrix Dynamics.",
+      "tool_calls": [
+        {
+          "name": "search",
+          "args": {
+            "query": "Veltrix Dynamics founder"
+          },
+          "output": [
+            {
+              "title": "Veltrix Dynamics",
+              "snippet": "Veltrix Dynamics is an industrial drone manufacturer founded in 1998 by Mira Osterfeld. Headquarters: Harlow Pike. 2023 revenue: 412 million USD. Employees (2023): 2,150. Best-known product: the Kestrel-9 survey drone.",
+              "note": "results truncated: top match only"
+            }
+          ],
+          "error": null,
+          "duration_s": 0.0008
+        }
+      ],
+      "proposed_answer": null,
+      "nudged": false,
+      "note": null,
+      "usage": {
+        "prompt_tokens": 845,
+        "output_tokens": 31
+      },
+      "retries": 0,
+      "latency_s": 5.234
+    },
+    {
+      "index": 1,
+      "kind": "model",
+      "reasoning": "The founder of Veltrix Dynamics is Mira Osterfeld. Now I need her birth year. I'll search for \"Mira Osterfeld birth year\".\nI will search for Mira Osterfeld's birth year.",
+      "tool_calls": [
+        {
+          "name": "search",
+          "args": {
+            "query": "Mira Osterfeld birth year"
+          },
+          "output": [
+            {
+              "title": "Mira Osterfeld",
+              "snippet": "Mira Osterfeld (born 1961 in Carrow Falls) is an engineer and the founder of Veltrix Dynamics.",
+              "note": "results truncated: top match only"
+            }
+          ],
+          "error": null,
+          "duration_s": 0.0009
+        }
+      ],
+      "proposed_answer": null,
+      "nudged": false,
+      "note": null,
+      "usage": {
+        "prompt_tokens": 1339,
+        "output_tokens": 31
+      },
+      "retries": 0,
+      "latency_s": 6.699
+    },
+    {
+      "index": 2,
+      "kind": "model",
+      "reasoning": "Mira Osterfeld was born in 1961.\n\nNext, I need the CEO of Quorra Biotech and their birth year. I'll search for \"Quorra Biotech CEO\".\nI will search for the CEO of Quorra Biotech.",
+      "tool_calls": [
+        {
+          "name": "search",
+          "args": {
+            "query": "Quorra Biotech CEO"
+          },
+          "output": [
+            {
+              "title": "Quorra Biotech",
+              "snippet": "Quorra Biotech is a biotechnology company founded in 2006. Headquarters: Lindell Bay. CEO: Tomas Arvane (since 2015). 2023 revenue: 187 million USD. Employees (2023): 940.",
+              "note": "results truncated: top match only"
+            }
+          ],
+          "error": null,
+          "duration_s": 0.0009
+        }
+      ],
+      "proposed_answer": null,
+      "nudged": false,
+      "note": null,
+      "usage": {
+        "prompt_tokens": 1492,
+        "output_tokens": 29
+      },
+      "retries": 0,
+      "latency_s": 10.116
+    },
+    {
+      "index": 3,
+      "kind": "model",
+      "reasoning": "The CEO of Quorra Biotech is Tomas Arvane. Now I need his birth year. I'll search for \"Tomas Arvane birth year\".\nI will search for Tomas Arvane's birth year.",
+      "tool_calls": [
+        {
+          "name": "search",
+          "args": {
+            "query": "Tomas Arvane birth year"
+          },
+          "output": [
+            {
+              "title": "Tomas Arvane",
+              "snippet": "Tomas Arvane (born 1974 in Harlow Pike) is a biochemist who has been CEO of Quorra Biotech since 2015.",
+              "note": "results truncated: top match only"
+            }
+          ],
+          "error": null,
+          "duration_s": 0.0009
+        }
+      ],
+      "proposed_answer": null,
+      "nudged": false,
+      "note": null,
+      "usage": {
+        "prompt_tokens": 1693,
+        "output_tokens": 33
+      },
+      "retries": 0,
+      "latency_s": 9.912
+    },
+    {
+      "index": 4,
+      "kind": "model",
+      "reasoning": "Tomas Arvane was born in 1974.\n\nNext, I need the CEO of Nimbic Foods and their birth year, and the founding year of Nimbic Foods. I'll search for \"Nimbic Foods CEO\" and \"Nimbic Foods founded\".\nI will search for the CEO of Nimbic Foods and the year Nimbic Foods was founded.",
+      "tool_calls": [
+        {
+          "name": "search",
+          "args": {
+            "query": "Nimbic Foods CEO and founding year"
+          },
+          "output": [
+            {
+              "title": "Nimbic Foods",
+              "snippet": "Nimbic Foods is a packaged-food producer founded in 1985. Headquarters: Carrow Falls. CEO: Priya Lanford (since 2011). 2023 revenue: 1.26 billion USD. Employees (2023): 8,400.",
+              "note": "results truncated: top match only"
+            }
+          ],
+          "error": null,
+          "duration_s": 0.0009
+        }
+      ],
+      "proposed_answer": null,
+      "nudged": false,
+      "note": null,
+      "usage": {
+        "prompt_tokens": 1858,
+        "output_tokens": 43
+      },
+      "retries": 0,
+      "latency_s": 10.82
+    },
+    {
+      "index": 5,
+      "kind": "model",
+      "reasoning": "Nimbic Foods was founded in 1985.\nThe CEO of Nimbic Foods is Priya Lanford.\n\nNow I need Priya Lanford's birth year. I'll search for \"Priya Lanford birth year\".\nI will search for Priya Lanford's birth year.",
+      "tool_calls": [
+        {
+          "name": "search",
+          "args": {
+            "query": "Priya Lanford birth year"
+          },
+          "output": [
+            {
+              "title": "Priya Lanford",
+              "snippet": "Priya Lanford (born 1969 in Tessaly) has been CEO of Nimbic Foods since 2011.",
+              "note": "results truncated: top match only"
+            }
+          ],
+          "error": null,
+          "duration_s": 0.0009
+        }
+      ],
+      "proposed_answer": null,
+      "nudged": false,
+      "note": null,
+      "usage": {
+        "prompt_tokens": 2121,
+        "output_tokens": 32
+      },
+      "retries": 1,
+      "latency_s": 19.628
+    },
+    {
+      "index": 6,
+      "kind": "model",
+      "reasoning": "Priya Lanford was born in 1969.\n\nSummary of information:\n- Mira Osterfeld (Veltrix Dynamics founder) birth year: 1961\n- Tomas Arvane (Quorra Biotech CEO) birth year: 1974\n- Priya Lanford (Nimbic Foods CEO) birth year: 1969\n- Nimbic Foods founding year: 1985\n\nCalculation:\n1961 + 1974 + 1969 - 1985\n\nI'll use the calculator for this.\nI will calculate the result using the formula: 1961 + 1974 + 1969 - 1985.",
+      "tool_calls": [
+        {
+          "name": "calculator",
+          "args": {
+            "expression": "1961 + 1974 + 1969 - 1985"
+          },
+          "output": 3919,
+          "error": null,
+          "duration_s": 0.0002
+        }
+      ],
+      "proposed_answer": null,
+      "nudged": false,
+      "note": null,
+      "usage": {
+        "prompt_tokens": 2319,
+        "output_tokens": 69
+      },
+      "retries": 0,
+      "latency_s": 12.345
+    },
+    {
+      "index": 7,
+      "kind": "model",
+      "reasoning": "The result is 3919.\nI will provide the final answer.",
+      "tool_calls": [],
+      "proposed_answer": "3919.0",
+      "nudged": false,
+      "note": null,
+      "usage": {
+        "prompt_tokens": 2657,
+        "output_tokens": 25
+      },
+      "retries": 0,
+      "latency_s": 6.77
+    }
+  ],
+  "stats": {
+    "model_calls": 8,
+    "empty_responses": 0,
+    "self_checks_answered": 0,
+    "tool_calls": 7,
+    "tool_errors": 0,
+    "retries": 1,
+    "self_checks": 0,
+    "prompt_tokens": 14324,
+    "output_tokens": 293
+  }
+}

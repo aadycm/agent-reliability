@@ -23,9 +23,9 @@
     "condition": "reflection[search1]"
   },
   "model": "gemma-4-26b-a4b-it",
-  "started_at": "2026-11-07T20:07:33+00:00",
-  "ended_at": "2026-11-07T20:23:45+00:00",
-  "duration_s": 972.671,
+  "started_at": "2026-11-08T00:38:20+00:00",
+  "ended_at": "2026-11-08T00:55:45+00:00",
+  "duration_s": 1045.362,
   "status": "api_error",
   "final_answer": null,
   "finish_mode": null,
@@ -45,7 +45,7 @@
         "output_tokens": 198
       },
       "retries": 0,
-      "latency_s": 17.621
+      "latency_s": 10.477
     },
     {
       "index": 1,
@@ -59,7 +59,7 @@
           },
           "output": "INTERNAL MEMO - 14 March 2024\nTo: Finance committee\nRe: Project Lantern\n\nProject Lantern, our joint cold-chain logistics initiative, will be led by the\ncurrent CEO of Quorra Biotech.\n\nThe approved budget for phase one is 1,850,000 Estmark crowns (EKR).\nPhase two is expected to cost 40% more than phase one and will be reviewed\nin Q1 2025.\n\nPlease direct questions to the program office.",
           "error": null,
-          "duration_s": 0.001
+          "duration_s": 0.0007
         }
       ],
       "proposed_answer": null,
@@ -70,7 +70,7 @@
         "output_tokens": 48
       },
       "retries": 0,
-      "latency_s": 3.643
+      "latency_s": 3.616
     },
     {
       "index": 2,
@@ -90,7 +90,7 @@
             }
           ],
           "error": null,
-          "duration_s": 0.0002
+          "duration_s": 0.0023
         }
       ],
       "proposed_answer": null,
@@ -100,8 +100,8 @@
         "prompt_tokens": 1810,
         "output_tokens": 32
       },
-      "retries": 1,
-      "latency_s": 18.637
+      "retries": 0,
+      "latency_s": 8.671
     },
     {
       "index": 3,
@@ -121,7 +121,7 @@
             }
           ],
           "error": null,
-          "duration_s": 0.0002
+          "duration_s": 0.0009
         }
       ],
       "proposed_answer": null,
@@ -132,7 +132,7 @@
         "output_tokens": 41
       },
       "retries": 0,
-      "latency_s": 9.99
+      "latency_s": 10.114
     },
     {
       "index": 4,
@@ -152,7 +152,7 @@
             }
           ],
           "error": null,
-          "duration_s": 0.0002
+          "duration_s": 0.0009
         }
       ],
       "proposed_answer": null,
@@ -163,7 +163,7 @@
         "output_tokens": 36
       },
       "retries": 0,
-      "latency_s": 14.405
+      "latency_s": 76.236
     }
   ],
   "stats": {
@@ -172,7 +172,7 @@
     "self_checks_answered": 0,
     "tool_calls": 4,
     "tool_errors": 0,
-    "retries": 1,
+    "retries": 0,
     "self_checks": 0,
     "prompt_tokens": 7718,
     "output_tokens": 355

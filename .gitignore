@@ -32,6 +32,8 @@ runs/*
 !runs/stress26_flaky30/
 !runs/stress26_search1/
 !runs/stress26_search1_reflection/
+!runs/stress26_search_mild/
+!runs/stress26_search_moderate/
 !runs/stress26_search1_selfcheck/
 !runs/_superseded/
 runs/_superseded/*

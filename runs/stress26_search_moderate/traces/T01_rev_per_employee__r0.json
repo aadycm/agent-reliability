@@ -1,0 +1,118 @@
+{
+  "task_id": "T01_rev_per_employee",
+  "task": "What was Veltrix Dynamics' 2023 revenue per employee in US dollars, rounded to the nearest dollar?",
+  "condition": "baseline[search-moderate]",
+  "config": {
+    "model": "gemma-4-26b-a4b-it",
+    "temperature": 0.0,
+    "max_steps": 12,
+    "self_check": false,
+    "max_self_checks": 1,
+    "reflection": false,
+    "tool_failure_rate": 0.0,
+    "degrade_search": true,
+    "search_level": "moderate",
+    "stress_seed": 0,
+    "max_empty_response_nudges": 2,
+    "retry": {
+      "max_retries": 6,
+      "base_delay": 2.0,
+      "max_delay": 60.0,
+      "requests_per_minute": 6.0
+    },
+    "condition": "baseline[search-moderate]"
+  },
+  "model": "gemma-4-26b-a4b-it",
+  "started_at": "2026-11-08T00:11:56+00:00",
+  "ended_at": "2026-11-08T00:12:21+00:00",
+  "duration_s": 25.616,
+  "status": "answered",
+  "final_answer": "191628",
+  "finish_mode": "final_answer_tool",
+  "error": null,
+  "reflection_plan": null,
+  "steps": [
+    {
+      "index": 0,
+      "kind": "model",
+      "reasoning": "The user wants to find the 2023 revenue per employee for Veltrix Dynamics in US dollars, rounded to the nearest dollar.\n\nFirst, I need to find information about Veltrix Dynamics, specifically its 2023 revenue and the number of employees in 2023.\n\nI'll start by searching for \"Veltrix Dynamics\" to see what information is available.\nI will search for \"Veltrix Dynamics\" to find information about its 2023 revenue and number of employees.",
+      "tool_calls": [
+        {
+          "name": "search",
+          "args": {
+            "query": "Veltrix Dynamics"
+          },
+          "output": [
+            {
+              "title": "Veltrix Dynamics",
+              "snippet": "Veltrix Dynamics is an industrial drone manufacturer founded in 1998 by Mira Osterfeld. Headquarters: Harlow Pike. 2023 revenue: 412 million USD. Employees (2023): 2,150. Best-known product: the Kestrel-9 survey drone.",
+              "note": "results truncated: top match only"
+            }
+          ],
+          "error": null,
+          "duration_s": 0.0458
+        }
+      ],
+      "proposed_answer": null,
+      "nudged": false,
+      "note": null,
+      "usage": {
+        "prompt_tokens": 825,
+        "output_tokens": 44
+      },
+      "retries": 0,
+      "latency_s": 3.435
+    },
+    {
+      "index": 1,
+      "kind": "model",
+      "reasoning": "The search result provides the following information for Veltrix Dynamics in 2023:\n- 2023 revenue: 412 million USD\n- Employees (2023): 2,150\n\nI need to calculate the revenue per employee.\nRevenue per employee = Total Revenue / Number of Employees\nRevenue per employee = 412,000,000 / 2,150\n\nI'll use the calculator to perform this division and round to the nearest dollar.\nI will calculate the revenue per employee by dividing the 2023 revenue (412,000,000 USD) by the number of employees (2,150) and rounding to the nearest dollar.",
+      "tool_calls": [
+        {
+          "name": "calculator",
+          "args": {
+            "expression": "round(412000000 / 2150)"
+          },
+          "output": 191628,
+          "error": null,
+          "duration_s": 0.0003
+        }
+      ],
+      "proposed_answer": null,
+      "nudged": false,
+      "note": null,
+      "usage": {
+        "prompt_tokens": 1138,
+        "output_tokens": 81
+      },
+      "retries": 0,
+      "latency_s": 11.214
+    },
+    {
+      "index": 2,
+      "kind": "model",
+      "reasoning": "The calculation result is 191,628.\nThe question asks for the revenue per employee in US dollars, rounded to the nearest dollar.\nThe result is 191628.\n\nI should double check if there are any other details.\n\"What was Veltrix Dynamics' 2023 revenue per employee in US dollars, rounded to the nearest dollar?\"\nRevenue: 412 million USD = 412,000,000 USD.\nEmployees: 2,150.\n412,000,000 / 2,150 = 191,627.90697674418...\nRounding to the nearest dollar gives 191,628.\n\nI'm confident with this answer.\nI have calculated the 2023 revenue per employee for Veltrix Dynamics, which is 191,628 USD.",
+      "tool_calls": [],
+      "proposed_answer": "191628",
+      "nudged": false,
+      "note": null,
+      "usage": {
+        "prompt_tokens": 1458,
+        "output_tokens": 52
+      },
+      "retries": 0,
+      "latency_s": 10.917
+    }
+  ],
+  "stats": {
+    "model_calls": 3,
+    "empty_responses": 0,
+    "self_checks_answered": 0,
+    "tool_calls": 2,
+    "tool_errors": 0,
+    "retries": 0,
+    "self_checks": 0,
+    "prompt_tokens": 3421,
+    "output_tokens": 177
+  }
+}

@@ -1,0 +1,174 @@
+{
+  "task_id": "T16_rev_per_employee_gap",
+  "task": "What is the absolute difference, in US dollars rounded to the nearest dollar, between the 2023 revenue per employee of Nimbic Foods and that of Quorra Biotech?",
+  "condition": "baseline[search-moderate]",
+  "config": {
+    "model": "gemma-4-26b-a4b-it",
+    "temperature": 0.0,
+    "max_steps": 12,
+    "self_check": false,
+    "max_self_checks": 1,
+    "reflection": false,
+    "tool_failure_rate": 0.0,
+    "degrade_search": true,
+    "search_level": "moderate",
+    "stress_seed": 0,
+    "max_empty_response_nudges": 2,
+    "retry": {
+      "max_retries": 6,
+      "base_delay": 2.0,
+      "max_delay": 60.0,
+      "requests_per_minute": 6.0
+    },
+    "condition": "baseline[search-moderate]"
+  },
+  "model": "gemma-4-26b-a4b-it",
+  "started_at": "2026-11-08T00:28:19+00:00",
+  "ended_at": "2026-11-08T00:29:02+00:00",
+  "duration_s": 42.745,
+  "status": "answered",
+  "final_answer": "48936",
+  "finish_mode": "final_answer_tool",
+  "error": null,
+  "reflection_plan": null,
+  "steps": [
+    {
+      "index": 0,
+      "kind": "model",
+      "reasoning": "The user wants to find the absolute difference in 2023 revenue per employee between Nimbic Foods and Quorra Biotech.\n\nFirst, I need to find the 2023 revenue and the number of employees for both Nimbic Foods and Quorra Biotech.\n\nI'll start by searching for \"Nimbic Foods\" and \"Quorra Biotech\" to find their 2023 revenue and employee counts.\nI will search for information about Nimbic Foods and Quorra Biotech to find their 2023 revenue and number of employees.",
+      "tool_calls": [
+        {
+          "name": "search",
+          "args": {
+            "query": "Nimbic Foods 2023 revenue and number of employees"
+          },
+          "output": [
+            {
+              "title": "Nimbic Foods",
+              "snippet": "Nimbic Foods is a packaged-food producer founded in 1985. Headquarters: Carrow Falls. CEO: Priya Lanford (since 2011). 2023 revenue: 1.26 billion USD. Employees (2023): 8,400.",
+              "note": "results truncated: top match only"
+            }
+          ],
+          "error": null,
+          "duration_s": 0.0009
+        }
+      ],
+      "proposed_answer": null,
+      "nudged": false,
+      "note": null,
+      "usage": {
+        "prompt_tokens": 837,
+        "output_tokens": 56
+      },
+      "retries": 0,
+      "latency_s": 3.655
+    },
+    {
+      "index": 1,
+      "kind": "model",
+      "reasoning": "I have the information for Nimbic Foods:\n- 2023 revenue: 1.26 billion USD\n- Employees (2023): 8,400\n\nNow I need to find the information for Quorra Biotech.\nI will search for information about Quorra Biotech to find its 2023 revenue and number of employees.",
+      "tool_calls": [
+        {
+          "name": "search",
+          "args": {
+            "query": "Quorra Biotech 2023 revenue and number of employees"
+          },
+          "output": [
+            {
+              "title": "Quorra Biotech",
+              "snippet": "Quorra Biotech is a biotechnology company founded in 2006. Headquarters: Lindell Bay. CEO: Tomas Arvane (since 2015). 2023 revenue: 187 million USD. Employees (2023): 940.",
+              "note": "results truncated: top match only"
+            }
+          ],
+          "error": null,
+          "duration_s": 0.0009
+        }
+      ],
+      "proposed_answer": null,
+      "nudged": false,
+      "note": null,
+      "usage": {
+        "prompt_tokens": 1173,
+        "output_tokens": 50
+      },
+      "retries": 0,
+      "latency_s": 17.663
+    },
+    {
+      "index": 2,
+      "kind": "model",
+      "reasoning": "I have the information for Quorra Biotech:\n- 2023 revenue: 187 million USD\n- Employees (2023): 940\n\nNow I need to calculate the revenue per employee for both companies.\n\nNimbic Foods:\nRevenue = 1,260,000,000 USD\nEmployees = 8,400\n\nQuorra Biotech:\nRevenue = 187,000,000 USD\nEmployees = 940\n\nRevenue per employee for Nimbic Foods = 1,260,000,000 / 8,400\nRevenue per employee for Quorra Biotech = 187,000,000 / 940\n\nThen I will find the absolute difference and round it to the nearest dollar.\nI will calculate the revenue per employee for both Nimbic Foods and Quorra Biotech, then find the absolute difference between them and round it to the nearest dollar.",
+      "tool_calls": [
+        {
+          "name": "calculator",
+          "args": {
+            "expression": "abs((1260000000 / 8400) - (187000000 / 940))"
+          },
+          "output": 48936.170212766,
+          "error": null,
+          "duration_s": 0.0002
+        }
+      ],
+      "proposed_answer": null,
+      "nudged": false,
+      "note": null,
+      "usage": {
+        "prompt_tokens": 1425,
+        "output_tokens": 83
+      },
+      "retries": 0,
+      "latency_s": 6.217
+    },
+    {
+      "index": 3,
+      "kind": "model",
+      "reasoning": "The absolute difference is approximately 48936.170212766.\nRounding to the nearest dollar gives 48936.\nI will round the absolute difference to the nearest dollar.",
+      "tool_calls": [
+        {
+          "name": "calculator",
+          "args": {
+            "expression": "round(48936.170212766)"
+          },
+          "output": 48936,
+          "error": null,
+          "duration_s": 0.0001
+        }
+      ],
+      "proposed_answer": null,
+      "nudged": false,
+      "note": null,
+      "usage": {
+        "prompt_tokens": 1902,
+        "output_tokens": 43
+      },
+      "retries": 0,
+      "latency_s": 10.33
+    },
+    {
+      "index": 4,
+      "kind": "model",
+      "reasoning": "The absolute difference is 48936.\nI will provide the final answer.",
+      "tool_calls": [],
+      "proposed_answer": "48936",
+      "nudged": false,
+      "note": null,
+      "usage": {
+        "prompt_tokens": 2031,
+        "output_tokens": 28
+      },
+      "retries": 0,
+      "latency_s": 4.869
+    }
+  ],
+  "stats": {
+    "model_calls": 5,
+    "empty_responses": 0,
+    "self_checks_answered": 0,
+    "tool_calls": 4,
+    "tool_errors": 0,
+    "retries": 0,
+    "self_checks": 0,
+    "prompt_tokens": 7368,
+    "output_tokens": 260
+  }
+}
