@@ -34,6 +34,8 @@ runs/*
 !runs/stress26_search1_reflection/
 !runs/stress26_search_mild/
 !runs/stress26_search_moderate/
+!runs/gemma26_baseline_rep/
+!runs/stress26_search1_rep/
 !runs/stress26_search1_selfcheck/
 !runs/_superseded/
 runs/_superseded/*

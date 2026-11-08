@@ -1,6 +1,6 @@
 # HANDOFF - current project state
 
-Generated 2026-11-07 21:01 by `scripts/handoff.py`. Do not edit by hand except
+Generated 2026-11-07 22:19 by `scripts/handoff.py`. Do not edit by hand except
 the Baton section; everything else is regenerated.
 
 ## Baton
@@ -40,6 +40,7 @@ self-check). Full design, results and limitations are in `README.md` - **read it
 | run | traces | correct | api_error | state |
 |---|---|---|---|---|
 | `gemma26_baseline` | 23 | 23 | 0 | complete |
+| `gemma26_baseline_rep` | 69 | 69 | 0 | complete |
 | `gemma_baseline` | 23 | 23 | 0 | complete |
 | `gemma_reflection` | 23 | 23 | 0 | complete |
 | `gemma_reflection+selfcheck` | 23 | 23 | 0 | complete |
@@ -56,18 +57,20 @@ success rates and retried automatically when the same benchmark command is rerun
 
 ## Repo state
 
-- Branch: `## main...origin/main [ahead 5]`
+- Branch: `## main...origin/main [ahead 6]`
 - Last commits:
 ```
+5310a52 Stop redirected runs dying on the progress tick mark
 810f699 Mark the dose ladder done in the handoff plan
 eea4069 Add the mild and moderate dose-level run data
 64c97b4 Run reflection-under-stress and the moderate dose level
 085dc0a Pre-register study 3 and queue the 5-day plan
-4e5ad5b Add search-degradation dose ladder and api_error sensitivity column
 ```
 - Uncommitted:
-- (clean)
-- Tests: `78 passed in 14.30s`
+- `gitignore`
+- `HANDOFF.md`
+- `runs/gemma26_baseline_rep/`
+- Tests: `(unknown)`
 
 ## Environment
 
