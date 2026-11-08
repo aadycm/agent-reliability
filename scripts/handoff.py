@@ -22,17 +22,14 @@ ROOT = Path(__file__).resolve().parent.parent
 # The only hand-maintained section. Edit as work progresses.
 # ---------------------------------------------------------------------------
 NEXT_STEPS = [
-    "DAY 1a: finish `stress26_search1_reflection` (3 tasks left). "
-    "`python -m agent_reliability benchmark --name stress26_search1_reflection "
-    "--model gemma-4-26b-a4b-it --rpm 8 --degrade-search --reflection` (resumes; skips cached).",
-    "DAY 1b: dose level MODERATE. `python -m agent_reliability benchmark --name stress26_search_moderate "
-    "--model gemma-4-26b-a4b-it --rpm 8 --degrade-search --search-level moderate`.",
-    "DAY 2a: dose level MILD. `python -m agent_reliability benchmark --name stress26_search_mild "
-    "--model gemma-4-26b-a4b-it --rpm 8 --degrade-search --search-level mild`.",
-    "DAY 2b: baseline repeats. `python -m agent_reliability benchmark --name gemma26_baseline_rep "
-    "--model gemma-4-26b-a4b-it --rpm 8 --repeats 3`.",
+    "DONE day 1-2: dose ladder complete. off 23/23, mild 23/23, moderate 23/23, severe 8/21. "
+    "Reflection under severe degradation: 8/20. All of them committed with traces.",
+    "DAY 2b (RUNNING): baseline repeats. `python -m agent_reliability benchmark --name gemma26_baseline_rep "
+    "--model gemma-4-26b-a4b-it --rpm 6 --repeats 3`.",
     "DAY 3: severe repeats. `python -m agent_reliability benchmark --name stress26_search1_rep "
-    "--model gemma-4-26b-a4b-it --rpm 8 --degrade-search --repeats 3`.",
+    "--model gemma-4-26b-a4b-it --rpm 6 --degrade-search --repeats 3`. Then allowlist the new run "
+    "directory in .gitignore - `runs/*` is ignored by default and a run left out of the allowlist "
+    "commits silently as nothing.",
     "DAY 4: rebuild the report over every run: `python -m agent_reliability report runs/gemma26_baseline "
     "runs/stress26_search_mild runs/stress26_search_moderate runs/stress26_search1 "
     "runs/stress26_steps5 runs/stress26_flaky30 --out reports/stress26`.",

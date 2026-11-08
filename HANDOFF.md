@@ -29,13 +29,11 @@ self-check). Full design, results and limitations are in `README.md` - **read it
 
 ## Next steps
 
-1. DAY 1a: finish `stress26_search1_reflection` (3 tasks left). `python -m agent_reliability benchmark --name stress26_search1_reflection --model gemma-4-26b-a4b-it --rpm 8 --degrade-search --reflection` (resumes; skips cached).
-2. DAY 1b: dose level MODERATE. `python -m agent_reliability benchmark --name stress26_search_moderate --model gemma-4-26b-a4b-it --rpm 8 --degrade-search --search-level moderate`.
-3. DAY 2a: dose level MILD. `python -m agent_reliability benchmark --name stress26_search_mild --model gemma-4-26b-a4b-it --rpm 8 --degrade-search --search-level mild`.
-4. DAY 2b: baseline repeats. `python -m agent_reliability benchmark --name gemma26_baseline_rep --model gemma-4-26b-a4b-it --rpm 8 --repeats 3`.
-5. DAY 3: severe repeats. `python -m agent_reliability benchmark --name stress26_search1_rep --model gemma-4-26b-a4b-it --rpm 8 --degrade-search --repeats 3`.
-6. DAY 4: rebuild the report over every run: `python -m agent_reliability report runs/gemma26_baseline runs/stress26_search_mild runs/stress26_search_moderate runs/stress26_search1 runs/stress26_steps5 runs/stress26_flaky30 --out reports/stress26`.
-7. DAY 5 (NEEDS THE USER - do not attempt unattended): write the study-3 section of the README from the regenerated report, check each prediction in docs/preregistration.md against what happened, and add the new figures to scripts/verify_claims.py.
+1. DONE day 1-2: dose ladder complete. off 23/23, mild 23/23, moderate 23/23, severe 8/21. Reflection under severe degradation: 8/20. All of them committed with traces.
+2. DAY 2b (RUNNING): baseline repeats. `python -m agent_reliability benchmark --name gemma26_baseline_rep --model gemma-4-26b-a4b-it --rpm 6 --repeats 3`.
+3. DAY 3: severe repeats. `python -m agent_reliability benchmark --name stress26_search1_rep --model gemma-4-26b-a4b-it --rpm 6 --degrade-search --repeats 3`. Then allowlist the new run directory in .gitignore - `runs/*` is ignored by default and a run left out of the allowlist commits silently as nothing.
+4. DAY 4: rebuild the report over every run: `python -m agent_reliability report runs/gemma26_baseline runs/stress26_search_mild runs/stress26_search_moderate runs/stress26_search1 runs/stress26_steps5 runs/stress26_flaky30 --out reports/stress26`.
+5. DAY 5 (NEEDS THE USER - do not attempt unattended): write the study-3 section of the README from the regenerated report, check each prediction in docs/preregistration.md against what happened, and add the new figures to scripts/verify_claims.py.
 
 ## Benchmark runs on disk
 
@@ -58,31 +56,17 @@ success rates and retried automatically when the same benchmark command is rerun
 
 ## Repo state
 
-- Branch: `## main...origin/main [ahead 3]`
+- Branch: `## main...origin/main [ahead 4]`
 - Last commits:
 ```
+eea4069 Add the mild and moderate dose-level run data
 64c97b4 Run reflection-under-stress and the moderate dose level
 085dc0a Pre-register study 3 and queue the 5-day plan
 4e5ad5b Add search-degradation dose ladder and api_error sensitivity column
 c5ae8bc Add claim verifier; refresh degraded-search failure labels
-0f381f7 Add handoff tooling for switching between assistants
 ```
 - Uncommitted:
-- `.gitignore`
-- `HANDOFF.md`
-- `runs/stress26_search1_reflection/failures.csv`
-- `runs/stress26_search1_reflection/failures_auto.json`
-- `runs/stress26_search1_reflection/results.jsonl`
-- `runs/stress26_search1_reflection/run_config.json`
-- `runs/stress26_search1_reflection/traces/T11_memo_leader_birthplace__r0.json`
-- `runs/stress26_search1_reflection/traces/T16_rev_per_employee_gap__r0.json`
-- `runs/stress26_search1_reflection/traces/T21_birth_year_sum__r0.json`
-- `runs/stress26_search1_reflection/traces/T22_veltrix_confusion__r0.json`
-- `runs/stress26_search_mild/failures.csv`
-- `runs/stress26_search_mild/failures_auto.json`
-- `runs/stress26_search_mild/results.jsonl`
-- `runs/stress26_search_mild/run_config.json`
-- `runs/stress26_search_mild/traces/T01_rev_per_employee__r0.json`
+- `cripts/handoff.py`
 - Tests: `(unknown)`
 
 ## Environment
