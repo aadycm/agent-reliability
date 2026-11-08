@@ -8,13 +8,14 @@
     "reflection": true,
     "tool_failure_rate": 0.0,
     "degrade_search": true,
+    "search_level": "severe",
     "stress_seed": 0,
     "max_empty_response_nudges": 2,
     "retry": {
       "max_retries": 6,
       "base_delay": 2.0,
       "max_delay": 60.0,
-      "requests_per_minute": 8.0
+      "requests_per_minute": 6.0
     },
     "condition": "reflection[search1]"
   },
@@ -44,5 +45,5 @@
     "T23_lantern_total_usd"
   ],
   "repeats": 1,
-  "updated_at": "2026-11-07T06:16:18+00:00"
+  "updated_at": "2026-11-07T20:04:36+00:00"
 }
