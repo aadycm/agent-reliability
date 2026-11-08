@@ -114,6 +114,66 @@ for run, n_err in [("gemma_reflection", 6), ("gemma_reflection+selfcheck", 5)]:
     check(f"{run}: on 5 distinct tasks", 5, len({tid for tid, _ in errs}))
     check(f"{run}: still 23/23 correct", 23, sum(x["correct"] for x in results(run)))
 
+# --- claim 7: study 3's dose ladder -------------------------------------------
+# README quotes these four points as the dose-response curve. Scored runs exclude api_error.
+DOSE = [("gemma26_baseline", 23, 23, 0), ("stress26_search_mild", 23, 23, 0),
+        ("stress26_search_moderate", 23, 23, 0), ("stress26_search1", 8, 21, 2)]
+for run, correct, scored, api in DOSE:
+    rows = results(run)
+    live = [r for r in rows if r["status"] != "api_error"]
+    check(f"dose {run}: {correct}/{scored} scored correct", (correct, scored),
+          (sum(bool(r["correct"]) for r in live), len(live)))
+    check(f"dose {run}: {api} api_error runs", api, len(rows) - len(live))
+
+# H2: all of the loss sits in the last step of the ladder, not earlier in it.
+intact = [sum(bool(r["correct"]) for r in results(r_) if r_ != "stress26_search1")
+          for r_ in ("gemma26_baseline", "stress26_search_mild", "stress26_search_moderate")]
+check("H2: no task lost before the severe level", [23, 23, 23], intact)
+
+# --- claim 8: reflection does not rescue degraded search ----------------------
+refl = results("stress26_search1_reflection")
+refl_live = [r for r in refl if r["status"] != "api_error"]
+check("severe+reflection: 8/20 scored correct", (8, 20),
+      (sum(bool(r["correct"]) for r in refl_live), len(refl_live)))
+check("severe+reflection: 3 api_error runs", 3, len(refl) - len(refl_live))
+
+# --- claim 9: no gave_up_early anywhere under degradation (H3) ---------------
+import csv as _csv
+for run, loops in [("stress26_search1", 13), ("stress26_search1_reflection", 12)]:
+    path = RUNS / run / "failures.csv"
+    cats = collections.Counter(r["final_category"]
+                               for r in _csv.DictReader(path.read_text(encoding="utf-8").splitlines()))
+    check(f"{run}: {loops} infinite_loop labels", loops, cats["infinite_loop"])
+    check(f"{run}: 0 gave_up_early labels", 0, cats["gave_up_early"])
+
+# --- claim 10: temperature 0 pins the answer, not the path -------------------
+rep_rows = results("gemma26_baseline_rep")
+check("baseline repeats: 69/69 correct", (69, 69),
+      (sum(bool(r["correct"]) for r in rep_rows), len(rep_rows)))
+check("baseline repeats: 3 repeats of 23 tasks", (23, [3]),
+      (len({r["task_id"] for r in rep_rows}),
+       sorted({sum(1 for x in rep_rows if x["task_id"] == tid)
+               for tid in {r["task_id"] for r in rep_rows}})))
+# Outcomes come from results.jsonl, which carries the repeat index; traces do not, so
+# step counts and finish modes are collected per task across whatever repeats exist on disk.
+outcome = collections.defaultdict(set)
+for r in rep_rows:
+    outcome[r["task_id"]].add(bool(r["correct"]))
+path_len = collections.defaultdict(set)
+finish = collections.defaultdict(set)
+for tr in traces("gemma26_baseline_rep"):
+    path_len[tr["task_id"]].add(len(tr["steps"]))
+    finish[tr["task_id"]].add(tr.get("finish_mode"))
+check("baseline repeats: 0 tasks changed outcome", [],
+      sorted(t for t, v in outcome.items() if len(v) > 1))
+check("baseline repeats: exactly 1 task varied its step count",
+      ["T20_south_revenue_ratio"], sorted(t for t, v in path_len.items() if len(v) > 1))
+check("baseline repeats: T20 took 11, 11, 12 steps", [11, 11, 12],
+      sorted(len(tr["steps"]) for tr in traces("gemma26_baseline_rep")
+             if tr["task_id"] == "T20_south_revenue_ratio"))
+check("baseline repeats: T20 used both finish modes",
+      {"final_answer_tool", "text_response"}, finish["T20_south_revenue_ratio"])
+
 # --- report --------------------------------------------------------------------
 width = max(len(c) for c, _, _ in checks) + 2
 fails = 0

@@ -1,6 +1,6 @@
 # HANDOFF - current project state
 
-Generated 2026-11-07 22:19 by `scripts/handoff.py`. Do not edit by hand except
+Generated 2026-11-07 22:50 by `scripts/handoff.py`. Do not edit by hand except
 the Baton section; everything else is regenerated.
 
 ## Baton
@@ -48,6 +48,7 @@ self-check). Full design, results and limitations are in `README.md` - **read it
 | `stress26_flaky30` | 23 | 21 | 0 | complete |
 | `stress26_search1` | 23 | 8 | 2 | complete |
 | `stress26_search1_reflection` | 23 | 8 | 3 | complete |
+| `stress26_search1_rep` | 6 | 0 | 3 | **IN PROGRESS (6/23)** |
 | `stress26_search_mild` | 23 | 23 | 0 | complete |
 | `stress26_search_moderate` | 23 | 23 | 0 | complete |
 | `stress26_steps5` | 23 | 17 | 0 | complete |
@@ -57,19 +58,20 @@ success rates and retried automatically when the same benchmark command is rerun
 
 ## Repo state
 
-- Branch: `## main...origin/main [ahead 6]`
+- Branch: `## main...origin/main`
 - Last commits:
 ```
+4b3da39 Add the baseline repeats (69/69 across three repeats)
 5310a52 Stop redirected runs dying on the progress tick mark
 810f699 Mark the dose ladder done in the handoff plan
 eea4069 Add the mild and moderate dose-level run data
 64c97b4 Run reflection-under-stress and the moderate dose level
-085dc0a Pre-register study 3 and queue the 5-day plan
 ```
 - Uncommitted:
-- `gitignore`
-- `HANDOFF.md`
-- `runs/gemma26_baseline_rep/`
+- `ANDOFF.md`
+- `README.md`
+- `scripts/verify_claims.py`
+- `runs/stress26_search1_rep/`
 - Tests: `(unknown)`
 
 ## Environment

@@ -8,10 +8,25 @@ report with plots.
 No training, no GPU. It runs on a laptop (built for a MacBook M2; the first study ran on Windows) and
 only needs a Gemini API key.
 
-> Results from the first study are in [Results](#results-first-study-gemma-4-31b). Every number there
-> comes from real runs. The report ([reports/gemma/summary.md](reports/gemma/summary.md)) and the raw
-> per-task traces (`runs/gemma_*`) are committed so you can check them. Other run output is gitignored.
-> The test suite runs fully offline and never produces benchmark numbers.
+> **Every number in this README comes from a committed run.** The run directories, the generated
+> reports ([reports/gemma/summary.md](reports/gemma/summary.md),
+> [reports/stress26/summary.md](reports/stress26/summary.md)) and the per-task JSON traces are in the
+> repository. `python scripts/verify_claims.py` recomputes 52 of these figures from those files and
+> exits non-zero if any of them has drifted, so a stale claim fails loudly instead of sitting here.
+> The test suite runs offline and never produces benchmark numbers.
+
+## Contents
+
+| section | what's in it |
+|---|---|
+| [Quick start](#quick-start) | install, key setup, first run, free-tier model notes |
+| [Project layout](#project-layout) | what each module and data directory holds |
+| [Part 1: the agent](#part-1-the-agent) | the loop, robustness, tools, trace format |
+| [Part 2: the study](#part-2-the-study) | tasks, failure taxonomy, interventions, stress conditions, reports |
+| [Study 1: baseline ablation](#study-1-baseline-ablation-gemma-4-31b) | 2x2 ablation on the full task set |
+| [Study 2: stress conditions](#study-2-stress-conditions-gemma-4-26b) | flaky tools, tight step budget, degraded search |
+| [Study 3: dose-response](#study-3-dose-response-pre-registered) | how much degradation it takes to break the agent |
+| [Limitations](#limitations) | read before quoting any result |
 
 ---
 
@@ -44,7 +59,7 @@ Put your key in **`.env`**, never in `.env.example`: the template is meant to be
 [ai.dev/rate-limit](https://ai.dev/rate-limit)):**
 - `gemini-2.5-flash` and `gemini-2.5-flash-lite` return 404 ("no longer available to new users").
 - `gemini-3.6-flash` works with function calling, but the free tier allowed only **20 requests per day**,
-  far too few for a benchmark (one condition ≈ 80–150 requests). A Gemini Pro *consumer* subscription
+  far too few for a benchmark (one condition ≈ 80-150 requests). A Gemini Pro *consumer* subscription
   does not raise API limits; API limits depend on the Cloud project's billing tier.
 - **`gemma-4-31b-it`** worked with function calling and had no rate-limit problems on the free tier, so
   the first study used it: `--model gemma-4-31b-it`. It did return frequent transient HTTP 500s,
@@ -73,9 +88,19 @@ data/
   knowledge_base.json  corpus for the mock search tool (fictional)
   files/               documents readable by read_file
 tests/                 offline tests, including re-deriving every benchmark answer with the real tools
-runs/                  (gitignored) traces and results, one directory per run/condition
-reports/               (gitignored) generated reports
+docs/
+  preregistration.md   study 3's hypotheses and falsification criteria, committed before the runs
+  handoff-prompt.md    briefing for handing the project to another assistant
+scripts/
+  verify_claims.py     recomputes every figure quoted in this README from runs/; non-zero exit on drift
+  handoff.py           regenerates HANDOFF.md from git, the run directories, and the test results
+runs/                  traces and results, one directory per run and condition
+reports/               generated reports (results.csv, summary.md, plots)
 ```
+
+`runs/` is gitignored by default, with the directories behind published results allowlisted
+individually in `.gitignore`. If you add a run whose numbers you intend to quote, allowlist it in the
+same place. A run left out of the allowlist stages as nothing and commits silently.
 
 ---
 
@@ -121,7 +146,7 @@ How one iteration works, concretely (`agent.py`):
 
 - **Rate limiting**: a client-side limiter spaces requests to `GEMINI_RPM`.
 - **Retries**: 429 / 5xx / timeouts are retried with exponential backoff and jitter
-  (`base_delay·2^n`, capped, ×0.5–1.5). If a 429 names a `retry_delay`, that delay is honored.
+  (`base_delay·2^n`, capped, 0.5-1.5x). If a 429 names a `retry_delay`, that delay is honored.
   Non-retryable errors (e.g. an invalid request) fail immediately.
 - **Graceful end states**: an exhausted retry budget ends the run as `api_error`. That result is saved,
   excluded from success rates, and re-attempted when you resume a run.
@@ -172,8 +197,8 @@ use, and an answer given without searching is detectably made up.
 
 | difficulty | canonical tool calls | tasks |
 |---|---|---|
-| easy | 2 | T01–T05, T08–T10, T15, T22 (10) |
-| medium | 3–4 | T06, T11–T14, T16, T19, T23 (8) |
+| easy | 2 | T01-T05, T08-T10, T15, T22 (10) |
+| medium | 3-4 | T06, T11-T14, T16, T19, T23 (8) |
 | hard | 5+ | T07, T17, T18, T20, T21 (5) |
 
 Some tasks carry deliberate **traps**: two similarly named companies (T22); a log line that mentions
@@ -211,7 +236,7 @@ in this order, and each label stores the evidence that triggered it:
 It shows the condensed trace, the expected answer, the task's trap, and the heuristic suggestion with
 its evidence. Press Enter to accept, a number to override, `s` to skip, `q` to quit. Labels are saved
 after every entry to `runs/<run>/labels_manual.csv` (you can also edit that file directly). Manual labels
-override heuristic ones, and the report shows **heuristic–manual agreement** and the most common
+override heuristic ones, and the report shows **heuristic-manual agreement** and the most common
 disagreements. Treat that agreement number as your measure of how far to trust the automatic labels.
 
 ### Interventions
@@ -234,6 +259,34 @@ Both are toggles on `AgentConfig` (`--reflection`, `--self-check`):
   answered / sent** and **empty responses** per condition, so this can't go unnoticed again. The
   invalid runs are kept in `runs/_superseded/`.
 
+### Stress conditions
+
+Study 2 and study 3 degrade the agent's environment rather than the tasks, so the task set stays
+fixed across every condition. `stress.py` wraps the tool registry; the tool declarations the model
+sees are untouched, so the agent is never told that anything is wrong. That is the point: the
+question is whether it notices.
+
+| flag | effect |
+|---|---|
+| `--tool-failure-rate P` | each tool call returns a transient error with probability `P`, before the real tool runs |
+| `--max-steps N` | tightens the step budget (default 12) |
+| `--degrade-search` | withholds part of every `search` result; how much depends on `--search-level` |
+| `--search-level mild\|moderate\|severe` | the dose. Default `severe` |
+| `--stress-seed N` | seed for injected tool failures (default 0) |
+
+The search-degradation levels form a ladder, each withholding at least as much as the one below it:
+
+| level | the agent receives |
+|---|---|
+| `off` | the top `k` results with full snippets |
+| `mild` | the top 2 results, full snippets |
+| `moderate` | the top result only, full snippet |
+| `severe` | the top result only, truncated to its first sentence |
+
+Injected tool failures are seeded per task, so the same command reproduces the same failure pattern.
+`severe` is pinned by `test_severe_is_unchanged_from_the_original_setting`, because study 2 ran at
+that level and would stop being comparable if the behaviour drifted.
+
 ### Running the study
 
 ```bash
@@ -251,9 +304,9 @@ python -m agent_reliability label runs/study1_baseline
 python -m agent_reliability report "runs/study1_*" --out reports/study1
 ```
 
-**Budget.** One condition is 23 tasks × ~3–8 model calls. Reflection adds 1 call per task and
-self-check about 1–2. A full ablation is roughly 400–700 requests. At `GEMINI_RPM=10`, that's about
-40–70 minutes of wall-clock time. Check your quota before running with `--repeats`.
+**Budget.** One condition is 23 tasks × ~3-8 model calls. Reflection adds 1 call per task and
+self-check about 1-2. A full ablation is roughly 400-700 requests. At `GEMINI_RPM=10`, that's about
+40-70 minutes of wall-clock time. Check your quota before running with `--repeats`.
 
 ### Report contents (`reports/<name>/`)
 
@@ -268,18 +321,18 @@ self-check about 1–2. A full ablation is roughly 400–700 requests. At `GEMIN
 
 ---
 
-## Results (first study, Gemma 4 31B)
+## Study 1: baseline ablation (Gemma 4 31B)
 
 **Setup:** `gemma-4-31b-it` through the Gemini API free tier, temperature 0, `max_steps=12`, 23 tasks, one run per
-task per condition (92 scored runs, 0 `api_error`). Run on 12–13 September 2026. Reproduce with
+task per condition (92 scored runs, 0 `api_error`). Run on 12-13 September 2026. Reproduce with
 `ablation --prefix gemma --model gemma-4-31b-it`; the report goes to `reports/gemma/`.
 
 | condition | correct | 95% CI | model calls / task | tokens / task | tokens vs baseline | tool errors |
 |---|---|---|---|---|---|---|
-| baseline | 23/23 | 85.7–100% | 4.2 | 6,331 | 1.0× | 0 |
-| self-check | 23/23 | 85.7–100% | 5.3 | 9,017 | 1.4× | 0 |
-| reflection | 23/23 | 85.7–100% | 6.0 | 14,090 | 2.2× | 6 (in 5 tasks) |
-| reflection + self-check | 23/23 | 85.7–100% | 7.0 | 18,091 | 2.9× | 5 (in 5 tasks) |
+| baseline | 23/23 | 85.7-100% | 4.2 | 6,331 | 1.0× | 0 |
+| self-check | 23/23 | 85.7-100% | 5.3 | 9,017 | 1.4× | 0 |
+| reflection | 23/23 | 85.7-100% | 6.0 | 14,090 | 2.2× | 6 (in 5 tasks) |
+| reflection + self-check | 23/23 | 85.7-100% | 7.0 | 18,091 | 2.9× | 5 (in 5 tasks) |
 
 What the traces show:
 
@@ -307,17 +360,18 @@ What the traces show:
 Timing (`seconds` in the report) is dominated by rate limiting and retries of transient HTTP 500s (up to 91 retries
 per condition), so it is **not** a meaningful efficiency comparison. Use model calls and tokens.
 
-**Next steps that would make the study informative:** a weaker model (e.g. `gemma-4-26b-a4b-it`), harder tasks
-(longer chains, conflicting sources, ambiguous wording), and `--repeats` with temperature > 0 to measure variance.
+**What followed from this:** study 2 kept the task set and degraded the environment instead, which
+produced failures to study. Study 3 then measured how much degradation it takes.
 
 ---
 
-## Results (second study: stress conditions, Gemma 4 26B)
+## Study 2: stress conditions (Gemma 4 26B)
 
 Study 1 hit a ceiling: `gemma-4-31b-it` solved every task, and so did the smaller `gemma-4-26b-a4b-it`
-(23/23 baseline, though with 1.5x the tokens and 8 recovered tool errors). Rather than rewrite the
-tasks after seeing which ones were easy - an obvious author bias - study 2 keeps the tasks fixed and
-degrades the **environment** (`stress.py`), which is objective and reproducible.
+(23/23 baseline, though with 1.5x the tokens and 8 recovered tool errors). Rewriting the tasks after
+seeing which ones were easy would have let me tune the difficulty toward whatever I expected to find.
+Study 2 keeps the tasks fixed and degrades the **environment** instead (`stress.py`), which is
+objective and reproducible.
 
 **Setup:** `gemma-4-26b-a4b-it`, temperature 0, 23 tasks per condition, one run each. Reproduce with
 `benchmark --model gemma-4-26b-a4b-it` plus the flag named below; report in `reports/stress26/`.
@@ -333,20 +387,20 @@ Degraded search excludes 2 runs that ended in `api_error` (repeated HTTP 504s on
 conversations), so it is scored over 21 runs.
 
 **Finding 1: information quality breaks the agent far more than tool failures do.** Flaky tools cost
-only 2 tasks, despite injecting 42 failures (1.8 per run) that the agent retried through - error
-recovery is a real strength. Truncating search results to one first-sentence hit cost 13 tasks. The
-gradient by difficulty is stark: 6/10 easy, 2/7 medium, **0/4 hard**. Every task that needed no search
-still passed.
+only 2 tasks, despite injecting 42 failures (1.8 per run) that the agent retried through. Error
+recovery is a real strength. Truncating search results to one first-sentence hit cost 13 tasks, and
+the gradient by difficulty was steep: 6/10 easy, 2/7 medium, **0/4 hard**. Every task that needed no
+search still passed.
 
 **Finding 2: the dominant failure is a reworded-query loop.** When the needed fact was in the
 truncated-away sentence, the agent rephrased the same question 8-9 times ("Brightwater Rail",
 "... average speed", "... km", "... miles"), received the identical snippet 5-7 times, then searched
 unrelated files before running out of steps. It averaged 9.0 tool calls and 2.3x baseline tokens.
-It never said "I could not find this": there were **zero** `gave_up_early` labels. Not recognising a
-dead end is the single most expensive behaviour observed in this project.
+It never said "I could not find this": there were **zero** `gave_up_early` labels. Failing to
+recognise a dead end cost more tasks than every other failure mode in this project combined.
 
 **Finding 3: under a tight budget, wasted first moves decide the outcome.** With 5 steps the agent
-lost tasks it solves comfortably at 12 - including 2-step ones. Steps went to a redundant `list_files`
+lost tasks it solves comfortably at 12, including 2-step ones. Steps went to a redundant `list_files`
 (the task names the file), reading a file twice, and `python_exec` code calling `open()`/`import csv`,
 which the sandbox blocks. Two runs (T17, T20) computed the correct value on their final step and were
 cut off before submitting it.
@@ -364,8 +418,73 @@ not be an independent validation, and none is claimed. The labels were checked b
 traces; an independent pass with `label` would still be worth doing.
 
 **What this does not show:** one model, one run per task, and stress levels (0.3, 5 steps, 1 truncated
-result) chosen by hand rather than swept. The interventions were not yet tested under stress - that is
-the open experiment, and the one setting where they might finally show an effect.
+result) chosen by hand rather than swept. The interventions were not yet tested under stress, and the
+degradation levels were not swept. Study 3 does both.
+
+---
+
+## Study 3: dose-response (pre-registered)
+
+Studies 1 and 2 were analysed after the fact, and in study 2 I refined two failure heuristics *after*
+reading the traces they were applied to. That was disclosed, but it means those labels were not an
+independent test. Study 3 fixes the hypotheses, the conditions and the analysis plan in
+[docs/preregistration.md](docs/preregistration.md), committed before the first run.
+
+The question: study 2 showed that degrading search breaks the agent. How much degradation does that
+take, and which part of the degradation does the damage?
+
+**Setup:** `gemma-4-26b-a4b-it`, temperature 0, `max_steps=12`, 23 tasks, fixed task set. Reproduce
+each level with `benchmark --model gemma-4-26b-a4b-it --degrade-search --search-level <level>`.
+
+| level | the agent receives | success | 95% CI | dominant failure |
+|---|---|---|---|---|
+| `off` | top `k` results, full snippets | 23/23 (100%) | 85.7-100% | - |
+| `mild` | top 2 results, full snippets | 23/23 (100%) | 85.7-100% | - |
+| `moderate` | top result, full snippet | 23/23 (100%) | 85.7-100% | - |
+| `severe` | top result, first sentence only | 8/21 (38.1%) | 20.8-59.1% | infinite_loop (13) |
+
+Severe excludes 2 runs that ended in `api_error`. The three intact levels had none.
+
+**Finding 1: the agent does not need many search results. It needs the sentence with the answer in
+it.** Cutting three results down to one cost nothing at all: 23/23 at both `mild` and `moderate`.
+Cutting that one result from a full snippet to its first sentence cost 13 of the 21 scored tasks. The
+entire effect sits in the last step of the ladder, where the knowledge base's later sentences, the
+ones holding the numbers, are removed.
+
+**Finding 2: reflection does not rescue degraded search.** Running the `severe` level with
+`--reflection` scored 8/20 (21.9-61.3%, 3 `api_error`) against 8/21 without it. All 12 scored
+failures label `infinite_loop`. Critiquing the plan before executing does not help when the plan is
+sound and the environment is withholding the fact. Both studies now agree that reflection costs
+tokens without moving accuracy.
+
+**Finding 3: temperature 0 pins the answer, not the path.** Three repeats of the baseline
+(`gemma26_baseline_rep`) scored 69/69 with no task changing outcome. The runs were not identical,
+though: `T20_south_revenue_ratio` finished through the `final_answer` tool in two repeats at 11 steps,
+and in the third ran to 12 steps and finished as a plain-text response that emitted its whole
+scratchpad, including a visible "Wait, I should check..." aside. It graded correct all three times,
+because `extract_final` recovers the number from the prose. One task in 23 took a different control
+path under identical settings.
+
+**How the pre-registered hypotheses held up:**
+
+| | prediction | outcome |
+|---|---|---|
+| H1 | success falls monotonically as degradation rises | Holds, but weakly. The curve is flat across three levels and then drops. "Monotonic" is true and uninformative here. |
+| H2 | most of the loss sits between `moderate` and `severe` | Confirmed, more sharply than predicted: *all* of it does. |
+| H3 | failures are `infinite_loop`, and `gave_up_early` stays at 0 | Confirmed. 13 and 12 `infinite_loop` labels in the two severe conditions, 0 `gave_up_early` anywhere. |
+| H4 | repeats at temperature 0 will not reproduce exactly | Not settled. The baseline is at the ceiling, so no outcome can flip. The severe-level repeats are the real test and had not finished when this was written. |
+
+**A harness bug worth recording.** The first baseline-repeats run died after one task with
+`UnicodeEncodeError`: the per-task progress line prints a tick mark, and Python selects the legacy
+ANSI codepage when stdout is a pipe rather than a console. The shell pipeline it ran under reported
+exit code 0 anyway. Every unattended run is a redirected run, so the bug only ever fired when nobody
+was watching, and the exit code hid it when it did. `main()` now forces UTF-8 on stdout and stderr
+(`test_cli_output_encoding.py`). The procedural fix matters more: a run counts as finished when its
+trace count says so, which is what `scripts/handoff.py` reports. This project studies agents that
+fail to notice a degraded environment, and its own harness had that bug for three studies.
+
+**What is still open:** the severe-level repeats (H4), and self-check under degradation. Levels
+between `moderate` and `severe` would locate the cliff more precisely than four points can.
 
 ---
 
@@ -391,8 +510,10 @@ Read these before drawing conclusions from any report.
   prompt set. They don't transfer to other models, or even to later versions of the same model.
   Prompt wording for the interventions is one choice among many, and a weak result may reflect the
   prompt, not the idea.
-- **Non-determinism.** Even at temperature 0, API outputs can vary between calls. A single run per
-  task is a noisy sample.
+- **Non-determinism.** Even at temperature 0, API outputs vary between calls. Three repeats of the
+  baseline produced the same outcome on all 23 tasks but not the same control flow: one task finished
+  through a different exit path with a different step count. Most results here are a single run per
+  task, which is a noisy sample.
 - **Cost and rate limits.** Free-tier quotas limit repeats and task count. Throttling and retries make
   wall-clock time a poor efficiency metric. Runs interrupted by quota exhaustion end as `api_error`;
   they are excluded from success rates and retried on resume, but a partially complete run compares
